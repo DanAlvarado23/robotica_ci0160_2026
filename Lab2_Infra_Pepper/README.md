@@ -146,9 +146,9 @@ app/src/main/assets/robot/robotsdk.xml
 debe estar:
 
 ```
-
-    
-
+<robot>
+    <users-robotsdk minSdkVersion='API 7'/>
+</robot>
 ```
 
 ---
@@ -250,7 +250,7 @@ Let's talk
 
 # Proyecto 3 — Pepper Gamepad
 
-### 13. Descargar Pepper Gamepad
+### 12. Descargar Pepper Gamepad
 
 Descargar el repositorio:
 
