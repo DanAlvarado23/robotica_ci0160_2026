@@ -1,3 +1,0 @@
-topic: ~variable()
-
-proposal: %read ^first["My robot is $var" "There is no value, type one"]
