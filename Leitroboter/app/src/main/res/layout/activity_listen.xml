@@ -1,34 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:padding="24dp">
+    android:paddingStart="160dp"
+    android:paddingEnd="160dp"
+    android:paddingTop="32dp"
+    android:paddingBottom="32dp">
 
     <TextView
+        style="@style/Leitroboter.Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="¿A qué lugar quieres ir?"
-        android:textSize="24sp"
-        android:gravity="center"
-        android:layout_marginBottom="24dp" />
+        android:textSize="32sp"
+        android:layout_marginBottom="32dp" />
 
     <EditText
         android:id="@+id/placeInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/card_background"
+        android:minHeight="64dp"
         android:hint="Ej. Aula de Robótica"
+        android:textColor="@color/text_title"
+        android:textColorHint="@color/text_body"
+        android:textSize="22sp"
         android:inputType="textCapSentences"
         android:singleLine="true" />
 
     <Button
         android:id="@+id/submitPlaceButton"
+        style="@style/Leitroboter.Button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/button_primary"
         android:text="Buscar"
+        android:layout_marginTop="24dp" />
+
+    <!-- Botón para volver al menú, porque en Pepper no hay barra de navegación -->
+    <Button
+        android:id="@+id/backButton"
+        style="@style/Leitroboter.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Regresar al menú"
         android:layout_marginTop="16dp" />
 
 </LinearLayout>

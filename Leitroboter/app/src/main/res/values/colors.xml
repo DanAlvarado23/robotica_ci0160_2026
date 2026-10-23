@@ -8,4 +8,12 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="background_light">#F3F6FA</color>
+
+    <!-- Colores de la interfaz de Leitroboter -->
+    <color name="primary_blue">#1769E0</color>
+    <color name="primary_blue_pressed">#0F52B5</color>
+    <color name="text_title">#172B4D</color>
+    <color name="text_body">#52647A</color>
+    <color name="card_background">#FFFFFF</color>
+    <color name="card_border">#DDE3EA</color>
 </resources>

@@ -11,38 +11,36 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="600dp"
-        android:layout_height="300dp"
+        android:layout_height="240dp"
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
         android:src="@drawable/leitroboter_menu" />
 
     <TextView
         android:id="@+id/titleText"
+        style="@style/Leitroboter.Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
         android:text="¡Hola! Soy Leitroboter"
-        android:textSize="36sp"
-        android:textStyle="bold"
-        android:textColor="#172B4D"
-        android:gravity="center"
-        android:fontFamily="sans"
-        android:layout_marginBottom="12dp" />
+        android:textSize="36sp" />
 
     <TextView
         android:id="@+id/subtitleText"
+        style="@style/Leitroboter.Body"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="¿A dónde te gustaría ir?"
-        android:textSize="24sp"
-        android:textColor="#52647A"
+        android:layout_marginBottom="24dp"
         android:gravity="center"
-        android:layout_marginBottom="28dp" />
+        android:text="¿A dónde te gustaría ir?"
+        android:textSize="24sp" />
 
     <Button
         android:id="@+id/searchButton"
+        style="@style/Leitroboter.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/button_primary"
         android:text="Iniciar" />
 
 </LinearLayout>
