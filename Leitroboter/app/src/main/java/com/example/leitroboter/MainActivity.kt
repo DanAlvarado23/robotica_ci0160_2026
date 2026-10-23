@@ -52,6 +52,10 @@ class MainActivity : Activity() {
 
             processRequest(request)
         }
+
+        findViewById<Button>(R.id.backButton).setOnClickListener {
+            showMenu()
+        }
     }
 
     private fun processRequest(request: String) {
@@ -60,9 +64,9 @@ class MainActivity : Activity() {
 
         if (place != null) {
             showMap(
-                placeName = place.name,
+                placeName = if (place.roomNumber != null) "${place.name} (${place.roomNumber})" else place.name,
                 mapImage = place.mapImageRes,
-                description = place.description
+                description = "${place.description}\n${place.directions}"
             )
         } else {
             showNotFound()
@@ -73,9 +77,9 @@ class MainActivity : Activity() {
          */
     }
 
-    private fun findPlace(request: String): Place? {
-        // Normaliza la solicitud
-        val normalizedRequest = request
+    // Pasa a minúsculas y quita tildes y la ñ, para que "baños" y "banos" coincidan
+    private fun normalize(text: String): String {
+        return text
             .trim()
             .lowercase()
             .replace("á", "a")
@@ -83,6 +87,13 @@ class MainActivity : Activity() {
             .replace("í", "i")
             .replace("ó", "o")
             .replace("ú", "u")
+            .replace("ü", "u")
+            .replace("ñ", "n")
+    }
+
+    private fun findPlace(request: String): Place? {
+        // Normaliza la solicitud
+        val normalizedRequest = normalize(request)
 
         // Obtiene la base de datos de los lugares
         val places = PlacesCatalog.places
@@ -90,13 +101,8 @@ class MainActivity : Activity() {
         // Busca entre los alias de los lugares uno que coincida con la solicitud
         return places.firstOrNull { place ->
             place.aliases.any { alias ->
-                alias == normalizedRequest
-            } || place.name.lowercase()
-                .replace("á", "a")
-                .replace("é", "e")
-                .replace("í", "i")
-                .replace("ó", "o")
-                .replace("ú", "u") == normalizedRequest
+                normalize(alias) == normalizedRequest
+            } || normalize(place.name) == normalizedRequest
         }
     }
 
@@ -105,7 +111,7 @@ class MainActivity : Activity() {
         showMap(
             placeName = "No encontré el lugar que pediste",
             mapImage = R.drawable.mapa_default,
-            description = "No te entendí o el lugar que me dijiste no se encuentra en el cuarto piso del edificio anexo de la ECCI.\n Regresa al menú y vuelve a preguntar"
+            description = "No te entendí o el lugar que me dijiste no se encuentra en el cuarto piso del edificio anexo de la ECCI.\nRegresa al menú y vuelve a preguntar"
         )
     }
 
@@ -126,6 +132,10 @@ class MainActivity : Activity() {
         // Muestra una descripción del lugar
         // TODO: el robot dice verbalmente la descripción
         findViewById<TextView>(R.id.placeDescription).text = description
+        // Vuelve al menú, porque en Pepper no hay barra de navegación
+        findViewById<Button>(R.id.backButton).setOnClickListener {
+            showMenu()
+        }
     }
 
     @Suppress("DEPRECATION")
