@@ -1,3 +1,29 @@
 <resources>
     <string name="app_name">Leitroboter</string>
+    <string name="search_prompt">¿A qué lugar quieres ir?</string>
+    <string name="voice_explanation">Habla o escribe tu destino. Con el servicio de voz, revisa el texto y pulsa Buscar. Sin ese servicio, grabaré hasta 8 segundos y enviaré el audio a Google Gemini al detener o llegar al límite. Vuelve atrás para cancelar.</string>
+    <string name="voice_button">Hablar</string>
+    <string name="voice_prompt">Di el lugar al que quieres ir</string>
+    <string name="voice_unavailable">No hay un micrófono disponible. Puedes escribir tu destino.</string>
+    <string name="voice_cancelled">Se canceló la entrada por voz. Puedes volver a hablar o escribir.</string>
+    <string name="voice_not_understood">No se pudo reconocer una solicitud válida. Vuelve a hablar o escribe tu destino.</string>
+    <string name="voice_review">Revisa el texto reconocido y pulsa Buscar. El texto se envía a Google Gemini para identificar el lugar.</string>
+    <string name="audio_permission_explanation">Permite el micrófono para grabar tu destino y enviarlo a Google Gemini. También puedes escribir.</string>
+    <string name="audio_permission_granted">Micrófono disponible. Pulsa Hablar para grabar hasta 8 segundos.</string>
+    <string name="audio_permission_denied">Sin permiso de micrófono. Puedes escribir tu destino.</string>
+    <string name="audio_stop_button">Detener y buscar</string>
+    <string name="audio_recording">● Grabando, máximo 8 segundos. Detener y buscar enviará el audio a Google Gemini. Vuelve atrás para cancelar.</string>
+    <string name="audio_recording_failed">No se pudo grabar una solicitud. Habla durante al menos un segundo o escribe tu destino.</string>
+    <string name="search_hint">Ej. ¿Dónde puedo imprimir?</string>
+    <string name="search_button">Buscar</string>
+    <string name="search_processing">Buscando el destino…</string>
+    <string name="search_ready">Puedes pedir un lugar del cuarto piso del anexo de la ECCI. Al buscar una frase, el texto se envía a Google Gemini.</string>
+    <string name="invalid_request">Indica un destino con entre 1 y 400 caracteres, sin caracteres de control.</string>
+    <string name="service_unavailable">No se pudo consultar el servicio de destinos. Revisa la conexión o escribe el nombre exacto de un lugar.</string>
+    <string name="place_not_found">No encontré el lugar que pediste</string>
+    <string name="place_not_found_description">Indica un solo destino del cuarto piso del edificio anexo de la ECCI. Solo puedo ayudarte a identificar lugares. Regresa al menú y vuelve a preguntar.</string>
+    <string name="voice_waiting_for_silence">Esperando a que Pepper deje de hablar…</string>
+    <string name="voice_silence_unavailable">Pepper sigue hablando. Intenta de nuevo o escribe tu destino.</string>
+    <string name="another_location">Consultar otra ubicación</string>
+    <string name="back_to_menu">Regresar al menú</string>
 </resources>

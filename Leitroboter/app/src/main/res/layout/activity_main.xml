@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
@@ -9,7 +7,6 @@
     android:padding="24dp">
 
     <ImageView
-        android:id="@+id/imageView"
         android:layout_width="600dp"
         android:layout_height="240dp"
         android:adjustViewBounds="true"
@@ -17,7 +14,6 @@
         android:src="@drawable/leitroboter_menu" />
 
     <TextView
-        android:id="@+id/titleText"
         style="@style/Leitroboter.Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,7 +23,6 @@
         android:textSize="36sp" />
 
     <TextView
-        android:id="@+id/subtitleText"
         style="@style/Leitroboter.Body"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
