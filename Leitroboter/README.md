@@ -2,7 +2,7 @@
 
 Aplicación Android desarrollada para el robot Pepper, cuyo objetivo es ayudar a los usuarios a encontrar lugares dentro del edificio anexo de la ECCI mediante la presentación de mapas e información descriptiva.
 
-Actualmente, la aplicación se encuentra en una primera versión de prueba. El usuario puede escribir el nombre de un lugar y la aplicación muestra su mapa y descripción correspondientes.
+El usuario puede escribir o decir el destino. La aplicación muestra su mapa, descripción e indicaciones.
 
 ## Estructura del proyecto
 
@@ -45,9 +45,12 @@ Sus responsabilidades incluyen:
 Define la estructura de información de un lugar.
 
 Cada lugar contiene:
+- **id:** identificador compartido con el servidor.
 - **name:** nombre del lugar.
+- **roomNumber:** número de aula, cuando corresponde.
 - **mapImageRes:** referencia al recurso de imagen del mapa.
 - **description:** descripción breve del lugar.
+- **directions:** indicaciones desde el ascensor.
 - **aliases:** nombres alternativos que permiten identificar el lugar.
 
 ### `data/PlacesCatalog.kt` — Catálogo de lugares
@@ -68,25 +71,15 @@ Contiene los archivos XML que definen la estructura visual de las pantallas.
 
 Entre ellas se encuentran:
 - `activity_main.xml`: menú principal.
-- `activity_listen.xml`: pantalla de entrada de texto para indicar el lugar solicitado.
+- `activity_listen.xml`: pantalla de entrada por texto o voz para indicar el lugar solicitado.
 - `screen_place.xml`: pantalla que presenta el nombre, el mapa y la descripción del lugar.
 
 ## Flujo de funcionamiento
 
 1. El usuario abre la aplicación.
 2. Selecciona la opción para buscar un lugar.
-3. Escribe el nombre del lugar solicitado.
+3. Escribe o dice el destino solicitado.
 4. La aplicación busca una coincidencia en el catálogo.
-5. Si encuentra el lugar, muestra su mapa y descripción.
+5. Si encuentra el lugar, muestra su mapa e indicaciones. El botón «Consultar otra ubicación» abre una nueva búsqueda.
 6. Si no encuentra una coincidencia, informa al usuario.
-
-## Estado actual y desarrollo futuro
-
-La primera versión utiliza entrada de texto para simular la solicitud del usuario.
-
-Las mejoras previstas incluyen:
-- Integrar reconocimiento de voz.
-- Mejorar la interpretación de solicitudes en lenguaje natural.
-- Incorporar un modelo de lenguaje para comprender solicitudes más flexibles.
-- Probar e integrar la aplicación con el robot Pepper físico.
 
