@@ -1,52 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:paddingStart="160dp"
-    android:paddingEnd="160dp"
-    android:paddingTop="32dp"
-    android:paddingBottom="32dp">
+    android:fillViewport="true">
 
-    <TextView
-        style="@style/Leitroboter.Title"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="¿A qué lugar quieres ir?"
-        android:textSize="32sp"
-        android:layout_marginBottom="32dp" />
+        android:orientation="vertical"
+        android:gravity="center"
+        android:paddingStart="160dp"
+        android:paddingEnd="160dp"
+        android:paddingTop="24dp"
+        android:paddingBottom="24dp">
 
-    <EditText
-        android:id="@+id/placeInput"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/card_background"
-        android:minHeight="64dp"
-        android:hint="Ej. Aula de Robótica"
-        android:textColor="@color/text_title"
-        android:textColorHint="@color/text_body"
-        android:textSize="22sp"
-        android:inputType="textCapSentences"
-        android:singleLine="true" />
+        <TextView
+            style="@style/Leitroboter.Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/search_prompt"
+            android:textSize="32sp"
+            android:layout_marginBottom="16dp" />
 
-    <Button
-        android:id="@+id/submitPlaceButton"
-        style="@style/Leitroboter.Button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Buscar"
-        android:layout_marginTop="24dp" />
+        <TextView
+            style="@style/Leitroboter.Body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/voice_explanation"
+            android:textSize="16sp"
+            android:layout_marginBottom="16dp" />
 
-    <!-- Botón para volver al menú, porque en Pepper no hay barra de navegación -->
-    <Button
-        android:id="@+id/backButton"
-        style="@style/Leitroboter.Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Regresar al menú"
-        android:layout_marginTop="16dp" />
+        <Button
+            android:id="@+id/voicePlaceButton"
+            style="@style/Leitroboter.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/voice_button" />
 
-</LinearLayout>
+        <EditText
+            android:id="@+id/placeInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/card_background"
+            android:minHeight="64dp"
+            android:hint="@string/search_hint"
+            android:textColor="@color/text_title"
+            android:textColorHint="@color/text_body"
+            android:textSize="22sp"
+            android:inputType="textCapSentences"
+            android:maxLength="400"
+            android:singleLine="true"
+            android:layout_marginTop="16dp" />
+
+        <Button
+            android:id="@+id/submitPlaceButton"
+            style="@style/Leitroboter.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/search_button"
+            android:layout_marginTop="16dp" />
+
+        <TextView
+            android:id="@+id/searchStatus"
+            style="@style/Leitroboter.Body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:accessibilityLiveRegion="polite"
+            android:gravity="center"
+            android:text="@string/search_ready"
+            android:textSize="16sp"
+            android:layout_marginTop="12dp" />
+
+        <Button
+            android:id="@+id/backButton"
+            style="@style/Leitroboter.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/back_to_menu"
+            android:layout_marginTop="16dp" />
+
+    </LinearLayout>
+</ScrollView>
