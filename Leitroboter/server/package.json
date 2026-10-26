@@ -1,0 +1,13 @@
+{
+  "name": "leitroboter-matcher",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "start": "node --env-file-if-exists=.env index.mjs",
+    "test": "node --test",
+    "test:live": "node --env-file-if-exists=.env live-check.mjs"
+  }
+}
