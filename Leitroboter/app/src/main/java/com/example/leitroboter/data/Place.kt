@@ -7,7 +7,7 @@ data class Place(
     val roomNumber: String?,
     val mapImageRes: Int,
     val description: String,
-    // Indicaciones desde el ascensor.
+    // Indicaciones desde el ascensor, con la persona de frente a él (ver README).
     val directions: String,
     val aliases: List<String>
 )
