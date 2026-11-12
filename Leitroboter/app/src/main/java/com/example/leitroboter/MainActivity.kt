@@ -340,7 +340,11 @@ class MainActivity : RobotActivity(), RobotLifecycleCallbacks {
         showMap(
             placeName = if (place.roomNumber != null) "${place.name} (${place.roomNumber})" else place.name,
             mapImage = place.mapImageRes,
-            description = listOf(place.description, place.directions).filter { it.isNotBlank() }.joinToString("\n"),
+            // El nombre ya está en el título; la descripción solo se muestra si agrega algo.
+            description = listOf(
+                if (repeatsName(place.description, place.name)) "" else place.description,
+                place.directions
+            ).filter { it.isNotBlank() }.joinToString("\n"),
             speech = joinSentences(
                 "Usted quiere ir a ${place.name}",
                 if (repeatsName(place.description, place.name)) "" else place.description,
