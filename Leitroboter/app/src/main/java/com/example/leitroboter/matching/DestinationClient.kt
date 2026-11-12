@@ -20,22 +20,30 @@ class DestinationClient(
         return post(apiUrl, payload, "application/json; charset=utf-8")
     }
 
-    fun matchAudio(wav: ByteArray): DestinationResult {
-        if (!PcmWave.isCanonical(wav)) return DestinationResult.Failure
-        val endpoint = DestinationEndpoint.forAudio(apiUrl) ?: return DestinationResult.Failure
-        return post(endpoint, wav, "audio/wav")
+    /** Devuelve lo que dijo la persona, "" si no se entendió voz, o null si falló el servicio. */
+    fun transcribeAudio(wav: ByteArray): String? {
+        if (!PcmWave.isCanonical(wav)) return null
+        val endpoint = DestinationEndpoint.forTranscription(apiUrl) ?: return null
+        val body = postRaw(endpoint, wav, "audio/wav", TranscriptResponse.MAX_RESPONSE_BYTES) ?: return null
+        return TranscriptResponse.parse(body)
     }
 
     private fun post(endpoint: String, payload: ByteArray, payloadType: String): DestinationResult {
-        if (Thread.currentThread().isInterrupted) return DestinationResult.Failure
+        val body = postRaw(endpoint, payload, payloadType, DestinationResponse.MAX_RESPONSE_BYTES)
+            ?: return DestinationResult.Failure
+        return DestinationResponse.parse(body, allowedDestinations)
+    }
+
+    private fun postRaw(endpoint: String, payload: ByteArray, payloadType: String, maxBytes: Int): String? {
+        if (Thread.currentThread().isInterrupted) return null
         var connection: HttpURLConnection? = null
         try {
             val url = URL(endpoint)
             if (url.protocol != "https" && !(allowCleartext && url.protocol == "http")) {
-                return DestinationResult.Failure
+                return null
             }
             if (url.host.isBlank() || url.userInfo != null || url.ref != null ||
-                apiToken.any { it == '\r' || it == '\n' }) return DestinationResult.Failure
+                apiToken.any { it == '\r' || it == '\n' }) return null
 
             connection = url.openConnection() as HttpURLConnection
             activeConnection.set(connection)
@@ -50,30 +58,30 @@ class DestinationClient(
                 if (apiToken.isNotBlank()) setRequestProperty("Authorization", "Bearer $apiToken")
             }
             connection.setFixedLengthStreamingMode(payload.size)
-            if (Thread.currentThread().isInterrupted) return DestinationResult.Failure
+            if (Thread.currentThread().isInterrupted) return null
             connection.outputStream.use { it.write(payload) }
-            if (connection.responseCode != HttpURLConnection.HTTP_OK) return DestinationResult.Failure
+            if (connection.responseCode != HttpURLConnection.HTTP_OK) return null
             val contentType = connection.contentType?.substringBefore(';')?.trim()
-            if (contentType != "application/json") return DestinationResult.Failure
+            if (contentType != "application/json") return null
             val output = ByteArrayOutputStream()
             connection.inputStream.use { stream ->
                 val buffer = ByteArray(256)
                 while (true) {
-                    if (Thread.currentThread().isInterrupted) return DestinationResult.Failure
+                    if (Thread.currentThread().isInterrupted) return null
                     val count = stream.read(buffer)
                     if (count < 0) break
-                    if (output.size() + count > DestinationResponse.MAX_RESPONSE_BYTES) {
-                        return DestinationResult.Failure
+                    if (output.size() + count > maxBytes) {
+                        return null
                     }
                     output.write(buffer, 0, count)
                 }
             }
-            return DestinationResponse.parse(output.toString("UTF-8"), allowedDestinations)
+            return output.toString("UTF-8")
         } catch (_: Exception) {
             // La interfaz recibe un error genérico, sin detalles del proveedor.
-            return DestinationResult.Failure
+            return null
         } catch (_: LinkageError) {
-            return DestinationResult.Failure
+            return null
         } finally {
             activeConnection.compareAndSet(connection, null)
             connection?.disconnect()

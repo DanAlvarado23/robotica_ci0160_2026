@@ -3,8 +3,10 @@ package com.example.leitroboter.matching
 import java.net.URI
 
 object DestinationEndpoint {
-    /** Valida la URL de texto y cambia su ruta final a /match-audio. */
-    fun forAudio(textEndpoint: String): String? = try {
+    /** Valida la URL de texto y cambia su ruta final a /transcribe-audio. */
+    fun forTranscription(textEndpoint: String): String? = sibling(textEndpoint, "/transcribe-audio")
+
+    private fun sibling(textEndpoint: String, suffix: String): String? = try {
         val endpoint = URI(textEndpoint)
         val path = endpoint.path.orEmpty()
         if ((endpoint.scheme != "https" && endpoint.scheme != "http") ||
@@ -16,7 +18,7 @@ object DestinationEndpoint {
         } else {
             URI(
                 endpoint.scheme, null, endpoint.host, endpoint.port,
-                path.removeSuffix("/match") + "/match-audio", null, null
+                path.removeSuffix("/match") + suffix, null, null
             ).toASCIIString()
         }
     } catch (_: Exception) { null }

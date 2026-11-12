@@ -7,12 +7,14 @@
     <string name="voice_unavailable">No hay un micrófono disponible. Puedes escribir tu destino.</string>
     <string name="voice_cancelled">Se canceló. Puedes volver a hablar o escribir.</string>
     <string name="voice_not_understood">No te entendí. Vuelve a hablar o escribe tu destino.</string>
-    <string name="voice_review">Revisa el texto y pulsa Buscar.</string>
     <string name="audio_permission_explanation">Permite el micrófono para hablar, o escribe tu destino.</string>
     <string name="audio_permission_granted">Micrófono listo. Pulsa Hablar.</string>
     <string name="audio_permission_denied">Sin permiso de micrófono. Puedes escribir tu destino.</string>
     <string name="audio_stop_button">Detener y buscar</string>
-    <string name="audio_recording">● Grabando… Pulsa Detener y buscar al terminar.</string>
+    <string name="audio_recording">● Te escucho… La búsqueda empieza sola cuando termines de hablar.</string>
+    <string name="audio_no_speech">No te escuché. Pulsa Hablar para intentar de nuevo.</string>
+    <string name="voice_heard">Esto es lo que entendí. Ya busco tu destino…</string>
+    <string name="audio_transcribing">Escribiendo lo que dijiste…</string>
     <string name="audio_recording_failed">No te escuché bien. Vuelve a hablar o escribe tu destino.</string>
     <string name="search_hint">Ej. ¿Dónde puedo imprimir?</string>
     <string name="search_button">Buscar</string>
