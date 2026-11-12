@@ -51,6 +51,7 @@ Cada lugar contiene:
 - **mapImageRes:** referencia al recurso de imagen del mapa.
 - **description:** descripción breve del lugar.
 - **directions:** indicaciones desde el ascensor. Todas usan el mismo marco de referencia: la persona está **de frente al ascensor** (mirando sus puertas), que es como se ve en los mapas, con el ascensor arriba. Así, un giro a la derecha en la indicación es una flecha hacia la derecha en el mapa. Solo el primer giro depende de este marco; los giros y lados siguientes se dicen según la dirección en que la persona va caminando.
+- **gestureAnimationRes:** animación de `res/raw` con la que Pepper señala el primer giro mientras dice las indicaciones (`gesture` en `destinations.json`: `right`, `left`, `back` o `null`). Pepper está a la par del ascensor, de frente a la persona, así que para la derecha de la persona levanta su brazo izquierdo (`point_right.qianim`) y viceversa.
 - **aliases:** nombres alternativos que permiten identificar el lugar.
 
 ### `data/PlacesCatalog.kt` — Catálogo de lugares

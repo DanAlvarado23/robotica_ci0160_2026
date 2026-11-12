@@ -6,6 +6,7 @@
     "map": "mapa_4_6",
     "description": "Laboratorio del PI de Ingeniería de Software y Bases de Datos.",
     "directions": "De frente al ascensor, gire a la derecha. El laboratorio 4-6 es la primera puerta a su izquierda, la puerta grande al lado de la oficina 4-5.",
+    "gesture": "right",
     "aliases": [
       "laboratorio de pi",
       "laboratorio pi",
@@ -34,6 +35,7 @@
     "map": "mapa_4_5",
     "description": "Oficina de la profesora y directora Gabriela.",
     "directions": "De frente al ascensor, gire a la derecha y camine unos pasos. La oficina 4-5 es la puerta que queda de frente.",
+    "gesture": "right",
     "aliases": [
       "gabriela",
       "profesora gabriela",
@@ -63,6 +65,7 @@
     "map": "mapa_4_4",
     "description": "Oficina del profesor Luis Gustavo.",
     "directions": "De frente al ascensor, gire a la derecha y camine unos pasos hasta la oficina 4-5. Ahí doble a la derecha. La oficina 4-4 es la primera puerta a su izquierda.",
+    "gesture": "right",
     "aliases": [
       "luis gustavo",
       "profesor luis gustavo",
@@ -90,6 +93,7 @@
     "map": "mapa_4_3",
     "description": "Oficina del profesor Casasola.",
     "directions": "De frente al ascensor, gire a la derecha y camine unos pasos hasta la oficina 4-5. Ahí doble a la derecha. La oficina 4-3 es la segunda puerta a su izquierda, después de la 4-4, en la esquina.",
+    "gesture": "right",
     "aliases": [
       "casasola",
       "profesor casasola",
@@ -113,6 +117,7 @@
     "map": "mapa_4_2",
     "description": "Sala común para consultas entre profesores y estudiantes.",
     "directions": "De frente al ascensor, gire a la derecha y camine unos pasos hasta la oficina 4-5. Ahí doble a la derecha. La sala 4-2 es la primera puerta a su derecha, frente a la oficina 4-4.",
+    "gesture": "right",
     "aliases": [
       "sala de consultas",
       "consultas",
@@ -135,6 +140,7 @@
     "map": "mapa_sala_estudio",
     "description": "Sala individual de estudio.",
     "directions": "De frente al ascensor, gire a la izquierda y cruce las puertas de vidrio. Es la cuarta puerta a su izquierda, al lado de la sala 4-19.",
+    "gesture": "left",
     "aliases": [
       "sala individual de estudio",
       "sala individual",
@@ -150,6 +156,7 @@
     "map": "mapa_4_20",
     "description": "Comedor de profesores.",
     "directions": "De frente al ascensor, gire a la izquierda y cruce las puertas de vidrio. El comedor (4-20) es la segunda puerta a su izquierda, al lado del cuarto de impresora.",
+    "gesture": "left",
     "aliases": [
       "comedor",
       "comedor de profesores",
@@ -171,6 +178,7 @@
     "map": "mapa_4_19",
     "description": "Área común y sala de estudiantes.",
     "directions": "De frente al ascensor, gire a la izquierda y cruce las puertas de vidrio. La sala 4-19 es la tercera puerta a su izquierda, al lado del comedor.",
+    "gesture": "left",
     "aliases": [
       "area comun",
       "sala de estudiantes",
@@ -194,6 +202,7 @@
     "map": "mapa_4_18",
     "description": "Cuarto de la impresora.",
     "directions": "De frente al ascensor, gire a la izquierda y cruce las puertas de vidrio. El cuarto de impresora (4-18) es la primera puerta a su izquierda.",
+    "gesture": "left",
     "aliases": [
       "impresora",
       "cuarto de impresora",
@@ -215,6 +224,7 @@
     "map": "mapa_laboratorios_robotica",
     "description": "En este piso hay dos laboratorios de robótica: la 4-15 (Robótica y énfasis en Ingeniería de Software) y la 4-17 (Robótica Kryscia y énfasis en Ciencias de la Computación).",
     "directions": "De frente al ascensor, gire a la izquierda y cruce las puertas de vidrio. La 4-15 es la segunda puerta a su derecha y la 4-17 es la última sala al fondo a su izquierda, frente a la 4-15.",
+    "gesture": "left",
     "aliases": [
       "robotica",
       "laboratorio de robotica",
@@ -232,6 +242,7 @@
     "map": "mapa_4_17",
     "description": "Laboratorio de Robótica Kryscia y del énfasis en Ciencias de la Computación.",
     "directions": "De frente al ascensor, gire a la izquierda, cruce las puertas de vidrio y siga hasta el fondo del pasillo. El laboratorio 4-17 es la última sala a su izquierda, frente a la 4-15.",
+    "gesture": "left",
     "aliases": [
       "laboratorio kryscia",
       "kryscia",
@@ -260,6 +271,7 @@
     "map": "mapa_4_15",
     "description": "Laboratorio de Robótica y del énfasis en Ingeniería de Software.",
     "directions": "De frente al ascensor, gire a la izquierda y cruce las puertas de vidrio. El laboratorio 4-15 es la segunda puerta a su derecha, después de la 4-14.",
+    "gesture": "left",
     "aliases": [
       "laboratorio de ingenieria de software",
       "ingenieria de software",
@@ -286,6 +298,7 @@
     "map": "mapa_4_14",
     "description": "Laboratorio del énfasis en Ingeniería en Tecnologías de Información.",
     "directions": "De frente al ascensor, gire a la izquierda y cruce las puertas de vidrio. El laboratorio 4-14 es la primera puerta a su derecha.",
+    "gesture": "left",
     "aliases": [
       "laboratorio de tecnologias de informacion",
       "tecnologias de informacion",
@@ -305,6 +318,7 @@
     "map": "mapa_ascensor",
     "description": "Ascensor del cuarto piso.",
     "directions": "Usted se encuentra frente al ascensor.",
+    "gesture": null,
     "aliases": [
       "ascensor",
       "elevador"
@@ -317,6 +331,7 @@
     "map": "mapa_banios",
     "description": "Baños del cuarto piso. Mujeres a la derecha, hombres a la izquierda y el baño para personas con discapacidad en el medio.",
     "directions": "De frente al ascensor, gire a la izquierda. Los baños están justo a su derecha, al lado del ascensor.",
+    "gesture": "left",
     "aliases": [
       "baños",
       "baño",
@@ -338,6 +353,7 @@
     "map": "mapa_salida_emergencia",
     "description": "Escalera de emergencia del cuarto piso.",
     "directions": "De frente al ascensor, gire a la izquierda, cruce las puertas de vidrio y siga recto hasta el final del pasillo. La salida de emergencia es la puerta del fondo.",
+    "gesture": "left",
     "aliases": [
       "salida de emergencia",
       "salida",
@@ -354,6 +370,7 @@
     "map": "mapa_escaleras",
     "description": "Escaleras principales del edificio.",
     "directions": "De frente al ascensor, dé media vuelta. Las escaleras están justo detrás de usted, al otro lado del pasillo.",
+    "gesture": "back",
     "aliases": [
       "escaleras",
       "escalera",
