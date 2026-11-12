@@ -64,6 +64,14 @@ class SilenceDetectorTest {
         assertEquals(Decision.END_OF_SPEECH, decision)
     }
 
+    @Test fun hearsAQuietMicrophone() {
+        // Audífonos en el emulador: la voz llega con RMS de unos 350.
+        val detector = SilenceDetector()
+        val soft = List(15) { block(500.0, tone = true) }
+        assertEquals(Decision.END_OF_SPEECH, run(detector, quiet(5) + soft + quiet(30)).first)
+        assertTrue(detector.peakLevel > detector.speechThreshold)
+    }
+
     @Test fun louderBackgroundRaisesTheThreshold() {
         val detector = SilenceDetector()
         val fan = List(3) { block(800.0, tone = true) }

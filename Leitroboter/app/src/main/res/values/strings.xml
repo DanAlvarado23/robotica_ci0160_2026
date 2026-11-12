@@ -13,6 +13,8 @@
     <string name="audio_stop_button">Detener y buscar</string>
     <string name="audio_recording">● Te escucho… La búsqueda empieza sola cuando termines de hablar.</string>
     <string name="audio_no_speech">No te escuché. Pulsa Hablar para intentar de nuevo.</string>
+    <string name="voice_heard">Esto es lo que entendí. Ya busco tu destino…</string>
+    <string name="audio_transcribing">Escribiendo lo que dijiste…</string>
     <string name="audio_recording_failed">No te escuché bien. Vuelve a hablar o escribe tu destino.</string>
     <string name="search_hint">Ej. ¿Dónde puedo imprimir?</string>
     <string name="search_button">Buscar</string>

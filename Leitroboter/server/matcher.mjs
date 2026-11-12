@@ -99,12 +99,8 @@ async function readBoundedJson(response) {
 
 export function createMatcher({apiKey='', model='gemini-3.5-flash-lite', fetchImpl=fetch, timeoutMs=12000}={}) {
   if (!/^gemini-[a-z0-9.-]+$/u.test(model)) throw new Error('Invalid Gemini model');
-  const match = async (text, remainingMs=timeoutMs) => {
-    const started = Date.now();
-    const audio = Buffer.isBuffer(text);
-    if (audio ? !isValidWav(text) : !isAllowedRequest(text)) return NO_MATCH;
-    const exact = audio ? undefined : aliases.get(normalize(text));
-    if (exact) return exact;
+  // Devuelve el único texto visible de Gemini, o null si la respuesta no es aceptable.
+  const ask = async (input, remainingMs) => {
     if (!apiKey.trim()) throw new Error('GEMINI_NOT_CONFIGURED');
     const controller = new AbortController();
     const timer = setTimeout(()=>controller.abort(), remainingMs);
@@ -112,30 +108,42 @@ export function createMatcher({apiKey='', model='gemini-3.5-flash-lite', fetchIm
       const response = await fetchImpl('https://generativelanguage.googleapis.com/v1beta/models/'+model+':generateContent', {
         method:'POST',redirect:'error',signal:controller.signal,
         headers:{'Content-Type':'application/json','x-goog-api-key':apiKey},
-        body:JSON.stringify(buildGeminiPayload(text))
+        body:JSON.stringify(buildGeminiPayload(input))
       });
       const data = await readBoundedJson(response);
-      if (data.promptFeedback?.blockReason || data.candidates?.length !== 1) return NO_MATCH;
+      if (data.promptFeedback?.blockReason || data.candidates?.length !== 1) return null;
       const candidate = data.candidates[0];
-      if (candidate.finishReason !== 'STOP') return NO_MATCH;
+      if (candidate.finishReason !== 'STOP') return null;
       const parts = candidate.content?.parts;
-      if (!Array.isArray(parts) || parts.some(p => Object.hasOwn(p,'functionCall') || Object.hasOwn(p,'executableCode') || Object.hasOwn(p,'codeExecutionResult'))) return NO_MATCH;
+      if (!Array.isArray(parts) || parts.some(p => Object.hasOwn(p,'functionCall') || Object.hasOwn(p,'executableCode') || Object.hasOwn(p,'codeExecutionResult'))) return null;
       const visible = parts.filter(p=>p.thought !== true);
-      if (visible.length !== 1 || typeof visible[0].text !== 'string') return NO_MATCH;
-      if (audio) {
-        const transcript = parseTranscript(visible[0].text);
-        if (!transcript) return NO_MATCH;
-        const budget = remainingMs - (Date.now() - started);
-        if (budget <= 0) throw new Error('PROVIDER_UNAVAILABLE');
-        clearTimeout(timer);
-        // La transcripción se valida con las mismas reglas que una petición escrita.
-        return await match(transcript, budget);
-      }
-      return parseDestination(visible[0].text);
+      if (visible.length !== 1 || typeof visible[0].text !== 'string') return null;
+      return visible[0].text;
     } catch {
       // Omite los detalles del error remoto, que pueden contener datos de la petición.
       throw new Error('PROVIDER_UNAVAILABLE');
     } finally { clearTimeout(timer); }
   };
+  // Transcribe el audio; devuelve '' si no hay voz o la transcripción no pasa los filtros.
+  const transcribe = async (audio, remainingMs=timeoutMs) => {
+    if (!isValidWav(audio)) return '';
+    return parseTranscript(await ask(audio, remainingMs));
+  };
+  const match = async (text, remainingMs=timeoutMs) => {
+    const started = Date.now();
+    if (Buffer.isBuffer(text)) {
+      const transcript = await transcribe(text, remainingMs);
+      if (!transcript) return NO_MATCH;
+      const budget = remainingMs - (Date.now() - started);
+      if (budget <= 0) throw new Error('PROVIDER_UNAVAILABLE');
+      // La transcripción se valida con las mismas reglas que una petición escrita.
+      return await match(transcript, budget);
+    }
+    if (!isAllowedRequest(text)) return NO_MATCH;
+    const exact = aliases.get(normalize(text));
+    if (exact) return exact;
+    return parseDestination(await ask(text, remainingMs));
+  };
+  match.transcribe = transcribe;
   return match;
 }

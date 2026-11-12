@@ -29,12 +29,12 @@ class PcmWaveTest {
     }
 
     @Test fun derivesAudioEndpointOnlyFromValidatedMatchPath() {
-        assertEquals("http://10.0.2.2:8787/match-audio", DestinationEndpoint.forAudio("http://10.0.2.2:8787/match"))
-        assertEquals("https://example.com/service/match-audio", DestinationEndpoint.forAudio("https://example.com/service/match"))
+        assertEquals("http://10.0.2.2:8787/transcribe-audio", DestinationEndpoint.forTranscription("http://10.0.2.2:8787/match"))
+        assertEquals("https://example.com/service/transcribe-audio", DestinationEndpoint.forTranscription("https://example.com/service/match"))
         listOf(
             "https://example.com/match?redirect=/match", "https://user:secret@example.com/match",
             "https://example.com/other", "file:///match", "https://example.com/%2e%2e/match",
             "https://example.com/match#fragment", "https://example.com/../match"
-        ).forEach { assertNull(it, DestinationEndpoint.forAudio(it)) }
+        ).forEach { assertNull(it, DestinationEndpoint.forTranscription(it)) }
     }
 }

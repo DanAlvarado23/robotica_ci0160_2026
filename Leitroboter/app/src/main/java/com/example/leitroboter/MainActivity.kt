@@ -57,6 +57,7 @@ class MainActivity : RobotActivity(), RobotLifecycleCallbacks {
     private var speechEpoch = 0
     private var speechStartTask: Runnable? = null
     private var voiceSilenceTask: Runnable? = null
+    private var transcriptPauseTask: Runnable? = null
     private var pendingRequest: Future<*>? = null
     private var wavRecorder: WavRecorder? = null
     private var requestTimeout: Runnable? = null
@@ -257,9 +258,21 @@ class MainActivity : RobotActivity(), RobotLifecycleCallbacks {
         val generation = requestGeneration
         armRequestTimeout(generation)
         setBusy(true)
+        statusText?.setText(R.string.audio_transcribing)
         pendingRequest = executor.submit {
-            val result = destinationClient.matchAudio(wav)
-            deliverResult(generation, result)
+            val transcript = destinationClient.transcribeAudio(wav)
+            runOnUiThread {
+                if (!canDeliver(generation)) return@runOnUiThread
+                clearRequestTimeout()
+                pendingRequest = null
+                setBusy(false)
+                when {
+                    transcript == null -> statusText?.setText(R.string.service_unavailable)
+                    transcript.isEmpty() -> statusText?.setText(R.string.voice_not_understood)
+                    // Se muestra lo que entendió el servidor antes de buscar el destino.
+                    else -> showTranscriptThenSearch(transcript)
+                }
+            }
         }
     }
 
@@ -281,10 +294,26 @@ class MainActivity : RobotActivity(), RobotLifecycleCallbacks {
             statusText?.setText(R.string.voice_not_understood)
             return
         }
+        // El reconocedor ya detectó el fin de la voz; se busca sin tocar Buscar.
+        showTranscriptThenSearch(transcript)
+    }
+
+    /** Muestra lo que se entendió y espera un momento para que la persona lo lea antes de buscar. */
+    private fun showTranscriptThenSearch(transcript: String) {
         placeInput?.setText(transcript)
         placeInput?.setSelection(transcript.length)
-        // El reconocedor ya detectó el fin de la voz; se busca sin tocar Buscar.
-        processRequest(transcript)
+        statusText?.setText(R.string.voice_heard)
+        setBusy(true)
+        val generation = requestGeneration
+        val task = Runnable {
+            transcriptPauseTask = null
+            if (!canDeliver(generation)) return@Runnable
+            setBusy(false)
+            statusText?.setText(R.string.search_processing)
+            processRequest(transcript)
+        }
+        transcriptPauseTask = task
+        mainHandler.postDelayed(task, TRANSCRIPT_PAUSE_MS)
     }
 
     private fun processRequest(request: String) {
@@ -410,6 +439,8 @@ class MainActivity : RobotActivity(), RobotLifecycleCallbacks {
         requestGeneration++
         voiceSilenceTask?.let { mainHandler.removeCallbacks(it) }
         voiceSilenceTask = null
+        transcriptPauseTask?.let { mainHandler.removeCallbacks(it) }
+        transcriptPauseTask = null
         voiceCapturePending = false
         clearRequestTimeout()
         mainHandler.removeCallbacks(automaticRecordingStop)
@@ -609,6 +640,8 @@ class MainActivity : RobotActivity(), RobotLifecycleCallbacks {
     private companion object {
         const val TAG = "Leitroboter"
         const val VOICE_REQUEST = 1001
+        /** Tiempo para leer en la barra lo que se entendió antes de mostrar la ruta. */
+        const val TRANSCRIPT_PAUSE_MS = 1_000L
         const val MICROPHONE_REQUEST = 1002
         const val GREETING = "¡Hola! Soy Leitroboter. Le puedo ayudar a encontrar aulas, oficinas y laboratorios del cuarto piso del edificio anexo de la ECCI. Toque el botón para buscar un lugar."
         const val ASK_PLACE = "¿A dónde le gustaría ir?"

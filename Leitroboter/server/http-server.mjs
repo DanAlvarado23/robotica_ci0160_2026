@@ -1,6 +1,6 @@
 import http from 'node:http';
 import { timingSafeEqual } from 'node:crypto';
-import { NO_MATCH, destinationIds, MAX_WAV_BYTES, isValidWav } from './matcher.mjs';
+import { NO_MATCH, destinationIds, MAX_WAV_BYTES, isValidWav, parseTranscript } from './matcher.mjs';
 
 const send = (res, status, value) => {
   res.writeHead(status, {'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'});
@@ -18,7 +18,9 @@ export function createServer({match, token='', configured=false, rateLimit=20}) 
   const server = http.createServer(async (req,res)=>{
     if (req.headers.origin) return send(res,403,{error:'FORBIDDEN'});
     if (req.url === '/health' && req.method === 'GET') return send(res,200,{status:configured?'ready':'configuration_required'});
-    const audio = req.url === '/match-audio';
+    // /transcribe-audio solo devuelve el texto; la app lo muestra y luego lo busca con /match.
+    const transcribeOnly = req.url === '/transcribe-audio' && typeof match.transcribe === 'function';
+    const audio = req.url === '/match-audio' || transcribeOnly;
     if (req.url !== '/match' && !audio) return send(res,404,{error:'NOT_FOUND'});
     if (req.method !== 'POST') return send(res,405,{error:'METHOD_NOT_ALLOWED'});
     if (!authorized(req)) return send(res,401,{error:'UNAUTHORIZED'});
@@ -41,6 +43,11 @@ export function createServer({match, token='', configured=false, rateLimit=20}) 
       if (oversized) return;
       const body = audio ? Buffer.concat(chunks) : JSON.parse(Buffer.concat(chunks).toString('utf8'));
       if (audio ? !isValidWav(body) : (!body || typeof body !== 'object' || Array.isArray(body) || Object.keys(body).length !== 1 || typeof body.text !== 'string')) return send(res,400,{error:'INVALID_REQUEST'});
+      if (transcribeOnly) {
+        const transcript = await match.transcribe(body);
+        // Se vuelve a validar para que la respuesta nunca lleve texto fuera de las reglas.
+        return send(res,200,{transcript:parseTranscript(JSON.stringify({transcript:typeof transcript === 'string' ? transcript : ''}))});
+      }
       const destination = await match(audio?body:body.text);
       return send(res,200,{destination:destinationIds.has(destination)?destination:NO_MATCH});
     } catch (error) {

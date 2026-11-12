@@ -21,6 +21,14 @@ class SilenceDetector(private val sampleRate: Int = PcmWave.SAMPLE_RATE) {
     var heardSpeech = false
         private set
 
+    /** RMS más alto escuchado después de calibrar; sirve para ajustar los umbrales. */
+    var peakLevel = 0.0
+        private set
+
+    /** Ruido de fondo medido, o 0 si todavía no hay calibración. */
+    val measuredNoise: Double
+        get() = if (noiseFloor == Double.MAX_VALUE) 0.0 else noiseFloor
+
     /** Umbral de voz actual, útil para registrar la calibración. */
     val speechThreshold: Double
         get() = maxOf(MIN_SPEECH_RMS, minOf(noiseFloor, MAX_NOISE_FLOOR) * SPEECH_FACTOR)
@@ -35,6 +43,7 @@ class SilenceDetector(private val sampleRate: Int = PcmWave.SAMPLE_RATE) {
             noiseFloor = minOf(noiseFloor, level)
             return Decision.CONTINUE
         }
+        peakLevel = maxOf(peakLevel, level)
         if (level >= speechThreshold) {
             loudMs += durationMs
             quietMs = 0.0
@@ -56,7 +65,9 @@ class SilenceDetector(private val sampleRate: Int = PcmWave.SAMPLE_RATE) {
         const val END_SILENCE_MS = 1_200.0
         const val NO_SPEECH_TIMEOUT_MS = 5_000.0
         /** Umbral mínimo de voz (escala de 0 a 32767), aunque el ruido de fondo sea muy bajo. */
-        const val MIN_SPEECH_RMS = 500.0
+        // 500 era demasiado para micrófonos bajos (audífonos en el emulador); el factor
+        // sobre el ruido sigue protegiendo en lugares ruidosos.
+        const val MIN_SPEECH_RMS = 150.0
         /** Ruido máximo que se acepta como base, por si la calibración capta voz. */
         const val MAX_NOISE_FLOOR = 1_500.0
         const val SPEECH_FACTOR = 2.5

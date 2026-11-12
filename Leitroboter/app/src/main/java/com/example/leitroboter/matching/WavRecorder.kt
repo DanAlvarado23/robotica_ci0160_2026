@@ -3,6 +3,7 @@ package com.example.leitroboter.matching
 import android.media.AudioFormat
 import android.media.AudioRecord
 import android.media.MediaRecorder
+import android.util.Log
 import java.io.ByteArrayOutputStream
 import java.util.concurrent.atomic.AtomicBoolean
 
@@ -62,8 +63,9 @@ class WavRecorder {
                     pcm.write((value ushr 8) and 0xff)
                 }
                 when (detector.feed(samples, count)) {
-                    SilenceDetector.Decision.END_OF_SPEECH -> break
+                    SilenceDetector.Decision.END_OF_SPEECH -> { logLevels("fin de voz"); break }
                     SilenceDetector.Decision.NO_SPEECH -> {
+                        logLevels("sin voz")
                         // No se envía audio vacío al servidor.
                         endedWithoutSpeech = true
                         return null
@@ -84,6 +86,11 @@ class WavRecorder {
         }
     }
 
+    private fun logLevels(reason: String) {
+        // Solo niveles numéricos, nunca el audio: sirven para calibrar en el Pepper real.
+        Log.d(TAG, "$reason: ruido=${detector.measuredNoise.toInt()} umbral=${detector.speechThreshold.toInt()} pico=${detector.peakLevel.toInt()}")
+    }
+
     /** Detiene la grabación y conserva el clip para enviarlo. */
     fun stop() {
         stopRequested.set(true)
@@ -96,5 +103,9 @@ class WavRecorder {
     fun cancel() {
         cancelled.set(true)
         stop()
+    }
+
+    private companion object {
+        const val TAG = "LeitroboterVoz"
     }
 }
