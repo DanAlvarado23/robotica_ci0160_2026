@@ -231,8 +231,14 @@ class MainActivity : RobotActivity(), RobotLifecycleCallbacks {
                 if (wav == null) {
                     clearRequestTimeout()
                     setBusy(false)
-                    statusText?.setText(R.string.audio_recording_failed)
+                    if (recorder.endedWithoutSpeech) {
+                        statusText?.setText(R.string.audio_no_speech)
+                        say(NO_SPEECH)
+                    } else {
+                        statusText?.setText(R.string.audio_recording_failed)
+                    }
                 } else {
+                    // Fin de la voz, botón Detener o tope de 8 s: la consulta se envía sola.
                     submitAudio(wav)
                 }
             }
@@ -277,8 +283,8 @@ class MainActivity : RobotActivity(), RobotLifecycleCallbacks {
         }
         placeInput?.setText(transcript)
         placeInput?.setSelection(transcript.length)
-        // El usuario revisa la transcripción antes de enviarla.
-        statusText?.setText(R.string.voice_review)
+        // El reconocedor ya detectó el fin de la voz; se busca sin tocar Buscar.
+        processRequest(transcript)
     }
 
     private fun processRequest(request: String) {
@@ -606,6 +612,7 @@ class MainActivity : RobotActivity(), RobotLifecycleCallbacks {
         const val MICROPHONE_REQUEST = 1002
         const val GREETING = "¡Hola! Soy Leitroboter. Le puedo ayudar a encontrar aulas, oficinas y laboratorios del cuarto piso del edificio anexo de la ECCI. Toque el botón para buscar un lugar."
         const val ASK_PLACE = "¿A dónde le gustaría ir?"
+        const val NO_SPEECH = "No le escuché. Toque Hablar para intentar de nuevo."
         val IGNORED_WORDS = setOf("de", "del", "la", "el", "los", "las", "y", "en", "a", "al")
     }
 }

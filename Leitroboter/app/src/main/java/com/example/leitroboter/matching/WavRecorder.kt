@@ -6,9 +6,17 @@ import android.media.MediaRecorder
 import java.io.ByteArrayOutputStream
 import java.util.concurrent.atomic.AtomicBoolean
 
-/** Graba un clip en memoria y libera AudioRecord al finalizar. */
+/**
+ * Graba un clip en memoria y libera AudioRecord al finalizar.
+ * Termina sola cuando [SilenceDetector] detecta el fin de la voz.
+ */
 class WavRecorder {
     private val stopRequested = AtomicBoolean(false)
+    private val detector = SilenceDetector()
+
+    /** Verdadero si la grabación terminó porque la persona no dijo nada. */
+    @Volatile var endedWithoutSpeech = false
+        private set
     private val cancelled = AtomicBoolean(false)
     private val recordingLock = Any()
     private var activeRecord: AudioRecord? = null
@@ -52,6 +60,15 @@ class WavRecorder {
                     val value = samples[index].toInt()
                     pcm.write(value and 0xff)
                     pcm.write((value ushr 8) and 0xff)
+                }
+                when (detector.feed(samples, count)) {
+                    SilenceDetector.Decision.END_OF_SPEECH -> break
+                    SilenceDetector.Decision.NO_SPEECH -> {
+                        // No se envía audio vacío al servidor.
+                        endedWithoutSpeech = true
+                        return null
+                    }
+                    SilenceDetector.Decision.CONTINUE -> Unit
                 }
             }
             if (cancelled.get() || Thread.currentThread().isInterrupted) return null
