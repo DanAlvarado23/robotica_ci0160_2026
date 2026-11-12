@@ -18,7 +18,10 @@ import com.aldebaran.qi.Future as QiFuture
 import com.aldebaran.qi.sdk.QiContext
 import com.aldebaran.qi.sdk.QiSDK
 import com.aldebaran.qi.sdk.RobotLifecycleCallbacks
+import com.aldebaran.qi.sdk.builder.AnimateBuilder
+import com.aldebaran.qi.sdk.builder.AnimationBuilder
 import com.aldebaran.qi.sdk.builder.SayBuilder
+import com.aldebaran.qi.sdk.`object`.conversation.BodyLanguageOption
 import com.aldebaran.qi.sdk.design.activity.RobotActivity
 import com.example.leitroboter.data.Place
 import com.example.leitroboter.data.PlacesCatalog
@@ -32,6 +35,9 @@ import java.util.concurrent.Future
 
 class MainActivity : RobotActivity(), RobotLifecycleCallbacks {
     private enum class Screen { MENU, SEARCH, MAP }
+
+    /** Frase que dice Pepper; si trae animación, la ejecuta mientras la dice. */
+    private data class SpeechPart(val text: String, val animationRes: Int? = null)
 
     private var screen = Screen.MENU
     private var lastPlaceId: String? = null
@@ -345,10 +351,13 @@ class MainActivity : RobotActivity(), RobotLifecycleCallbacks {
                 if (repeatsName(place.description, place.name)) "" else place.description,
                 place.directions
             ).filter { it.isNotBlank() }.joinToString("\n"),
-            speech = joinSentences(
-                "Usted quiere ir a ${place.name}",
-                if (repeatsName(place.description, place.name)) "" else place.description,
-                place.directions
+            speech = listOf(
+                SpeechPart(joinSentences(
+                    "Usted quiere ir a ${place.name}",
+                    if (repeatsName(place.description, place.name)) "" else place.description
+                )),
+                // Pepper señala el primer giro mientras dice las indicaciones.
+                SpeechPart(joinSentences(place.directions), place.gestureAnimationRes)
             )
         )
     }
@@ -366,7 +375,7 @@ class MainActivity : RobotActivity(), RobotLifecycleCallbacks {
         placeName: String,
         mapImage: Int,
         description: String,
-        speech: String = description
+        speech: List<SpeechPart> = listOf(SpeechPart(description))
     ) {
         stopSpeaking()
         cancelPendingRequest()
@@ -474,10 +483,14 @@ class MainActivity : RobotActivity(), RobotLifecycleCallbacks {
     }
 
     /** Lee frases de la aplicación e indicaciones del catálogo. */
-    private fun say(text: String) {
+    private fun say(text: String) = say(listOf(SpeechPart(text)))
+
+    /** Dice las partes en orden; las animaciones se cancelan junto con la voz. */
+    private fun say(parts: List<SpeechPart>) {
         stopSpeaking()
         val context = qiContext ?: return
-        if (!foreground || externalVoiceActive || voiceCapturePending || text.isBlank()) return
+        val pending = parts.filter { it.text.isNotBlank() }
+        if (!foreground || externalVoiceActive || voiceCapturePending || pending.isEmpty()) return
         val epoch = speechEpoch
         val deadline = System.nanoTime() + 5_000_000_000L
         val startWhenSilent = object : Runnable {
@@ -488,35 +501,66 @@ class MainActivity : RobotActivity(), RobotLifecycleCallbacks {
                     return
                 }
                 speechStartTask = null
-                try {
-                    val build = SayBuilder.with(context).withText(text.replace("\n", " ")).buildAsync()
-                    speechFutures.add(build)
-                    build.thenConsume { completed ->
-                        runOnUiThread {
-                            speechFutures.remove(build)
-                            if (!canSpeak(epoch, context) || !completed.isSuccess) return@runOnUiThread
-                            try {
-                                val running = completed.value.async().run()
-                                speechFutures.add(running)
-                                running.thenConsume { completedSpeech ->
-                                    if (completedSpeech.hasError()) {
-                                        Log.w(TAG, "No se pudo completar la voz de Pepper", completedSpeech.error)
-                                    } else if (completedSpeech.isSuccess) {
-                                        Log.i(TAG, "Voz de Pepper completada")
-                                    }
-                                    runOnUiThread { speechFutures.remove(running) }
-                                }
-                            } catch (_: Exception) {
-                            }
-                        }
-                    }
-                } catch (_: Exception) {
-                    // El mapa sigue disponible si falla el servicio de voz.
-                }
+                sayPart(pending, 0, epoch, context)
             }
         }
         speechStartTask = startWhenSilent
         mainHandler.post(startWhenSilent)
+    }
+
+    private fun sayPart(parts: List<SpeechPart>, index: Int, epoch: Int, context: QiContext) {
+        if (index >= parts.size || !canSpeak(epoch, context)) return
+        val part = parts[index]
+        try {
+            val builder = SayBuilder.with(context).withText(part.text.replace("\n", " "))
+            // Sin gestos automáticos de la voz para que no choquen con la animación.
+            if (part.animationRes != null) builder.withBodyLanguageOption(BodyLanguageOption.DISABLED)
+            val build = builder.buildAsync()
+            speechFutures.add(build)
+            build.thenConsume { completed ->
+                runOnUiThread {
+                    speechFutures.remove(build)
+                    if (!canSpeak(epoch, context) || !completed.isSuccess) return@runOnUiThread
+                    try {
+                        part.animationRes?.let { animate(it, context) }
+                        val running = completed.value.async().run()
+                        speechFutures.add(running)
+                        running.thenConsume { completedSpeech ->
+                            if (completedSpeech.hasError()) {
+                                Log.w(TAG, "No se pudo completar la voz de Pepper", completedSpeech.error)
+                            } else if (completedSpeech.isSuccess) {
+                                Log.i(TAG, "Voz de Pepper completada")
+                            }
+                            runOnUiThread {
+                                speechFutures.remove(running)
+                                if (completedSpeech.isSuccess) sayPart(parts, index + 1, epoch, context)
+                            }
+                        }
+                    } catch (_: Exception) {
+                    }
+                }
+            }
+        } catch (_: Exception) {
+            // El mapa sigue disponible si falla el servicio de voz.
+        }
+    }
+
+    /** Ejecuta un gesto de res/raw; stopSpeaking() también lo cancela. */
+    private fun animate(animationRes: Int, context: QiContext) {
+        try {
+            val running = AnimationBuilder.with(context).withResources(animationRes).buildAsync()
+                .andThenCompose { animation ->
+                    AnimateBuilder.with(context).withAnimation(animation).buildAsync()
+                }
+                .andThenCompose { action -> action.async().run() }
+            speechFutures.add(running)
+            running.thenConsume { completed ->
+                if (completed.hasError()) Log.w(TAG, "No se pudo completar el gesto de Pepper", completed.error)
+                runOnUiThread { speechFutures.remove(running) }
+            }
+        } catch (_: Exception) {
+            // Sin gesto, Pepper igual dice las indicaciones.
+        }
     }
 
     private fun canSpeak(epoch: Int, context: QiContext): Boolean =

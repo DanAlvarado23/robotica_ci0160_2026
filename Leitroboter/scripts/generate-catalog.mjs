@@ -3,12 +3,15 @@ import fs from 'node:fs';
 const root = new URL('../', import.meta.url);
 const catalog = JSON.parse(fs.readFileSync(new URL('destinations.json', root), 'utf8'));
 if (!Array.isArray(catalog) || !catalog.length) throw new Error('Catálogo vacío o inválido');
+// Gesto que hace Pepper según el primer giro, visto por la persona de frente al ascensor.
+const gestures = {right: 'R.raw.point_right', left: 'R.raw.point_left', back: 'R.raw.point_back'};
 const identifiers = new Set();
 for (const place of catalog) {
   if (!/^[a-z0-9_]{1,64}$/.test(place.id) || identifiers.has(place.id) ||
       !/^[a-z][a-z0-9_]*$/.test(place.map) ||
       !['name','description','directions'].every(key => typeof place[key] === 'string' && place[key].trim()) ||
       !(place.roomNumber === null || typeof place.roomNumber === 'string') ||
+      !(place.gesture === null || Object.hasOwn(gestures, place.gesture)) ||
       !Array.isArray(place.aliases) || !place.aliases.length ||
       place.aliases.some(alias => typeof alias !== 'string' || !alias.trim())) {
     throw new Error('Destino inválido: ' + (place.id || '(sin ID)'));
@@ -24,6 +27,7 @@ const entries = catalog.map(p => '        Place(\n' +
   '            mapImageRes = R.drawable.' + p.map + ',\n' +
   '            description = ' + quote(p.description) + ',\n' +
   '            directions = ' + quote(p.directions) + ',\n' +
+  '            gestureAnimationRes = ' + (p.gesture === null ? 'null' : gestures[p.gesture]) + ',\n' +
   '            aliases = listOf(' + p.aliases.map(quote).join(', ') + ')\n' +
   '        )').join(',\n');
 const output = 'package com.example.leitroboter.data\n\nimport com.example.leitroboter.R\n\n' +
