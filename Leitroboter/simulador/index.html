@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Simulador Leitroboter</title>
+<style>
+/* Copia las medidas de los layouts de Android: 1 dp = 1 px en la tableta de Pepper (1280 x 800).
+   Si cambia un tamaño en res/layout, cámbielo aquí también (variables de abajo). */
+:root{
+  --bottom-button-height:48px; /* screen_list.xml minHeight de los botones de abajo */
+  --blue:#1769E0;--blue-pressed:#0F52B5;--title:#172B4D;--body:#52647A;--bg:#F3F6FA;--card:#fff;--border:#DDE3EA;
+}
+@font-face{font-family:Poppins;src:url(fonts/poppins_regular.ttf)}
+@font-face{font-family:Poppins;font-weight:600;src:url(fonts/poppins_semibold.ttf)}
+*{box-sizing:border-box}
+body{margin:0;background:#2b2f36;font-family:Poppins,sans-serif;color:var(--title);display:flex;flex-direction:column;align-items:center;gap:12px;padding:16px}
+.bar{color:#dfe3ea;font-size:14px;display:flex;gap:16px;align-items:center;flex-wrap:wrap;justify-content:center}
+.bar label{display:flex;gap:6px;align-items:center}
+.bar select,.bar input{font:inherit}
+/* Marco de la tableta en proporción real: cuerpo 246 x 175 mm, pantalla 10.1" de 217 x 136 mm. */
+#frame{flex:none;background:#111;border-radius:calc(var(--mm) * 8);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 40px #000}
+#screen{overflow:hidden;position:relative}
+#tablet{width:1280px;height:800px;background:var(--bg);overflow:hidden;position:relative;transform-origin:top left}
+#card{height:6px;background:#f5b400;border-radius:3px}
+.screen{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center}
+button.btn{font-family:Poppins,sans-serif;font-weight:600;color:#fff;background:var(--blue);border:0;border-radius:32px;font-size:20px;min-height:64px;min-width:240px;padding:0 32px;cursor:pointer}
+button.btn:active{background:var(--blue-pressed)}
+button.btn:disabled{opacity:.5;cursor:default}
+h1{margin:0;font-weight:600;text-align:center}
+p.body{margin:0;color:var(--body);text-align:center}
+/* screen_list.xml */
+.list{padding:16px 32px 8px}
+.grid{flex:1;width:100%;display:flex;flex-direction:column;min-height:0}
+.row{display:flex;flex:1 1 0;min-height:0}
+.row>*{flex:1 1 0;margin:4px;min-width:0}
+.row>span{padding:0 12px}
+.grid button.btn{height:auto;min-height:0;min-width:0;padding:0 12px;line-height:1.2;overflow:hidden}
+.grid button.btn span{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.bottom{display:flex;width:100%;padding:0 128px;margin-top:8px}
+.bottom button.btn{flex:1;min-width:0;min-height:var(--bottom-button-height);font-size:16px;margin:0 8px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:20px}
+#say{color:#fff;font-size:15px;max-width:1100px;min-height:44px;text-align:center;opacity:0;transition:opacity .3s}
+</style>
+</head>
+<body>
+<div class="bar">
+  <span>Simulador de la tableta de Pepper · 1280 × 800</span>
+  <label>Pepper está en el piso <select id="pepperFloor"></select></label>
+  <label>Tamaño <select id="mode"><option value="real">Real (como la tableta de Pepper)</option><option value="fit">Ajustar a la ventana</option></select></label>
+  <label id="calib">Calibrar monitor <input type="range" id="calibRange" min="0.7" max="1.4" step="0.01" value="1"></label>
+</div>
+<div class="bar" id="calibHelp">Para que el tamaño real sea exacto, ponga una tarjeta (de crédito o carné, 85.6 mm) sobre la barra amarilla y mueva "Calibrar" hasta que midan lo mismo: <div id="card"></div></div>
+<div id="frame"><div id="screen"><div id="tablet"></div></div></div>
+
+<script>
+const PEPPER_FLOORS = [1,2,3,4,5,6];
+const OFFICE_PREFIXES = ['Oficina del profesor ', 'Oficina de la profesora '];
+const GRID_SIDE_PADDING = {2:200, 3:80, 4:0};
+let places = [], pepperFloor = 4;
+const tablet = document.getElementById('tablet');
+
+const el = (tag, attrs = {}, ...kids) => {
+  const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (k === 'style') e.style.cssText = v; else if (k.startsWith('on')) e[k] = v; else e.setAttribute(k, v);
+  }
+  for (const kid of kids.flat()) if (kid != null) e.append(kid);
+  return e;
+};
+const btn = (text, onclick, extra = {}) => el('button', {class: 'btn', onclick, ...extra}, text);
+const show = screen => { tablet.replaceChildren(screen); };
+const sayBox = el('div', {id: 'say'});
+document.body.append(sayBox); // Lo que Pepper diría, debajo de la tableta.
+let sayTimer;
+function say(text) { // Pepper habla: aquí se muestra abajo como subtítulo.
+  if (!text) return;
+  sayBox.textContent = '🔊 ' + text; sayBox.style.opacity = 1;
+  clearTimeout(sayTimer); sayTimer = setTimeout(() => sayBox.style.opacity = 0, 8000);
+}
+const norm = s => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9 -]/g, ' ').replace(/\s+/g, ' ').trim();
+const title = p => p.roomNumber ? `${p.name} (${p.roomNumber})` : p.name;
+function shortLabel(p) {
+  const name = p.shortName || OFFICE_PREFIXES.reduce((t, pre) => t.startsWith(pre) ? t.slice(pre.length) : t, p.name);
+  return p.roomNumber && !name.includes(p.roomNumber) ? `${p.roomNumber} · ${name}` : name;
+}
+const ORD = {primer:1,primero:1,segundo:2,tercer:3,tercero:3,cuarto:4,quinto:5,sexto:6};
+const NUM = {uno:1,dos:2,tres:3,cuatro:4,cinco:5,seis:6};
+function requestedFloor(text) {
+  const w = norm(text).split(' ');
+  for (let i = 0; i < w.length; i++) if (w[i] === 'piso' || w[i] === 'nivel') {
+    const n = w[i+1] && (NUM[w[i+1]] || parseInt(w[i+1])); if (n >= 1 && n <= 6) return n;
+    const b = w[i-1] && (ORD[w[i-1]] || NUM[w[i-1]] || parseInt(w[i-1])); if (b >= 1 && b <= 6) return b;
+  }
+  return null;
+}
+
+/* ---------- Menú (activity_main.xml) ---------- */
+function showMenu() {
+  show(el('div', {class: 'screen', style: 'justify-content:center;padding:24px'},
+    el('img', {src: 'maps/leitroboter_menu.jpg', style: 'width:600px;height:240px;object-fit:contain'}),
+    el('h1', {style: 'font-size:36px;margin:16px 0 8px'}, '¡Hola! Soy Leitroboter'),
+    el('p', {class: 'body', style: 'font-size:24px;margin-bottom:24px'}, '¿A dónde te gustaría ir?'),
+    el('div', {style: 'display:flex;gap:24px'}, btn('Iniciar', showSearch), btn('Explorar por piso', showFloors))
+  ));
+  say('¡Hola! Soy Leitroboter. Le puedo ayudar a encontrar aulas, oficinas y laboratorios del edificio anexo de la ECCI.');
+}
+
+/* ---------- Búsqueda (activity_listen.xml) ---------- */
+function showSearch(prev = '') {
+  const input = el('input', {placeholder: 'Ej. ¿Dónde puedo imprimir?', class: 'card', style: 'flex:1;min-height:64px;font:22px Poppins,sans-serif;padding:0 24px;color:var(--title)'});
+  input.value = typeof prev === 'string' ? prev : '';
+  const status = el('p', {class: 'body', style: 'font-size:16px;margin-top:12px'}, 'Puedes pedir un lugar de cualquier piso del anexo de la ECCI.');
+  const go = () => search(input.value.trim(), status);
+  input.onkeydown = e => { if (e.key === 'Enter') go(); };
+  show(el('div', {class: 'screen', style: 'justify-content:center;padding:24px 160px'},
+    el('h1', {style: 'font-size:32px;margin-bottom:8px'}, '¿A qué lugar quieres ir?'),
+    el('p', {class: 'body', style: 'font-size:16px;margin-bottom:12px'}, 'Habla o escribe tu destino.'),
+    btn('Hablar', () => { status.textContent = 'En el simulador no hay micrófono: escriba el destino.'; }, {style: 'width:100%'}),
+    el('div', {style: 'display:flex;align-items:center;width:100%;margin-top:12px'}, input, btn('Buscar', go, {style: 'min-width:160px;margin-left:12px'})),
+    status,
+    btn('Regresar al menú', showMenu, {style: 'margin-top:12px'})
+  ));
+  input.focus();
+  say('¿A dónde le gustaría ir?');
+}
+// En la app la búsqueda la hace Gemini. Aquí es una aproximación por palabras: se quitan las
+// palabras de relleno ("dónde", "queda", "el"...) y se buscan las que quedan en el nombre,
+// el número y los alias. Si no queda ninguna palabra útil, no encuentra nada.
+const FILLER = new Set(('a al como cual de del donde el en encuentra encuentro esta este hay ir la las lo los me ' +
+  'mi necesito para piso nivel por puedo que queda quiero se su un una voy y ' +
+  'primer primero segundo tercer tercero cuarto quinto sexto uno dos tres cuatro cinco seis favor hola llego llegar').split(' '));
+const words = text => norm(text).split(' ').filter(w => w && !FILLER.has(w) && !/^[1-6]$/.test(w));
+function search(text, status) {
+  if (!text) { status.textContent = 'Escribe un destino válido.'; return; }
+  const q = words(text);
+  if (!q.length) return showNotFound();
+  const score = p => {
+    let best = 0;
+    for (const key of [p.name, p.roomNumber || '', ...(p.aliases || [])]) {
+      const k = words(key);
+      if (!k.length) continue;
+      const hits = q.filter(w => k.includes(w)).length;
+      // Todas las palabras de la búsqueda están en la clave: mejor si además la clave es corta.
+      const value = hits === q.length ? 2 + hits / k.length : hits / q.length;
+      best = Math.max(best, value);
+    }
+    return best;
+  };
+  const ranked = places.map(p => [score(p), p]).filter(([sc]) => sc >= 0.5).sort((x, y) => y[0] - x[0]);
+  if (!ranked.length) return showNotFound();
+  resolvePlace(ranked[0][1], text);
+}
+function resolvePlace(place, request) {
+  let cands = place.group ? places.filter(p => p.group === place.group) : [place];
+  const f = requestedFloor(request);
+  if (f) { const onFloor = cands.filter(p => p.floor === f); if (onFloor.length) cands = onFloor; }
+  cands.sort((a, b) => a.floor - b.floor);
+  if (cands.length === 1) showPlace(cands[0]); else showFloorChoice(cands, request);
+}
+
+/* ---------- Mapa (screen_place.xml) ---------- */
+function showPlace(p) {
+  const directions = p.directions;
+  const repeats = norm(p.description).replace(/\.$/, '') === norm(p.name);
+  const text = [repeats ? '' : p.description, directions].filter(Boolean).join('\n');
+  show(el('div', {class: 'screen', style: 'padding:8px 32px'},
+    el('h1', {style: 'font-size:22px'}, `${title(p)} · Piso ${p.floor}`),
+    el('img', {src: `maps/${p.map}.jpg`, style: 'flex:1;min-height:0;width:100%;object-fit:contain;margin-top:4px'}),
+    el('div', {class: 'card', style: 'width:100%;margin-top:6px;padding:6px 16px;font-size:14px;color:var(--body);white-space:pre-line'}, text),
+    el('div', {class: 'bottom', style: 'padding:0;margin-top:6px'},
+      btn('Consultar otra ubicación', () => showSearch(), {style: 'min-height:52px;font-size:18px'}),
+      btn('Regresar al menú', showMenu, {style: 'min-height:52px;font-size:18px'}))
+  ));
+  say(`Usted quiere ir a ${p.name}${p.floor !== pepperFloor ? `, en el piso ${p.floor}` : ''}. ${directions}`);
+}
+function showNotFound() {
+  show(el('div', {class: 'screen', style: 'padding:8px 32px'},
+    el('h1', {style: 'font-size:22px'}, 'No encontré el lugar que pediste'),
+    el('img', {src: 'maps/mapa_default.jpg', style: 'flex:1;min-height:0;width:100%;object-fit:contain;margin-top:4px'}),
+    el('div', {class: 'card', style: 'width:100%;margin-top:6px;padding:6px 16px;font-size:14px;color:var(--body)'}, 'Prueba con otro lugar del anexo de la ECCI, o explora los lugares por piso.'),
+    el('div', {class: 'bottom', style: 'padding:0;margin-top:6px'},
+      btn('Consultar otra ubicación', () => showSearch(), {style: 'min-height:52px;font-size:18px'}),
+      btn('Regresar al menú', showMenu, {style: 'min-height:52px;font-size:18px'}))
+  ));
+}
+
+/* ---------- Listas en cuadrícula (screen_list.xml + item_list_button.xml) ---------- */
+const GRID_TEXT = {2: 18, 3: 16, 4: 14};   // MainActivity.GRID_TEXT_SP
+const GRID_ROWS = 7;                       // MainActivity.GRID_ROWS
+function showList(t, sub, options, secondary, speech) {
+  const columns = options.length <= 6 ? 2 : options.length <= 12 ? 3 : 4;
+  const grid = el('div', {class: 'grid', style: `padding:0 ${GRID_SIDE_PADDING[columns]}px`});
+  const rows = Math.ceil(options.length / columns);
+  const spacer = Math.max(0, GRID_ROWS - rows) / 2;
+  const addSpacer = () => { if (spacer) grid.append(el('div', {style: `flex:${spacer} 1 0`})); };
+  addSpacer();
+  for (let i = 0; i < options.length; i += columns) {
+    const chunk = options.slice(i, i + columns);
+    grid.append(el('div', {class: 'row'},
+      chunk.map(o => btn(el('span', {}, o.text), o.onClick, {style: `font-size:${GRID_TEXT[columns]}px`, ...(o.enabled === false ? {disabled: ''} : {})})),
+      Array.from({length: columns - chunk.length}, () => el('span'))));
+  }
+  addSpacer();
+  show(el('div', {class: 'screen list'},
+    el('h1', {style: 'font-size:28px;width:100%'}, t),
+    el('p', {class: 'body', style: 'font-size:16px;margin:4px 0 8px'}, sub),
+    grid,
+    el('div', {class: 'bottom'}, btn(secondary[0], secondary[1]), btn('Regresar al menú', showMenu))
+  ));
+  say(speech);
+}
+function showFloors() {
+  showList('¿Qué piso quiere ver?', `Usted está en el piso ${pepperFloor}, frente al ascensor.`,
+    [1,2,3,4,5,6].map(f => {
+      const n = places.filter(p => p.floor === f).length;
+      return {text: n ? `Piso ${f} · ${n} lugares` : `Piso ${f} · próximamente`, enabled: n > 0, onClick: () => showFloorPlaces(f)};
+    }),
+    ['Buscar otro lugar', () => showSearch()], '¿Qué piso quiere ver?');
+}
+function showFloorPlaces(f) {
+  showList(`Piso ${f}`, 'Toque un lugar para ver cómo llegar.',
+    places.filter(p => p.floor === f).map(p => ({text: shortLabel(p), onClick: () => showPlace(p)})),
+    ['Ver otros pisos', showFloors], `Estos son los lugares del piso ${f}. Toque uno para ver cómo llegar.`);
+}
+function showFloorChoice(cands, request) {
+  showList('¿En qué piso?', 'Ese lugar está en varios pisos. Toque el que busca.',
+    cands.map(p => ({text: `Piso ${p.floor} · ${shortLabel(p)}`, onClick: () => showPlace(p)})),
+    ['Buscar otro lugar', () => showSearch(request)], 'Ese lugar está en varios pisos. ¿A cuál piso quiere ir?');
+}
+
+/* ---------- Arranque ---------- */
+const sel = document.getElementById('pepperFloor');
+PEPPER_FLOORS.forEach(f => sel.append(el('option', {value: f}, String(f))));
+sel.value = pepperFloor;
+sel.onchange = () => { pepperFloor = Number(sel.value); showMenu(); };
+// Tamaño real: la pantalla mide 217 mm de ancho. El navegador supone 96 px por pulgada;
+// como cada monitor es distinto, se puede calibrar con una tarjeta de 85.6 mm.
+const frame = document.getElementById('frame'), mode = document.getElementById('mode'), calibRange = document.getElementById('calibRange');
+const MM = 96 / 25.4;
+const store = {get: k => { try { return localStorage.getItem(k); } catch { return null; } }, set: (k, v) => { try { localStorage.setItem(k, v); } catch {} }};
+calibRange.value = store.get('calib') || 1;
+mode.value = store.get('mode') || 'real';
+function rescale() {
+  const mm = MM * Number(calibRange.value);                    // px de pantalla por milímetro real
+  const real = mode.value === 'real';
+  const bodyW = 246, bodyH = 175, screenW = 217;              // milímetros
+  const unit = real ? mm : Math.min((innerWidth - 40) / bodyW, (innerHeight - 110) / bodyH); // px por mm del marco
+  const s = screenW * unit / 1280;
+  document.documentElement.style.setProperty('--mm', unit + 'px');
+  frame.style.width = bodyW * unit + 'px'; frame.style.height = bodyH * unit + 'px';
+  const screenBox = document.getElementById('screen');
+  screenBox.style.width = 1280 * s + 'px'; screenBox.style.height = 800 * s + 'px';
+  tablet.style.transform = `scale(${s})`;
+  document.getElementById('card').style.width = 85.6 * mm + 'px';
+  document.getElementById('calib').style.display = document.getElementById('calibHelp').style.display = real ? '' : 'none';
+  store.set('calib', calibRange.value); store.set('mode', mode.value);
+}
+addEventListener('resize', rescale); mode.onchange = rescale; calibRange.oninput = rescale;
+fetch('destinations.json').then(r => r.json()).then(data => { places = data; rescale(); showMenu(); });
+</script>
+</body>
+</html>

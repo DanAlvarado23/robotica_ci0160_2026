@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Lista de opciones: pisos para explorar, lugares de un piso o pisos de un lugar repetido. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:paddingStart="32dp"
+    android:paddingEnd="32dp"
+    android:paddingTop="16dp"
+    android:paddingBottom="8dp">
+
+    <TextView
+        android:id="@+id/listTitle"
+        style="@style/Leitroboter.Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="28sp" />
+
+    <TextView
+        android:id="@+id/listSubtitle"
+        style="@style/Leitroboter.Body"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:textSize="16sp" />
+
+    <!-- Cuadrícula sin desplazamiento: MainActivity agrega las filas, centradas en el alto. -->
+    <LinearLayout
+        android:id="@+id/listContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:orientation="vertical" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="8dp"
+        android:paddingStart="128dp"
+        android:paddingEnd="128dp">
+
+        <Button
+            android:id="@+id/listBackButton"
+            style="@style/Leitroboter.Button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:minHeight="48dp"
+            android:minWidth="0dp"
+            android:textSize="16sp"
+            android:layout_marginEnd="8dp" />
+
+        <Button
+            android:id="@+id/backButton"
+            style="@style/Leitroboter.Button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/back_to_menu"
+            android:minHeight="48dp"
+            android:minWidth="0dp"
+            android:textSize="16sp"
+            android:layout_marginStart="8dp" />
+    </LinearLayout>
+</LinearLayout>

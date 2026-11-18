@@ -19,13 +19,24 @@
     <string name="search_hint">Ej. ¿Dónde puedo imprimir?</string>
     <string name="search_button">Buscar</string>
     <string name="search_processing">Buscando el destino…</string>
-    <string name="search_ready">Puedes pedir un lugar del cuarto piso del anexo de la ECCI.</string>
+    <string name="search_ready">Puedes pedir un lugar de cualquier piso del anexo de la ECCI.</string>
     <string name="invalid_request">Escribe un destino válido.</string>
     <string name="service_unavailable">No se pudo buscar. Escribe el nombre exacto del lugar.</string>
     <string name="place_not_found">No encontré el lugar que pediste</string>
-    <string name="place_not_found_description">Prueba con otro lugar del cuarto piso del anexo de la ECCI.</string>
+    <string name="place_not_found_description">Prueba con otro lugar del anexo de la ECCI, o explora los lugares por piso.</string>
     <string name="voice_waiting_for_silence">Esperando a que Pepper deje de hablar…</string>
     <string name="voice_silence_unavailable">Pepper sigue hablando. Intenta de nuevo o escribe tu destino.</string>
     <string name="another_location">Consultar otra ubicación</string>
     <string name="back_to_menu">Regresar al menú</string>
+    <string name="explore_floors">Explorar por piso</string>
+    <string name="floors_title">¿Qué piso quiere ver?</string>
+    <string name="floors_subtitle">Usted está en el piso %1$d, frente al ascensor.</string>
+    <string name="floor_label">Piso %1$d</string>
+    <string name="floor_button">Piso %1$d · %2$d lugares</string>
+    <string name="floor_button_empty">Piso %1$d · próximamente</string>
+    <string name="floor_places_subtitle">Toque un lugar para ver cómo llegar.</string>
+    <string name="other_floors">Ver otros pisos</string>
+    <string name="choose_floor_title">¿En qué piso?</string>
+    <string name="choose_floor_subtitle">Ese lugar está en varios pisos. Toque el que busca.</string>
+    <string name="new_search">Buscar otro lugar</string>
 </resources>
