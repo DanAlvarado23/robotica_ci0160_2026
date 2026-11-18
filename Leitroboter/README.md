@@ -48,6 +48,9 @@ Cada lugar contiene:
 - **id:** identificador compartido con el servidor.
 - **name:** nombre del lugar.
 - **roomNumber:** número de aula, cuando corresponde.
+- **floor:** piso del edificio anexo (1 a 6). Cuando el lugar no está en el piso de Pepper (`res/values/config.xml`, `pepper_floor`, hoy 4), el título del mapa muestra el piso y Pepper dice "Usted quiere ir a X, en el piso N"; no hace gesto con el brazo. El ascensor está en la misma posición en todos los pisos, así que las indicaciones de cada piso empiezan igual: de frente al ascensor de ese piso.
+- **group:** (opcional en `destinations.json`) une el mismo tipo de lugar en varios pisos, por ejemplo `banos` o `sala_reuniones`. Si la persona pide uno de esos lugares sin decir el piso, la aplicación muestra la lista de pisos para elegir; si dice el piso ("baños del piso 2"), va directo. Un alias solo puede repetirse entre lugares del mismo grupo.
+- **shortName:** (opcional) nombre corto para los botones de "Explorar por piso" cuando el nombre completo no cabe en dos líneas, por ejemplo "Lab. Robótica Kryscia". Máximo 32 caracteres.
 - **mapImageRes:** referencia al recurso de imagen del mapa.
 - **description:** descripción breve del lugar.
 - **directions:** indicaciones desde el ascensor. Todas usan el mismo marco de referencia: la persona está **de frente al ascensor** (mirando sus puertas), que es como se ve en los mapas, con el ascensor arriba. Así, un giro a la derecha en la indicación es una flecha hacia la derecha en el mapa. Solo el primer giro depende de este marco; los giros y lados siguientes se dicen según la dirección en que la persona va caminando.
@@ -74,6 +77,7 @@ Entre ellas se encuentran:
 - `activity_main.xml`: menú principal.
 - `activity_listen.xml`: pantalla de entrada por texto o voz para indicar el lugar solicitado.
 - `screen_place.xml`: pantalla que presenta el nombre, el mapa y la descripción del lugar.
+- `screen_list.xml`: lista de opciones para "Explorar por piso" (pisos y lugares de cada piso) y para elegir el piso cuando un lugar se repite.
 
 ## Flujo de funcionamiento
 

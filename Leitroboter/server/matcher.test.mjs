@@ -1,13 +1,14 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {execFileSync} from 'node:child_process';
-import {catalog,createMatcher,parseDestination,buildGeminiPayload,isAllowedRequest,NO_MATCH,isValidWav,parseTranscript} from './matcher.mjs';
+import {catalog,createMatcher,parseDestination,buildGeminiPayload,isAllowedRequest,NO_MATCH,isValidWav,parseTranscript,withoutFloor,normalize} from './matcher.mjs';
 import {createServer} from './http-server.mjs';
 
 const candidate = (text, finishReason='STOP', extra={}) => ({candidates:[{finishReason,content:{parts:[{text}]}}],...extra});
 const mock = data => async()=>Response.json(data);
 test('catalog: destination data and generated Android catalog agree',()=>{
-  assert.equal(catalog.length,17);
+  assert.equal(catalog.filter(p=>p.floor===4).length,17);
+  assert.ok(catalog.every(p=>Number.isInteger(p.floor) && p.floor>=1 && p.floor<=6));
   assert.equal(catalog.find(p=>p.id==='laboratorio_robotica_4_17').roomNumber,'4-17');
   assert.equal(catalog.find(p=>p.id==='laboratorio_iti_4_14').roomNumber,'4-14');
   execFileSync(process.execPath,[new URL('../scripts/generate-catalog.mjs',import.meta.url).pathname.replace(/^\/(\w:)/,'$1'),'--check']);
@@ -30,8 +31,31 @@ test('catalog contains room numbers, maps and spoken directions',()=>{
 });
 test('all exact aliases work without Gemini credentials, including accents and room numbers',async()=>{
   const match=createMatcher();
-  for(const p of catalog) for(const name of [p.name,...p.aliases]) assert.equal(await match(name),p.id,name);
+  for(const p of catalog) for(const name of [p.name,...p.aliases]) {
+    const found=await match(name);
+    // Un alias compartido entre pisos devuelve un lugar del mismo grupo; la app pregunta el piso.
+    if(found!==p.id) assert.ok(p.group && catalog.find(q=>q.id===found)?.group===p.group,name);
+  }
   assert.equal(await match('AULA 4-17'),'laboratorio_robotica_4_17');
+});
+
+test('a name repeated on several floors resolves within its group',async()=>{
+  const match=createMatcher();
+  const id=await match('baños');
+  const found=catalog.find(p=>p.id===id);
+  assert.equal(found.group,'banos');
+  assert.ok(catalog.filter(p=>p.group==='banos').length>1);
+  const groups=new Map();
+  for(const p of catalog.filter(p=>p.group)) {
+    const floors=groups.get(p.group)??new Set();
+    assert.ok(!floors.has(p.floor),'grupo repetido en el mismo piso: '+p.id);
+    groups.set(p.group,floors.add(p.floor));
+  }
+});
+
+test('every catalog map exists in res/drawable',async()=>{
+  const fs=await import('node:fs');
+  for(const p of catalog) assert.ok(fs.existsSync(new URL('../app/src/main/res/drawable/'+p.map+'.jpg',import.meta.url))||fs.existsSync(new URL('../app/src/main/res/drawable/'+p.map+'.png',import.meta.url)),p.map);
 });
 
 test('robotics overview, specific rooms and ITI/IS resolve to separate destinations',async()=>{
@@ -185,4 +209,22 @@ test('HTTP API rate limit',async t=>{
   const options={method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:'banos'})};
   assert.equal((await fetch(url,options)).status,200);
   assert.equal((await fetch(url,options)).status,429);
+});
+
+test('reconoce el lugar aunque la petición diga el piso, sin llamar a Gemini', async () => {
+  const match = createMatcher({apiKey: 'x', fetchImpl: async () => { throw new Error('no debe llamarse'); }});
+  for (const text of ['bano piso uno', 'baños del piso 2', 'baño en el segundo piso', 'auditorio piso 1']) {
+    assert.notEqual(await match(text), NO_MATCH, text);
+  }
+  assert.equal(withoutFloor(normalize('sala de reuniones del piso 3')), 'sala de reuniones');
+});
+
+test('reintenta una vez si Gemini falla', async () => {
+  let calls = 0;
+  const fetchImpl = async () => {
+    if (++calls === 1) return new Response('error', {status: 503});
+    return Response.json({candidates: [{finishReason: 'STOP', content: {parts: [{text: '{"destination":"auditorio_1"}'}]}}]});
+  };
+  assert.equal(await createMatcher({apiKey: 'x', fetchImpl})('donde dan charlas grandes'), 'auditorio_1');
+  assert.equal(calls, 2);
 });
