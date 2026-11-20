@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Piso del edificio anexo donde está Pepper (a la par del ascensor). Cambiarlo si Pepper se mueve de piso. -->
+    <integer name="pepper_floor">4</integer>
+</resources>

@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:text="@string/search_prompt"
             android:textSize="32sp"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="8dp" />
 
         <TextView
             style="@style/Leitroboter.Body"
@@ -29,7 +29,7 @@
             android:gravity="center"
             android:text="@string/voice_explanation"
             android:textSize="16sp"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="12dp" />
 
         <Button
             android:id="@+id/voicePlaceButton"
@@ -38,28 +38,38 @@
             android:layout_height="wrap_content"
             android:text="@string/voice_button" />
 
-        <EditText
-            android:id="@+id/placeInput"
+        <!-- Campo de texto y botón Buscar en la misma fila. -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/card_background"
-            android:minHeight="64dp"
-            android:hint="@string/search_hint"
-            android:textColor="@color/text_title"
-            android:textColorHint="@color/text_body"
-            android:textSize="22sp"
-            android:inputType="textCapSentences"
-            android:maxLength="400"
-            android:singleLine="true"
-            android:layout_marginTop="16dp" />
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="12dp">
 
-        <Button
-            android:id="@+id/submitPlaceButton"
-            style="@style/Leitroboter.Button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/search_button"
-            android:layout_marginTop="16dp" />
+            <EditText
+                android:id="@+id/placeInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/card_background"
+                android:minHeight="64dp"
+                android:hint="@string/search_hint"
+                android:textColor="@color/text_title"
+                android:textColorHint="@color/text_body"
+                android:textSize="22sp"
+                android:inputType="textCapSentences"
+                android:maxLength="400"
+                android:singleLine="true" />
+
+            <Button
+                android:id="@+id/submitPlaceButton"
+                style="@style/Leitroboter.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="160dp"
+                android:text="@string/search_button"
+                android:layout_marginStart="12dp" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/searchStatus"
@@ -78,7 +88,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/back_to_menu"
-            android:layout_marginTop="16dp" />
+            android:layout_marginTop="12dp" />
 
     </LinearLayout>
 </ScrollView>

@@ -31,11 +31,27 @@
         android:text="¿A dónde te gustaría ir?"
         android:textSize="24sp" />
 
-    <Button
-        android:id="@+id/searchButton"
-        style="@style/Leitroboter.Button"
+    <!-- Los dos botones del menú van a la par para que todo quepa sin deslizar. -->
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Iniciar" />
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/searchButton"
+            style="@style/Leitroboter.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:text="Iniciar" />
+
+        <Button
+            android:id="@+id/exploreButton"
+            style="@style/Leitroboter.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="@string/explore_floors" />
+    </LinearLayout>
 
 </LinearLayout>

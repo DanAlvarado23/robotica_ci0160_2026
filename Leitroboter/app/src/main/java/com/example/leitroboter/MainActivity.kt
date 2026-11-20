@@ -9,7 +9,10 @@ import android.os.Handler
 import android.os.Looper
 import android.speech.RecognizerIntent
 import android.util.Log
+import android.view.View
 import android.widget.Button
+import android.widget.LinearLayout
+import android.widget.Space
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
@@ -23,6 +26,8 @@ import com.aldebaran.qi.sdk.builder.AnimationBuilder
 import com.aldebaran.qi.sdk.builder.SayBuilder
 import com.aldebaran.qi.sdk.`object`.conversation.BodyLanguageOption
 import com.aldebaran.qi.sdk.design.activity.RobotActivity
+import com.aldebaran.qi.sdk.design.activity.conversationstatus.SpeechBarDisplayStrategy
+import com.example.leitroboter.data.Floors
 import com.example.leitroboter.data.Place
 import com.example.leitroboter.data.PlacesCatalog
 import com.example.leitroboter.matching.DestinationClient
@@ -34,13 +39,17 @@ import java.util.concurrent.Executors
 import java.util.concurrent.Future
 
 class MainActivity : RobotActivity(), RobotLifecycleCallbacks {
-    private enum class Screen { MENU, SEARCH, MAP }
+    private enum class Screen { MENU, SEARCH, MAP, FLOORS, FLOOR_PLACES, CHOOSE_FLOOR }
 
     /** Frase que dice Pepper; si trae animación, la ejecuta mientras la dice. */
     private data class SpeechPart(val text: String, val animationRes: Int? = null)
 
     private var screen = Screen.MENU
     private var lastPlaceId: String? = null
+    private var lastFloor = Floors.DEFAULT_PEPPER_FLOOR
+    // Piso donde está Pepper, a la par del ascensor (res/values/config.xml).
+    private val pepperFloor by lazy { resources.getInteger(R.integer.pepper_floor) }
+    private var lastRequest = ""
     private var placeInput: EditText? = null
     private var submitButton: Button? = null
     private var voiceButton: Button? = null
@@ -75,9 +84,15 @@ class MainActivity : RobotActivity(), RobotLifecycleCallbacks {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Oculta la franja gris de QiSDK arriba de la pantalla (la barra de lo que Pepper oye).
+        // La app ya muestra en la barra de búsqueda lo que entendió.
+        setSpeechBarDisplayStrategy(SpeechBarDisplayStrategy.IMMERSIVE)
         QiSDK.register(this, this)
         when (savedInstanceState?.getString("screen")) {
-            Screen.SEARCH.name -> listenForPlace(savedInstanceState.getString("request").orEmpty())
+            Screen.SEARCH.name, Screen.CHOOSE_FLOOR.name ->
+                listenForPlace(savedInstanceState.getString("request").orEmpty())
+            Screen.FLOORS.name -> showFloors()
+            Screen.FLOOR_PLACES.name -> showFloorPlaces(savedInstanceState.getInt("floor", Floors.DEFAULT_PEPPER_FLOOR))
             Screen.MAP.name -> {
                 val place = PlacesCatalog.places.firstOrNull {
                     it.id == savedInstanceState.getString("placeId")
@@ -98,6 +113,7 @@ class MainActivity : RobotActivity(), RobotLifecycleCallbacks {
         lastPlaceId = null
         setContentView(R.layout.activity_main)
         findViewById<Button>(R.id.searchButton).setOnClickListener { listenForPlace() }
+        findViewById<Button>(R.id.exploreButton).setOnClickListener { showFloors() }
         say(GREETING)
     }
 
@@ -327,8 +343,9 @@ class MainActivity : RobotActivity(), RobotLifecycleCallbacks {
             RequestPolicy.normalize(place.name) == normalized ||
                 place.aliases.any { RequestPolicy.normalize(it) == normalized }
         }
-        if (exactMatches.size == 1) {
-            showPlace(exactMatches.single())
+        // Un mismo nombre puede estar en varios pisos (grupo): se pregunta el piso si hace falta.
+        if (exactMatches.size == 1 || (exactMatches.size > 1 && Floors.groupOf(exactMatches) != null)) {
+            resolvePlace(exactMatches.first(), request)
             return
         }
 
@@ -344,14 +361,14 @@ class MainActivity : RobotActivity(), RobotLifecycleCallbacks {
             } catch (_: Exception) {
                 DestinationResult.Failure
             }
-            deliverResult(generation, result)
+            deliverResult(generation, request, result)
         }
     }
 
     private fun canDeliver(generation: Int): Boolean =
         generation == requestGeneration && screen == Screen.SEARCH && foreground && !isFinishing && !isDestroyed
 
-    private fun deliverResult(generation: Int, result: DestinationResult) {
+    private fun deliverResult(generation: Int, request: String, result: DestinationResult) {
         runOnUiThread {
             if (!canDeliver(generation)) return@runOnUiThread
             clearRequestTimeout()
@@ -360,7 +377,7 @@ class MainActivity : RobotActivity(), RobotLifecycleCallbacks {
             when (result) {
                 is DestinationResult.Match -> {
                     val place = PlacesCatalog.places.firstOrNull { it.id == result.id }
-                    if (place == null) showNotFound() else showPlace(place)
+                    if (place == null) showNotFound() else resolvePlace(place, request)
                 }
                 DestinationResult.NoMatch -> showNotFound()
                 DestinationResult.Failure -> statusText?.setText(R.string.service_unavailable)
@@ -376,25 +393,177 @@ class MainActivity : RobotActivity(), RobotLifecycleCallbacks {
         statusText?.setText(if (busy) R.string.search_processing else R.string.search_ready)
     }
 
+    /** Muestra el lugar, o la lista de pisos si el lugar se repite y no se dijo en cuál piso. */
+    private fun resolvePlace(place: Place, request: String) {
+        val candidates = Floors.candidates(place, request, PlacesCatalog.places)
+        if (candidates.size == 1) showPlace(candidates.single()) else showFloorChoice(candidates, request)
+    }
+
     private fun showPlace(place: Place) {
         lastPlaceId = place.id
+        val otherFloor = place.floor != pepperFloor
+        // En otro piso, el título y Pepper ya dicen el piso; las indicaciones son desde el ascensor de ese piso.
+        val directions = place.directions
+        val title = if (place.roomNumber != null) "${place.name} (${place.roomNumber})" else place.name
         showMap(
-            placeName = if (place.roomNumber != null) "${place.name} (${place.roomNumber})" else place.name,
+            placeName = "$title · ${getString(R.string.floor_label, place.floor)}",
             mapImage = place.mapImageRes,
             // El nombre ya está en el título; la descripción solo se muestra si agrega algo.
             description = listOf(
                 if (repeatsName(place.description, place.name)) "" else place.description,
-                place.directions
+                directions
             ).filter { it.isNotBlank() }.joinToString("\n"),
             speech = listOf(
                 SpeechPart(joinSentences(
-                    "Usted quiere ir a ${place.name}",
+                    if (otherFloor) "Usted quiere ir a ${place.name}, en el piso ${place.floor}"
+                    else "Usted quiere ir a ${place.name}",
                     if (repeatsName(place.description, place.name)) "" else place.description
                 )),
-                // Pepper señala el primer giro mientras dice las indicaciones.
-                SpeechPart(joinSentences(place.directions), place.gestureAnimationRes)
+                // Pepper señala el primer giro mientras dice las indicaciones. En otro piso no,
+                // porque el giro se hace frente al ascensor de ese piso, no aquí.
+                SpeechPart(directions, if (otherFloor) null else place.gestureAnimationRes)
             )
         )
+    }
+
+    /** Pisos del edificio para explorar los lugares sin buscar. */
+    private fun showFloors() {
+        showList(
+            Screen.FLOORS,
+            getString(R.string.floors_title),
+            getString(R.string.floors_subtitle, pepperFloor),
+            Floors.ALL.map { floor ->
+                val count = PlacesCatalog.places.count { it.floor == floor }
+                ListOption(
+                    if (count == 0) getString(R.string.floor_button_empty, floor)
+                    else getString(R.string.floor_button, floor, count),
+                    enabled = count > 0
+                ) { showFloorPlaces(floor) }
+            },
+            getString(R.string.new_search) to { listenForPlace() },
+            speech = getString(R.string.floors_title)
+        )
+    }
+
+    private fun showFloorPlaces(floor: Int) {
+        lastFloor = floor
+        showList(
+            Screen.FLOOR_PLACES,
+            getString(R.string.floor_label, floor),
+            getString(R.string.floor_places_subtitle),
+            PlacesCatalog.places.filter { it.floor == floor }.map { place ->
+                ListOption(shortLabel(place)) { showPlace(place) }
+            },
+            getString(R.string.other_floors) to { showFloors() },
+            speech = "Estos son los lugares del piso $floor. Toque uno para ver cómo llegar."
+        )
+    }
+
+    /** El lugar pedido existe en varios pisos: la persona toca el que busca. */
+    private fun showFloorChoice(candidates: List<Place>, request: String) {
+        showList(
+            Screen.CHOOSE_FLOOR,
+            getString(R.string.choose_floor_title),
+            getString(R.string.choose_floor_subtitle),
+            candidates.map { place ->
+                ListOption("${getString(R.string.floor_label, place.floor)} · ${shortLabel(place)}") { showPlace(place) }
+            },
+            getString(R.string.new_search) to { listenForPlace(request) },
+            speech = "Ese lugar está en varios pisos. ¿A cuál piso quiere ir?",
+            request = request
+        )
+    }
+
+    private class ListOption(val text: String, val enabled: Boolean = true, val onClick: () -> Unit)
+
+    private fun showList(
+        listScreen: Screen,
+        title: String,
+        subtitle: String,
+        options: List<ListOption>,
+        secondary: Pair<String, () -> Unit>,
+        speech: String = "",
+        request: String = ""
+    ) {
+        stopSpeaking()
+        cancelPendingRequest()
+        searchSession++
+        externalVoiceActive = false
+        clearSearchViews()
+        screen = listScreen
+        lastPlaceId = null
+        lastRequest = request
+        setContentView(R.layout.screen_list)
+        findViewById<TextView>(R.id.listTitle).text = title
+        findViewById<TextView>(R.id.listSubtitle).text = subtitle
+        fillGrid(findViewById(R.id.listContainer), options)
+        findViewById<Button>(R.id.listBackButton).apply {
+            text = secondary.first
+            setOnClickListener { secondary.second() }
+        }
+        findViewById<Button>(R.id.backButton).setOnClickListener { showMenu() }
+        if (speech.isNotBlank()) say(speech)
+    }
+
+    /**
+     * Acomoda las opciones en una cuadrícula que cabe en la pantalla sin deslizar:
+     * hasta 6 opciones en 2 columnas (los pisos quedan en 2 x 3), hasta 12 en 3 y más en 4
+     * (el piso 3, con 26 lugares, queda en 4 x 7).
+     *
+     * Para que todas las pantallas se vean iguales, el alto se divide siempre en
+     * [GRID_ROWS] filas del mismo tamaño; si hay menos filas, el resto queda como espacio
+     * arriba y abajo. Así todos los botones miden lo mismo en cualquier piso.
+     */
+    private fun fillGrid(grid: LinearLayout, options: List<ListOption>) {
+        val columns = when {
+            options.size <= 6 -> 2
+            options.size <= 12 -> 3
+            else -> 4
+        }
+        val density = resources.displayMetrics.density
+        val sidePadding = ((GRID_SIDE_PADDING_DP[columns] ?: 0) * density).toInt()
+        grid.setPadding(sidePadding, 0, sidePadding, 0)
+        val textSize = GRID_TEXT_SP[columns] ?: 14f
+        val rows = options.chunked(columns)
+        val spacerWeight = (GRID_ROWS - rows.size).coerceAtLeast(0) / 2f
+        fun addSpacer() {
+            if (spacerWeight > 0f) {
+                grid.addView(Space(this), LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, spacerWeight))
+            }
+        }
+        addSpacer()
+        for (rowOptions in rows) {
+            val row = LinearLayout(this).apply {
+                orientation = LinearLayout.HORIZONTAL
+                // Sin esto, Android alinea los botones por la línea del texto y los desplaza
+                // hacia arriba o abajo según tengan una o dos líneas.
+                isBaselineAligned = false
+            }
+            for (option in rowOptions) {
+                val button = layoutInflater.inflate(R.layout.item_list_button, row, false) as Button
+                button.text = option.text
+                button.textSize = textSize
+                button.isEnabled = option.enabled
+                if (!option.enabled) button.alpha = 0.5f
+                button.setOnClickListener { option.onClick() }
+                row.addView(button)
+            }
+            // La última fila incompleta conserva el ancho de columna de las demás.
+            repeat(columns - rowOptions.size) {
+                row.addView(Space(this), LinearLayout.LayoutParams(0, 0, 1f))
+            }
+            grid.addView(row, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 1f))
+        }
+        addSpacer()
+    }
+
+    /** Nombre corto para un botón de la cuadrícula: "3-14 · José Antonio Brenes Carranza".
+     *  El número va primero para que no se parta al final de una línea. */
+    private fun shortLabel(place: Place): String {
+        val name = place.shortName
+            ?: OFFICE_PREFIXES.fold(place.name) { text, prefix -> text.removePrefix(prefix) }
+        val room = place.roomNumber
+        return if (room != null && !name.contains(room)) "$room · $name" else name
     }
 
     private fun showNotFound() {
@@ -471,7 +640,8 @@ class MainActivity : RobotActivity(), RobotLifecycleCallbacks {
 
     override fun onSaveInstanceState(outState: Bundle) {
         outState.putString("screen", screen.name)
-        outState.putString("request", placeInput?.text?.toString().orEmpty())
+        outState.putString("request", placeInput?.text?.toString() ?: lastRequest)
+        outState.putInt("floor", lastFloor)
         outState.putString("placeId", lastPlaceId)
         super.onSaveInstanceState(outState)
     }
@@ -488,6 +658,26 @@ class MainActivity : RobotActivity(), RobotLifecycleCallbacks {
         cancelPendingRequest()
         setBusy(false)
         super.onStop()
+    }
+
+    // Pantalla completa (modo inmersivo): esconde la barra de estado y la de navegación de
+    // Android. Se vuelve a aplicar cada vez que la app recupera el foco, porque Android las
+    // muestra de nuevo al volver de otra ventana (por ejemplo, el diálogo del micrófono).
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (hasFocus) hideSystemBars()
+    }
+
+    @Suppress("DEPRECATION")
+    private fun hideSystemBars() {
+        window.decorView.systemUiVisibility = (
+            View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_FULLSCREEN
+            )
     }
 
     override fun onDestroy() {
@@ -639,11 +829,18 @@ class MainActivity : RobotActivity(), RobotLifecycleCallbacks {
 
     private companion object {
         const val TAG = "Leitroboter"
+        /** Margen a cada lado de la cuadrícula según cuántas columnas tiene. */
+        val GRID_SIDE_PADDING_DP = mapOf(2 to 200, 3 to 80, 4 to 0)
+        /** Tamaño de letra de los botones según las columnas: igual en toda la cuadrícula. */
+        val GRID_TEXT_SP = mapOf(2 to 18f, 3 to 16f, 4 to 14f)
+        /** Filas en que se divide el alto (las del piso 3, el que tiene más lugares). */
+        const val GRID_ROWS = 7
+        val OFFICE_PREFIXES = listOf("Oficina del profesor ", "Oficina de la profesora ")
         const val VOICE_REQUEST = 1001
         /** Tiempo para leer en la barra lo que se entendió antes de mostrar la ruta. */
         const val TRANSCRIPT_PAUSE_MS = 1_000L
         const val MICROPHONE_REQUEST = 1002
-        const val GREETING = "¡Hola! Soy Leitroboter. Le puedo ayudar a encontrar aulas, oficinas y laboratorios del cuarto piso del edificio anexo de la ECCI. Toque el botón para buscar un lugar."
+        const val GREETING = "¡Hola! Soy Leitroboter. Le puedo ayudar a encontrar aulas, oficinas y laboratorios del edificio anexo de la ECCI. Toque Iniciar para buscar un lugar, o Explorar por piso para ver qué hay en cada piso."
         const val ASK_PLACE = "¿A dónde le gustaría ir?"
         const val NO_SPEECH = "No le escuché. Toque Hablar para intentar de nuevo."
         val IGNORED_WORDS = setOf("de", "del", "la", "el", "los", "las", "y", "en", "a", "al")
