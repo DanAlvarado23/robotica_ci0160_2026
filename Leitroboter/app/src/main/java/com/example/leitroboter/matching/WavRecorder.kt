@@ -74,6 +74,11 @@ class WavRecorder {
                 }
             }
             if (cancelled.get() || Thread.currentThread().isInterrupted) return null
+            if (!detector.heardSpeech) {
+                endedWithoutSpeech = true
+                logLevels("sin voz")
+                return null
+            }
             return PcmWave.wrap(pcm.toByteArray())
         } catch (_: Exception) {
             return null

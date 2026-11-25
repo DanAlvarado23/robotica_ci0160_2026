@@ -78,4 +78,20 @@ class SilenceDetectorTest {
         run(detector, fan)
         assertTrue(detector.speechThreshold > SilenceDetector.MIN_SPEECH_RMS)
     }
+
+    @Test fun keepsAShortWordSpokenAsRecordingStarts() {
+        val detector = SilenceDetector()
+        val (decision, index) = run(detector, voice(3) + quiet(30))
+        assertEquals(Decision.END_OF_SPEECH, decision)
+        assertTrue(detector.heardSpeech)
+        assertEquals(14, index)
+    }
+
+    @Test fun keepsAQuietWordDuringCalibration() {
+        val detector = SilenceDetector()
+        val soft = List(3) { block(500.0, tone = true) }
+        val (decision, _) = run(detector, soft + quiet(30))
+        assertEquals(Decision.END_OF_SPEECH, decision)
+        assertTrue(detector.heardSpeech)
+    }
 }
