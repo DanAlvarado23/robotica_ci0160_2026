@@ -24,6 +24,7 @@
     <string name="service_unavailable">No se pudo buscar. Escribe el nombre exacto del lugar.</string>
     <string name="place_not_found">No encontré el lugar que pediste</string>
     <string name="place_not_found_description">Prueba con otro lugar del anexo de la ECCI, o explora los lugares por piso.</string>
+    <string name="place_not_found_on_floor">No tengo ese lugar registrado en el piso %1$d. Puedes explorar los lugares disponibles por piso.</string>
     <string name="voice_waiting_for_silence">Esperando a que Pepper deje de hablar…</string>
     <string name="voice_silence_unavailable">Pepper sigue hablando. Intenta de nuevo o escribe tu destino.</string>
     <string name="another_location">Consultar otra ubicación</string>
@@ -32,6 +33,8 @@
     <string name="floors_title">¿Qué piso quiere ver?</string>
     <string name="floors_subtitle">Usted está en el piso %1$d, frente al ascensor.</string>
     <string name="floor_label">Piso %1$d</string>
+    <string name="map_origin">Ascensor</string>
+    <string name="directions_other_floor">Estas indicaciones empiezan frente al ascensor del piso %1$d.</string>
     <string name="floor_button">Piso %1$d · %2$d lugares</string>
     <string name="floor_button_empty">Piso %1$d · próximamente</string>
     <string name="floor_places_subtitle">Toque un lugar para ver cómo llegar.</string>

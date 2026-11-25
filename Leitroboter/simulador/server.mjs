@@ -13,6 +13,14 @@ const res = path.join(root, 'app', 'src', 'main', 'res');
 const port = Number(process.env.PORT) || 8080;
 const types = { '.html': 'text/html; charset=utf-8', '.json': 'application/json; charset=utf-8', '.jpg': 'image/jpeg', '.png': 'image/png', '.ttf': 'font/ttf' };
 
+function vectorAsSvg(xml) {
+  const width = /android:viewportWidth="([0-9.]+)"/.exec(xml)[1];
+  const height = /android:viewportHeight="([0-9.]+)"/.exec(xml)[1];
+  const paths = [...xml.matchAll(/<path android:fillColor="([#a-fA-F0-9]+)" android:pathData="([^"]+)"/g)]
+    .map(([,fill,d]) => `<path fill="${fill}" d="${d}"/>`).join('');
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">${paths}</svg>`;
+}
+
 function resolve(url) {
   const name = decodeURIComponent(url.split('?')[0]);
   if (name === '/' || name === '/index.html') return path.join(here, 'index.html');
@@ -27,6 +35,22 @@ http.createServer(async (req, reply) => {
   const file = resolve(req.url);
   try {
     if (!file) throw new Error('not found');
+    if (file.endsWith('.svg')) {
+      const xml = await readFile(file.replace(/\.svg$/, '.xml'), 'utf8').catch(error => {
+        if (error.code !== 'ENOENT') throw error;
+        return null;
+      });
+      if (xml) {
+        reply.writeHead(200, {'Content-Type':'image/svg+xml', 'Cache-Control':'no-store'});
+        reply.end(vectorAsSvg(xml));
+      } else {
+        const png = path.basename(file, '.svg') + '.png';
+        const body = await readFile(path.join(res, 'drawable-nodpi', png));
+        reply.writeHead(200, {'Content-Type':'image/png', 'Cache-Control':'no-store'});
+        reply.end(body);
+      }
+      return;
+    }
     // Algunos mapas son .png (p. ej. mapa_default): si no está el .jpg, se busca el .png.
     const body = await readFile(file).catch(() => readFile(file.replace(/\.jpg$/, '.png')));
     reply.writeHead(200, { 'Content-Type': body[0] === 0x89 ? 'image/png' : types[path.extname(file)] || 'application/octet-stream', 'Cache-Control': 'no-store' });

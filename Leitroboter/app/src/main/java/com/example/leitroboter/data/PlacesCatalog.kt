@@ -1,6 +1,7 @@
 package com.example.leitroboter.data
 
 import com.example.leitroboter.R
+import com.example.leitroboter.matching.RequestPolicy
 
 // Generado desde destinations.json: node scripts/generate-catalog.mjs
 object PlacesCatalog {
@@ -12,11 +13,12 @@ object PlacesCatalog {
             roomNumber = "4-6",
             floor = 4,
             group = "laboratorio_pi",
-            mapImageRes = R.drawable.mapa_4_6,
+            mapImageRes = R.drawable.mapa_piso_4,
             description = "Laboratorio del PI de Ingeniería de Software y Bases de Datos.",
             directions = "De frente al ascensor, gire a la derecha. El laboratorio 4-6 es la primera puerta a su izquierda, la puerta grande al lado de la oficina 4-5.",
             gestureAnimationRes = R.raw.point_right,
-            aliases = listOf("laboratorio de pi", "laboratorio pi", "lab de pi", "pi", "laboratorio de pi de ingenieria de software y bases de datos", "laboratorio de pi para ingenieria de software y bases de datos", "proyecto integrador", "laboratorio de proyecto integrador", "bases de datos", "laboratorio de bases de datos", "4-6", "46", "aula 4-6", "sala 4-6", "Tripleta", "oficina 4-6", "cuatro seis", "aula cuatro seis")
+            aliases = listOf("laboratorio de pi", "laboratorio pi", "lab de pi", "pi", "laboratorio de pi de ingenieria de software y bases de datos", "laboratorio de pi para ingenieria de software y bases de datos", "proyecto integrador", "laboratorio de proyecto integrador", "bases de datos", "laboratorio de bases de datos", "4-6", "46", "aula 4-6", "sala 4-6", "Tripleta", "oficina 4-6", "cuatro seis", "aula cuatro seis"),
+            routes = listOf(MapRoute("4-6", listOf(MapPoint(0.7193f, 0.49692f), MapPoint(0.72105f, 0.53538f), MapPoint(0.79386f, 0.53231f), MapPoint(0.79386f, 0.35538f))))
         ),
         Place(
             id = "gaby_4_5",
@@ -25,11 +27,12 @@ object PlacesCatalog {
             roomNumber = "4-5",
             floor = 4,
             group = null,
-            mapImageRes = R.drawable.mapa_4_5,
+            mapImageRes = R.drawable.mapa_piso_4,
             description = "La profesora Gabriela es la directora de la escuela.",
             directions = "De frente al ascensor, gire a la derecha y camine unos pasos. La oficina 4-5 es la puerta que queda de frente.",
             gestureAnimationRes = R.raw.point_right,
-            aliases = listOf("gabriela", "profesora gabriela", "oficina de gabriela", "oficina de la profesora gabriela", "gabriela barrantes", "gabriela barrantes sliesarieva", "barrantes", "gaby", "directora", "oficina de la directora", "direccion", "4-5", "45", "oficina 4-5", "Oficina de Gaby", "aula 4-5", "gabi", "oficina gaby", "cuatro cinco")
+            aliases = listOf("gabriela", "profesora gabriela", "oficina de gabriela", "oficina de la profesora gabriela", "gabriela barrantes", "gabriela barrantes sliesarieva", "barrantes", "gaby", "directora", "oficina de la directora", "direccion", "4-5", "45", "oficina 4-5", "Oficina de Gaby", "aula 4-5", "gabi", "oficina gaby", "cuatro cinco"),
+            routes = listOf(MapRoute("4-5", listOf(MapPoint(0.7193f, 0.49692f), MapPoint(0.72105f, 0.53538f), MapPoint(0.86316f, 0.53538f), MapPoint(0.86667f, 0.50462f), MapPoint(0.89123f, 0.50462f))))
         ),
         Place(
             id = "luis_gustavo_4_4",
@@ -38,11 +41,12 @@ object PlacesCatalog {
             roomNumber = "4-4",
             floor = 4,
             group = null,
-            mapImageRes = R.drawable.mapa_4_4,
+            mapImageRes = R.drawable.mapa_piso_4,
             description = "Oficina del profesor Luis Gustavo.",
             directions = "De frente al ascensor, gire a la derecha y camine unos pasos hasta la oficina 4-5. Ahí doble a la derecha. La oficina 4-4 es la primera puerta a su izquierda.",
             gestureAnimationRes = R.raw.point_right,
-            aliases = listOf("luis gustavo", "profesor luis gustavo", "oficina de luis gustavo", "oficina del profesor luis gustavo", "4-4", "44", "oficina 4-4", "luis gustavo esquivel quiros", "luis gustavo esquivel", "esquivel", "luis", "gustavo", "aula 4-4", "oficina luis gustavo", "luis gustavo esp", "oficina luis gustavo esp", "cuatro cuatro")
+            aliases = listOf("luis gustavo", "profesor luis gustavo", "oficina de luis gustavo", "oficina del profesor luis gustavo", "4-4", "44", "oficina 4-4", "luis gustavo esquivel quiros", "luis gustavo esquivel", "esquivel", "luis", "gustavo", "aula 4-4", "oficina luis gustavo", "luis gustavo esp", "oficina luis gustavo esp", "cuatro cuatro"),
+            routes = listOf(MapRoute("4-4", listOf(MapPoint(0.7193f, 0.49692f), MapPoint(0.72105f, 0.53538f), MapPoint(0.86316f, 0.53538f), MapPoint(0.86491f, 0.63385f), MapPoint(0.89298f, 0.63692f))))
         ),
         Place(
             id = "casasola_4_3",
@@ -51,11 +55,12 @@ object PlacesCatalog {
             roomNumber = "4-3",
             floor = 4,
             group = null,
-            mapImageRes = R.drawable.mapa_4_3,
+            mapImageRes = R.drawable.mapa_piso_4,
             description = "Oficina del profesor Casasola.",
             directions = "De frente al ascensor, gire a la derecha y camine unos pasos hasta la oficina 4-5. Ahí doble a la derecha. La oficina 4-3 es la segunda puerta a su izquierda, después de la 4-4, en la esquina.",
             gestureAnimationRes = R.raw.point_right,
-            aliases = listOf("casasola", "profesor casasola", "oficina de casasola", "oficina del profesor casasola", "edgar casasola", "edgar casasola murillo", "edgar", "4-3", "43", "oficina 4-3", "aula 4-3", "oficina casasola", "cuatro tres")
+            aliases = listOf("casasola", "profesor casasola", "oficina de casasola", "oficina del profesor casasola", "edgar casasola", "edgar casasola murillo", "edgar", "4-3", "43", "oficina 4-3", "aula 4-3", "oficina casasola", "cuatro tres"),
+            routes = listOf(MapRoute("4-3", listOf(MapPoint(0.7193f, 0.49692f), MapPoint(0.72105f, 0.53538f), MapPoint(0.86316f, 0.53538f), MapPoint(0.86491f, 0.69538f), MapPoint(0.89123f, 0.69846f))))
         ),
         Place(
             id = "sala_4_2",
@@ -64,11 +69,12 @@ object PlacesCatalog {
             roomNumber = "4-2",
             floor = 4,
             group = null,
-            mapImageRes = R.drawable.mapa_4_2,
+            mapImageRes = R.drawable.mapa_piso_4,
             description = "Para consultas entre profesores y estudiantes.",
             directions = "De frente al ascensor, gire a la derecha y camine unos pasos hasta la oficina 4-5. Ahí doble a la derecha. La sala 4-2 es la primera puerta a su derecha, frente a la oficina 4-4.",
             gestureAnimationRes = R.raw.point_right,
-            aliases = listOf("sala de consultas", "consultas", "consulta", "sala comun", "sala comun para consultas", "4-2", "42", "sala 4-2", "Sala", "aula 4-2", "oficina 4-2", "cuatro dos")
+            aliases = listOf("sala de consultas", "consultas", "consulta", "sala comun", "sala comun para consultas", "4-2", "42", "sala 4-2", "Sala", "aula 4-2", "oficina 4-2", "cuatro dos"),
+            routes = listOf(MapRoute("4-2", listOf(MapPoint(0.7193f, 0.49692f), MapPoint(0.72105f, 0.53538f), MapPoint(0.86316f, 0.53538f), MapPoint(0.86491f, 0.63385f), MapPoint(0.83333f, 0.63692f))))
         ),
         Place(
             id = "sala_estudio_individual",
@@ -77,11 +83,12 @@ object PlacesCatalog {
             roomNumber = null,
             floor = 4,
             group = "sala_estudio_individual",
-            mapImageRes = R.drawable.mapa_sala_estudio,
+            mapImageRes = R.drawable.mapa_piso_4,
             description = "Sala individual de estudio.",
             directions = "De frente al ascensor, gire a la izquierda y cruce las puertas de vidrio. Es la cuarta puerta a su izquierda, al lado de la sala 4-19.",
             gestureAnimationRes = R.raw.point_left,
-            aliases = listOf("sala individual de estudio", "sala individual", "sala de estudio", "estudio individual", "estudiar")
+            aliases = listOf("sala individual de estudio", "sala individual", "sala de estudio", "estudio individual", "estudiar"),
+            routes = listOf(MapRoute("Estudio", listOf(MapPoint(0.7193f, 0.49692f), MapPoint(0.71754f, 0.53538f), MapPoint(0.35263f, 0.53538f), MapPoint(0.35088f, 0.61385f))))
         ),
         Place(
             id = "comedor_4_20",
@@ -90,11 +97,12 @@ object PlacesCatalog {
             roomNumber = "4-20",
             floor = 4,
             group = null,
-            mapImageRes = R.drawable.mapa_4_20,
+            mapImageRes = R.drawable.mapa_piso_4,
             description = "Comedor de profesores.",
             directions = "De frente al ascensor, gire a la izquierda y cruce las puertas de vidrio. El comedor (4-20) es la segunda puerta a su izquierda, al lado del cuarto de impresora.",
             gestureAnimationRes = R.raw.point_left,
-            aliases = listOf("comedor", "comedor de profesores", "cocina", "4-20", "420", "sala 4-20", "aula 4-20", "oficina 4-20", "comedor profes", "comedor profesores", "cuatro veinte")
+            aliases = listOf("comedor", "comedor de profesores", "cocina", "4-20", "420", "sala 4-20", "aula 4-20", "oficina 4-20", "comedor profes", "comedor profesores", "cuatro veinte"),
+            routes = listOf(MapRoute("4-20", listOf(MapPoint(0.7193f, 0.49692f), MapPoint(0.71754f, 0.53538f), MapPoint(0.42982f, 0.53538f), MapPoint(0.42807f, 0.79077f))))
         ),
         Place(
             id = "area_comun_4_19",
@@ -103,11 +111,12 @@ object PlacesCatalog {
             roomNumber = "4-19",
             floor = 4,
             group = "area_comun",
-            mapImageRes = R.drawable.mapa_4_19,
+            mapImageRes = R.drawable.mapa_piso_4,
             description = "Área común y sala de estudiantes.",
             directions = "De frente al ascensor, gire a la izquierda y cruce las puertas de vidrio. La sala 4-19 es la tercera puerta a su izquierda, al lado del comedor.",
             gestureAnimationRes = R.raw.point_left,
-            aliases = listOf("area comun", "sala de estudiantes", "area comun y sala de estudiantes", "estudiantes", "4-19", "419", "sala 4-19", "Área común / Sala de estudiantes", "aula 4-19", "oficina 4-19", "sala estudiantes", "sala est", "cuatro diecinueve")
+            aliases = listOf("area comun", "sala de estudiantes", "area comun y sala de estudiantes", "estudiantes", "4-19", "419", "sala 4-19", "Área común / Sala de estudiantes", "aula 4-19", "oficina 4-19", "sala estudiantes", "sala est", "cuatro diecinueve"),
+            routes = listOf(MapRoute("4-19", listOf(MapPoint(0.7193f, 0.49692f), MapPoint(0.71754f, 0.53538f), MapPoint(0.39035f, 0.53538f), MapPoint(0.3886f, 0.79538f))))
         ),
         Place(
             id = "impresora_4_18",
@@ -116,11 +125,12 @@ object PlacesCatalog {
             roomNumber = "4-18",
             floor = 4,
             group = null,
-            mapImageRes = R.drawable.mapa_4_18,
+            mapImageRes = R.drawable.mapa_piso_4,
             description = "Cuarto de la impresora.",
             directions = "De frente al ascensor, gire a la izquierda y cruce las puertas de vidrio. El cuarto de impresora (4-18) es la primera puerta a su izquierda.",
             gestureAnimationRes = R.raw.point_left,
-            aliases = listOf("impresora", "cuarto de impresora", "cuarto de la impresora", "imprimir", "4-18", "418", "sala 4-18", "aula 4-18", "oficina 4-18", "impresión", "cuatro dieciocho")
+            aliases = listOf("impresora", "cuarto de impresora", "cuarto de la impresora", "imprimir", "4-18", "418", "sala 4-18", "aula 4-18", "oficina 4-18", "impresión", "cuatro dieciocho"),
+            routes = listOf(MapRoute("4-18", listOf(MapPoint(0.7193f, 0.49692f), MapPoint(0.71754f, 0.53538f), MapPoint(0.45789f, 0.53538f), MapPoint(0.45702f, 0.62f))))
         ),
         Place(
             id = "laboratorios_robotica",
@@ -129,11 +139,12 @@ object PlacesCatalog {
             roomNumber = "4-15 y 4-17",
             floor = 4,
             group = null,
-            mapImageRes = R.drawable.mapa_laboratorios_robotica,
+            mapImageRes = R.drawable.mapa_piso_4,
             description = "En este piso hay dos laboratorios de robótica: la 4-15 (Robótica y énfasis en Ingeniería de Software) y la 4-17 (Robótica Kryscia y énfasis en Ciencias de la Computación).",
             directions = "De frente al ascensor, gire a la izquierda y cruce las puertas de vidrio. La 4-15 es la segunda puerta a su derecha y la 4-17 es la última sala al fondo a su izquierda, frente a la 4-15.",
             gestureAnimationRes = R.raw.point_left,
-            aliases = listOf("robotica", "laboratorio de robotica", "laboratorios de robotica", "lab de robotica", "aula de robotica", "aula robotica", "laboratorio robotica")
+            aliases = listOf("robotica", "laboratorio de robotica", "laboratorios de robotica", "lab de robotica", "aula de robotica", "aula robotica", "laboratorio robotica"),
+            routes = listOf(MapRoute("4-15", listOf(MapPoint(0.7193f, 0.49692f), MapPoint(0.71754f, 0.53538f), MapPoint(0.2886f, 0.53538f), MapPoint(0.28772f, 0.46462f))), MapRoute("4-17", listOf(MapPoint(0.7193f, 0.49692f), MapPoint(0.71754f, 0.53538f), MapPoint(0.2886f, 0.53538f), MapPoint(0.28772f, 0.61231f))))
         ),
         Place(
             id = "laboratorio_robotica_4_17",
@@ -142,11 +153,12 @@ object PlacesCatalog {
             roomNumber = "4-17",
             floor = 4,
             group = null,
-            mapImageRes = R.drawable.mapa_4_17,
+            mapImageRes = R.drawable.mapa_piso_4,
             description = "Laboratorio de Robótica Kryscia y del énfasis en Ciencias de la Computación.",
             directions = "De frente al ascensor, gire a la izquierda, cruce las puertas de vidrio y siga hasta el fondo del pasillo. El laboratorio 4-17 es la última sala a su izquierda, frente a la 4-15.",
             gestureAnimationRes = R.raw.point_left,
-            aliases = listOf("laboratorio kryscia", "kryscia", "laboratorio de robotica kryscia", "laboratorio de ciencias de la computacion", "ciencias de la computacion", "4-17", "417", "aula 4-17", "laboratorio 4-17", "laboratorio del enfasis de ciencias de la computacion", "tcu", "cc", "oficina 4-17", "aula cuatro diecisiete", "cuatro diecisiete", "laboratorio tcu", "laboratorio cc", "cc rob tcu")
+            aliases = listOf("laboratorio kryscia", "kryscia", "laboratorio de robotica kryscia", "laboratorio de ciencias de la computacion", "ciencias de la computacion", "4-17", "417", "aula 4-17", "laboratorio 4-17", "laboratorio del enfasis de ciencias de la computacion", "tcu", "cc", "oficina 4-17", "aula cuatro diecisiete", "cuatro diecisiete", "laboratorio tcu", "laboratorio cc", "cc rob tcu"),
+            routes = listOf(MapRoute("4-17", listOf(MapPoint(0.7193f, 0.49692f), MapPoint(0.71754f, 0.53538f), MapPoint(0.28947f, 0.53538f), MapPoint(0.28772f, 0.61231f))))
         ),
         Place(
             id = "is_rob_4_15",
@@ -155,11 +167,12 @@ object PlacesCatalog {
             roomNumber = "4-15",
             floor = 4,
             group = null,
-            mapImageRes = R.drawable.mapa_4_15,
+            mapImageRes = R.drawable.mapa_piso_4,
             description = "Laboratorio de Robótica y del énfasis en Ingeniería de Software.",
             directions = "De frente al ascensor, gire a la izquierda y cruce las puertas de vidrio. El laboratorio 4-15 es la segunda puerta a su derecha, después de la 4-14.",
             gestureAnimationRes = R.raw.point_left,
-            aliases = listOf("laboratorio de ingenieria de software", "ingenieria de software", "laboratorio de robotica e ingenieria de software", "4-15", "415", "aula 4-15", "laboratorio 4-15", "laboratorio del enfasis de ingenieria de software", "is", "IS / Rob", "oficina 4-15", "oficina is rob", "cuatro quince", "Laboratorio IS", "lab is", "laboratorio de is")
+            aliases = listOf("laboratorio de ingenieria de software", "ingenieria de software", "laboratorio de robotica e ingenieria de software", "4-15", "415", "aula 4-15", "laboratorio 4-15", "laboratorio del enfasis de ingenieria de software", "is", "IS / Rob", "oficina 4-15", "oficina is rob", "cuatro quince", "Laboratorio IS", "lab is", "laboratorio de is"),
+            routes = listOf(MapRoute("4-15", listOf(MapPoint(0.7193f, 0.49692f), MapPoint(0.71754f, 0.53538f), MapPoint(0.28947f, 0.53538f), MapPoint(0.28772f, 0.46462f))))
         ),
         Place(
             id = "laboratorio_iti_4_14",
@@ -168,11 +181,12 @@ object PlacesCatalog {
             roomNumber = "4-14",
             floor = 4,
             group = null,
-            mapImageRes = R.drawable.mapa_4_14,
+            mapImageRes = R.drawable.mapa_piso_4,
             description = "Laboratorio del énfasis en Ingeniería en Tecnologías de Información.",
             directions = "De frente al ascensor, gire a la izquierda y cruce las puertas de vidrio. El laboratorio 4-14 es la primera puerta a su derecha.",
             gestureAnimationRes = R.raw.point_left,
-            aliases = listOf("laboratorio de tecnologias de informacion", "tecnologias de informacion", "laboratorio de ingenieria en tecnologias de informacion", "iti", "4-14", "414", "aula 4-14", "laboratorio 4-14", "cuatro catorce")
+            aliases = listOf("laboratorio de tecnologias de informacion", "tecnologias de informacion", "laboratorio de ingenieria en tecnologias de informacion", "iti", "4-14", "414", "aula 4-14", "laboratorio 4-14", "cuatro catorce"),
+            routes = listOf(MapRoute("4-14", listOf(MapPoint(0.7193f, 0.49692f), MapPoint(0.71754f, 0.53538f), MapPoint(0.34123f, 0.53538f), MapPoint(0.33947f, 0.46462f))))
         ),
         Place(
             id = "ascensor",
@@ -181,11 +195,12 @@ object PlacesCatalog {
             roomNumber = null,
             floor = 4,
             group = "ascensor",
-            mapImageRes = R.drawable.mapa_ascensor,
+            mapImageRes = R.drawable.mapa_piso_4,
             description = "Ascensor",
             directions = "Usted se encuentra frente al ascensor.",
             gestureAnimationRes = null,
-            aliases = listOf("ascensor", "elevador")
+            aliases = listOf("ascensor", "elevador"),
+            routes = listOf(MapRoute("Ascensor", listOf(MapPoint(0.7193f, 0.49692f))))
         ),
         Place(
             id = "banos",
@@ -194,11 +209,12 @@ object PlacesCatalog {
             roomNumber = null,
             floor = 4,
             group = "banos",
-            mapImageRes = R.drawable.mapa_banios,
+            mapImageRes = R.drawable.mapa_piso_4,
             description = "Mujeres a la derecha, hombres a la izquierda y el baño para personas con discapacidad en el medio.",
             directions = "De frente al ascensor, gire a la izquierda. Los baños están justo a su derecha, al lado del ascensor.",
             gestureAnimationRes = R.raw.point_left,
-            aliases = listOf("baños", "baño", "banios", "banio", "servicio sanitario", "servicios sanitarios", "baño de mujeres", "baño de hombres", "baño de discapacitados", "baño accesible", "sanitarios")
+            aliases = listOf("baños", "baño", "banios", "banio", "servicio sanitario", "servicios sanitarios", "baño de mujeres", "baño de hombres", "baño de discapacitados", "baño accesible", "sanitarios"),
+            routes = listOf(MapRoute("Baños", listOf(MapPoint(0.7193f, 0.49692f), MapPoint(0.71754f, 0.53538f), MapPoint(0.58246f, 0.53538f), MapPoint(0.5807f, 0.45846f))))
         ),
         Place(
             id = "salida_emergencia",
@@ -207,11 +223,12 @@ object PlacesCatalog {
             roomNumber = null,
             floor = 4,
             group = "salida_emergencia",
-            mapImageRes = R.drawable.mapa_salida_emergencia,
+            mapImageRes = R.drawable.mapa_piso_4,
             description = "Es la escalera de emergencia.",
             directions = "De frente al ascensor, gire a la izquierda, cruce las puertas de vidrio y siga recto hasta el final del pasillo. La salida de emergencia es la puerta del fondo.",
             gestureAnimationRes = R.raw.point_left,
-            aliases = listOf("salida de emergencia", "salida", "emergencia", "escalera de emergencia", "salida emergencia", "salida de emergencias")
+            aliases = listOf("salida de emergencia", "salida", "emergencia", "escalera de emergencia", "salida emergencia", "salida de emergencias"),
+            routes = listOf(MapRoute("Salida", listOf(MapPoint(0.7193f, 0.49692f), MapPoint(0.71754f, 0.53538f), MapPoint(0.09035f, 0.53538f), MapPoint(0.09211f, 0.52615f))))
         ),
         Place(
             id = "escalera",
@@ -220,11 +237,12 @@ object PlacesCatalog {
             roomNumber = null,
             floor = 4,
             group = "escalera",
-            mapImageRes = R.drawable.mapa_escaleras,
+            mapImageRes = R.drawable.mapa_piso_4,
             description = "Escaleras",
             directions = "De frente al ascensor, dé media vuelta. Las escaleras están justo detrás de usted, al otro lado del pasillo.",
             gestureAnimationRes = R.raw.point_back,
-            aliases = listOf("escaleras", "escalera", "gradas")
+            aliases = listOf("escaleras", "escalera", "gradas"),
+            routes = listOf(MapRoute("Escaleras", listOf(MapPoint(0.7193f, 0.49692f), MapPoint(0.72105f, 0.53538f), MapPoint(0.74386f, 0.53846f), MapPoint(0.74386f, 0.62923f))))
         ),
         Place(
             id = "auditorio_1",
@@ -233,11 +251,12 @@ object PlacesCatalog {
             roomNumber = null,
             floor = 1,
             group = null,
-            mapImageRes = R.drawable.mapa_1_auditorio,
+            mapImageRes = R.drawable.mapa_piso_1,
             description = "Auditorio",
             directions = "De frente al ascensor, gire a la izquierda y cruce todo el vestíbulo hasta las puertas dobles del fondo. Al pasarlas, siga recto hasta la puerta del auditorio.",
             gestureAnimationRes = R.raw.point_left,
-            aliases = listOf("auditorio", "el auditorio", "auditorio de la ecci", "charla", "conferencia", "escenario", "sala de conferencias")
+            aliases = listOf("auditorio", "el auditorio", "auditorio de la ecci", "charla", "conferencia", "escenario", "sala de conferencias"),
+            routes = listOf(MapRoute("Auditorio", listOf(MapPoint(0.73286f, 0.52169f), MapPoint(0.73286f, 0.5539f), MapPoint(0.73071f, 0.55886f), MapPoint(0.39143f, 0.55886f), MapPoint(0.39286f, 0.54399f))))
         ),
         Place(
             id = "aula_multiuso_1_17",
@@ -246,11 +265,12 @@ object PlacesCatalog {
             roomNumber = "1-17",
             floor = 1,
             group = null,
-            mapImageRes = R.drawable.mapa_1_17,
+            mapImageRes = R.drawable.mapa_piso_1,
             description = "Aula multiuso.",
             directions = "De frente al ascensor, gire a la derecha y camine unos pasos. La puerta del aula multiuso 1-17 queda a su derecha, al lado de las escaleras.",
             gestureAnimationRes = R.raw.point_right,
-            aliases = listOf("aula multiuso", "sala multiuso", "aula multi uso", "multiuso", "1-17", "117", "aula 1-17", "sala 1-17", "oficina 1-17")
+            aliases = listOf("aula multiuso", "sala multiuso", "aula multi uso", "multiuso", "1-17", "117", "aula 1-17", "sala 1-17", "oficina 1-17"),
+            routes = listOf(MapRoute("1-17", listOf(MapPoint(0.73286f, 0.52169f), MapPoint(0.73429f, 0.5539f), MapPoint(0.78857f, 0.55514f), MapPoint(0.78929f, 0.61834f), MapPoint(0.79786f, 0.61462f))))
         ),
         Place(
             id = "banos_1",
@@ -259,11 +279,12 @@ object PlacesCatalog {
             roomNumber = null,
             floor = 1,
             group = "banos",
-            mapImageRes = R.drawable.mapa_1_banos,
+            mapImageRes = R.drawable.mapa_piso_1,
             description = "Baños",
             directions = "De frente al ascensor, gire a la derecha y luego a la izquierda, por el lado del ascensor. Los baños quedan al fondo: el de mujeres a la izquierda y el de hombres a la derecha.",
             gestureAnimationRes = R.raw.point_right,
-            aliases = listOf("baño", "baños", "servicio sanitario", "servicios sanitarios", "sanitarios", "baño de hombres", "baño de mujeres")
+            aliases = listOf("baño", "baños", "servicio sanitario", "servicios sanitarios", "sanitarios", "baño de hombres", "baño de mujeres"),
+            routes = listOf(MapRoute("Baños", listOf(MapPoint(0.73286f, 0.52169f), MapPoint(0.73286f, 0.54771f), MapPoint(0.735f, 0.55019f), MapPoint(0.84571f, 0.54895f), MapPoint(0.84643f, 0.33953f), MapPoint(0.84929f, 0.33829f))))
         ),
         Place(
             id = "entradas_1",
@@ -272,11 +293,12 @@ object PlacesCatalog {
             roomNumber = null,
             floor = 1,
             group = null,
-            mapImageRes = R.drawable.mapa_1_entradas,
+            mapImageRes = R.drawable.mapa_piso_1,
             description = "Entradas del edificio",
             directions = "De frente al ascensor, gire a la izquierda y camine por el vestíbulo. Hay dos entradas con puertas dobles: una a su derecha y otra a su izquierda.",
             gestureAnimationRes = R.raw.point_left,
-            aliases = listOf("entrada", "entradas", "entrada al edificio", "entrada principal", "salida del edificio", "puerta principal", "como salgo", "por donde salgo")
+            aliases = listOf("entrada", "entradas", "entrada al edificio", "entrada principal", "salida del edificio", "puerta principal", "como salgo", "por donde salgo"),
+            routes = listOf(MapRoute("Entrada", listOf(MapPoint(0.73286f, 0.52169f), MapPoint(0.73143f, 0.5539f), MapPoint(0.58357f, 0.5539f), MapPoint(0.58357f, 0.34696f))), MapRoute("Entrada", listOf(MapPoint(0.73286f, 0.52169f), MapPoint(0.73143f, 0.5539f), MapPoint(0.58429f, 0.5539f), MapPoint(0.58357f, 0.76828f), MapPoint(0.58571f, 0.76952f))))
         ),
         Place(
             id = "bodega_2_1",
@@ -285,11 +307,12 @@ object PlacesCatalog {
             roomNumber = "2-1",
             floor = 2,
             group = "bodega",
-            mapImageRes = R.drawable.mapa_2_1,
+            mapImageRes = R.drawable.mapa_piso_2,
             description = "Bodega",
             directions = "De frente al ascensor, gire a la derecha y enseguida a la izquierda, al pasillo que pasa al lado del ascensor. La bodega 2-1 es la puerta de la izquierda, al fondo.",
             gestureAnimationRes = R.raw.point_right,
-            aliases = listOf("bodega", "bodega 2-1", "2-1", "21", "aula 2-1", "sala 2-1", "oficina 2-1")
+            aliases = listOf("bodega", "bodega 2-1", "2-1", "21", "aula 2-1", "sala 2-1", "oficina 2-1"),
+            routes = listOf(MapRoute("2-1", listOf(MapPoint(0.73071f, 0.50619f), MapPoint(0.73071f, 0.52599f), MapPoint(0.73286f, 0.52723f), MapPoint(0.78214f, 0.52723f), MapPoint(0.78429f, 0.52351f), MapPoint(0.78429f, 0.32302f))))
         ),
         Place(
             id = "laboratorio_taller_2",
@@ -298,11 +321,12 @@ object PlacesCatalog {
             roomNumber = null,
             floor = 2,
             group = null,
-            mapImageRes = R.drawable.mapa_2_laboratorio_taller,
+            mapImageRes = R.drawable.mapa_piso_2,
             description = "Laboratorio taller.",
             directions = "De frente al ascensor, gire a la derecha y enseguida a la izquierda, al pasillo que pasa al lado del ascensor. El laboratorio taller es la puerta de la derecha, al fondo.",
             gestureAnimationRes = R.raw.point_right,
-            aliases = listOf("laboratorio taller", "taller", "laboratorio / taller", "lab taller", "el taller")
+            aliases = listOf("laboratorio taller", "taller", "laboratorio / taller", "lab taller", "el taller"),
+            routes = listOf(MapRoute("Taller", listOf(MapPoint(0.73071f, 0.50619f), MapPoint(0.73071f, 0.52599f), MapPoint(0.73286f, 0.52723f), MapPoint(0.825f, 0.52475f), MapPoint(0.82643f, 0.30198f), MapPoint(0.82786f, 0.29579f), MapPoint(0.83429f, 0.29827f))))
         ),
         Place(
             id = "servidores_2",
@@ -311,11 +335,12 @@ object PlacesCatalog {
             roomNumber = null,
             floor = 2,
             group = null,
-            mapImageRes = R.drawable.mapa_2_servidores,
+            mapImageRes = R.drawable.mapa_piso_2,
             description = "Cuarto de servidores",
             directions = "De frente al ascensor, gire a la derecha y enseguida a la izquierda, al pasillo que pasa al lado del ascensor. El cuarto de servidores es la primera puerta a su derecha.",
             gestureAnimationRes = R.raw.point_right,
-            aliases = listOf("cuarto de servidores", "servidores", "sala de servidores", "data center")
+            aliases = listOf("cuarto de servidores", "servidores", "sala de servidores", "data center"),
+            routes = listOf(MapRoute("Servidores", listOf(MapPoint(0.73071f, 0.50619f), MapPoint(0.73071f, 0.52599f), MapPoint(0.73286f, 0.52723f), MapPoint(0.81286f, 0.52723f), MapPoint(0.815f, 0.52475f), MapPoint(0.815f, 0.44554f), MapPoint(0.81714f, 0.44183f), MapPoint(0.83857f, 0.44183f), MapPoint(0.83786f, 0.42698f))))
         ),
         Place(
             id = "rid_2_4",
@@ -324,11 +349,12 @@ object PlacesCatalog {
             roomNumber = "2-4",
             floor = 2,
             group = null,
-            mapImageRes = R.drawable.mapa_2_4,
+            mapImageRes = R.drawable.mapa_piso_2,
             description = "Oficina de administración de redes (RID)",
             directions = "De frente al ascensor, gire a la derecha y camine hasta el final del pasillo. La oficina 2-4 es la puerta que queda de frente.",
             gestureAnimationRes = R.raw.point_right,
-            aliases = listOf("administracion de redes", "administración de redes", "oficina de administracion de redes", "redes", "rid", "rid 2-4", "soporte tecnico", "soporte técnico", "problemas con internet", "wifi", "2-4", "24", "aula 2-4", "sala 2-4", "oficina 2-4")
+            aliases = listOf("administracion de redes", "administración de redes", "oficina de administracion de redes", "redes", "rid", "rid 2-4", "soporte tecnico", "soporte técnico", "problemas con internet", "wifi", "2-4", "24", "aula 2-4", "sala 2-4", "oficina 2-4"),
+            routes = listOf(MapRoute("2-4", listOf(MapPoint(0.73071f, 0.50619f), MapPoint(0.73071f, 0.52599f), MapPoint(0.73286f, 0.52723f), MapPoint(0.83857f, 0.52723f), MapPoint(0.83929f, 0.53342f))))
         ),
         Place(
             id = "rid_2_5",
@@ -337,11 +363,12 @@ object PlacesCatalog {
             roomNumber = "2-5",
             floor = 2,
             group = null,
-            mapImageRes = R.drawable.mapa_2_5,
+            mapImageRes = R.drawable.mapa_piso_2,
             description = "Segunda oficina de administración de redes (RID)",
             directions = "De frente al ascensor, gire a la derecha y camine hasta el final del pasillo. La oficina 2-5 es la puerta a su derecha, después del laboratorio de pruebas 2-6.",
             gestureAnimationRes = R.raw.point_right,
-            aliases = listOf("rid 2-5", "2-5", "25", "aula 2-5", "sala 2-5", "oficina 2-5")
+            aliases = listOf("rid 2-5", "2-5", "25", "aula 2-5", "sala 2-5", "oficina 2-5"),
+            routes = listOf(MapRoute("2-5", listOf(MapPoint(0.73071f, 0.50619f), MapPoint(0.73f, 0.53342f), MapPoint(0.73214f, 0.53589f), MapPoint(0.84714f, 0.53589f), MapPoint(0.84857f, 0.60644f), MapPoint(0.85571f, 0.60396f))))
         ),
         Place(
             id = "rid_2_6",
@@ -350,11 +377,12 @@ object PlacesCatalog {
             roomNumber = "2-6",
             floor = 2,
             group = null,
-            mapImageRes = R.drawable.mapa_2_6,
+            mapImageRes = R.drawable.mapa_piso_2,
             description = "Laboratorio de pruebas (RID)",
             directions = "De frente al ascensor, gire a la derecha. El laboratorio de pruebas 2-6 es la primera puerta a su derecha, al lado de las escaleras.",
             gestureAnimationRes = R.raw.point_right,
-            aliases = listOf("laboratorio de pruebas", "lab de pruebas", "sala de pruebas", "pruebas", "rid 2-6", "2-6", "26", "aula 2-6", "sala 2-6", "oficina 2-6")
+            aliases = listOf("laboratorio de pruebas", "lab de pruebas", "sala de pruebas", "pruebas", "rid 2-6", "2-6", "26", "aula 2-6", "sala 2-6", "oficina 2-6"),
+            routes = listOf(MapRoute("2-6", listOf(MapPoint(0.73071f, 0.50619f), MapPoint(0.73f, 0.53342f), MapPoint(0.73214f, 0.53589f), MapPoint(0.79071f, 0.53589f), MapPoint(0.79214f, 0.59406f), MapPoint(0.79714f, 0.59406f))))
         ),
         Place(
             id = "banos_2",
@@ -363,11 +391,12 @@ object PlacesCatalog {
             roomNumber = null,
             floor = 2,
             group = "banos",
-            mapImageRes = R.drawable.mapa_2_banos,
+            mapImageRes = R.drawable.mapa_piso_2,
             description = "Baños",
             directions = "De frente al ascensor, gire a la izquierda. Los baños están justo a su derecha, al lado del ascensor: primero el de mujeres y luego el de hombres.",
             gestureAnimationRes = R.raw.point_left,
-            aliases = listOf("baño", "baños", "servicio sanitario", "servicios sanitarios", "sanitarios", "baño de hombres", "baño de mujeres")
+            aliases = listOf("baño", "baños", "servicio sanitario", "servicios sanitarios", "sanitarios", "baño de hombres", "baño de mujeres"),
+            routes = listOf(MapRoute("Baños", listOf(MapPoint(0.73071f, 0.50619f), MapPoint(0.72857f, 0.5396f), MapPoint(0.61f, 0.5396f), MapPoint(0.60929f, 0.4901f), MapPoint(0.60643f, 0.48886f))))
         ),
         Place(
             id = "idf_2",
@@ -376,11 +405,12 @@ object PlacesCatalog {
             roomNumber = null,
             floor = 2,
             group = "idf",
-            mapImageRes = R.drawable.mapa_2_idf,
+            mapImageRes = R.drawable.mapa_piso_2,
             description = "Cuarto de IDF",
             directions = "De frente al ascensor, gire a la izquierda y camine por el pasillo. El cuarto de IDF es la última puerta a su izquierda, antes de las puertas de vidrio.",
             gestureAnimationRes = R.raw.point_left,
-            aliases = listOf("idf", "cuarto de idf", "cuarto idf", "cuarto de telecomunicaciones")
+            aliases = listOf("idf", "cuarto de idf", "cuarto idf", "cuarto de telecomunicaciones"),
+            routes = listOf(MapRoute("IDF", listOf(MapPoint(0.73071f, 0.50619f), MapPoint(0.72857f, 0.54455f), MapPoint(0.47714f, 0.54455f), MapPoint(0.475f, 0.54827f), MapPoint(0.47643f, 0.59158f))))
         ),
         Place(
             id = "comedor_administrativo_2",
@@ -389,11 +419,12 @@ object PlacesCatalog {
             roomNumber = null,
             floor = 2,
             group = null,
-            mapImageRes = R.drawable.mapa_2_comedor,
+            mapImageRes = R.drawable.mapa_piso_2,
             description = "Comedor del personal administrativo.",
             directions = "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. El comedor del personal administrativo es la primera puerta a su derecha.",
             gestureAnimationRes = R.raw.point_left,
-            aliases = listOf("comedor administrativo", "comedor del personal administrativo", "comedor de administrativos", "comedor personal administrativo")
+            aliases = listOf("comedor administrativo", "comedor del personal administrativo", "comedor de administrativos", "comedor personal administrativo"),
+            routes = listOf(MapRoute("Comedor", listOf(MapPoint(0.73071f, 0.50619f), MapPoint(0.72857f, 0.54455f), MapPoint(0.43286f, 0.54455f), MapPoint(0.43071f, 0.54084f), MapPoint(0.43071f, 0.48762f), MapPoint(0.43286f, 0.48515f))))
         ),
         Place(
             id = "mensajeria_2",
@@ -402,11 +433,12 @@ object PlacesCatalog {
             roomNumber = null,
             floor = 2,
             group = null,
-            mapImageRes = R.drawable.mapa_2_mensajeria,
+            mapImageRes = R.drawable.mapa_piso_2,
             description = "También es la conserjería.",
             directions = "De frente al ascensor, gire a la izquierda, cruce las puertas de vidrio y siga recto, pasando las bodegas. La mensajería queda al final del pasillo, a su derecha.",
             gestureAnimationRes = R.raw.point_left,
-            aliases = listOf("mensajeria", "mensajería", "conserjeria", "conserjería", "correspondencia", "entregar un paquete", "paquetes")
+            aliases = listOf("mensajeria", "mensajería", "conserjeria", "conserjería", "correspondencia", "entregar un paquete", "paquetes"),
+            routes = listOf(MapRoute("Mensajería", listOf(MapPoint(0.73071f, 0.50619f), MapPoint(0.72857f, 0.54455f), MapPoint(0.29143f, 0.54455f), MapPoint(0.28929f, 0.54208f), MapPoint(0.28929f, 0.46287f), MapPoint(0.27571f, 0.45792f))))
         ),
         Place(
             id = "secretaria_2",
@@ -414,12 +446,13 @@ object PlacesCatalog {
             shortName = null,
             roomNumber = null,
             floor = 2,
-            group = null,
-            mapImageRes = R.drawable.mapa_2_secretaria,
+            group = "secretaria",
+            mapImageRes = R.drawable.mapa_piso_2,
             description = "Secretaría de la ECCI",
             directions = "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Todo el lado izquierdo es la secretaría; la entrada está a pocos pasos, a su izquierda.",
             gestureAnimationRes = R.raw.point_left,
-            aliases = listOf("secretaria", "secretaría", "secretaria de la ecci", "secretaría de la escuela", "tramites", "trámites", "administracion", "administración", "recepcion de la ecci")
+            aliases = listOf("secretaria", "secretaría", "secretaria de la ecci", "secretaría de la escuela", "tramites", "trámites", "administracion", "administración", "recepcion de la ecci"),
+            routes = listOf(MapRoute("Secretaría", listOf(MapPoint(0.73071f, 0.50619f), MapPoint(0.72857f, 0.54455f), MapPoint(0.38357f, 0.54455f), MapPoint(0.38214f, 0.59777f), MapPoint(0.37714f, 0.59777f))))
         ),
         Place(
             id = "laboratorio_pi_redes_3_5",
@@ -428,11 +461,12 @@ object PlacesCatalog {
             roomNumber = "3-5",
             floor = 3,
             group = "laboratorio_pi",
-            mapImageRes = R.drawable.mapa_3_5,
+            mapImageRes = R.drawable.mapa_piso_3,
             description = "PI significa proyecto integrador.",
             directions = "De frente al ascensor, gire a la derecha. El laboratorio 3-5 es la primera puerta a su izquierda, la puerta grande.",
             gestureAnimationRes = R.raw.point_right,
-            aliases = listOf("laboratorio de pi de redes", "laboratorio de redes", "lab de redes", "pi de redes", "laboratorio de sistemas operativos", "sistemas operativos", "operativos", "redes oper", "lab pi redes oper", "pi de redes y sistemas operativos", "laboratorio de pi redes y sistemas operativos", "laboratorio de redes y sistemas operativos", "laboratorio de proyecto integrador de redes y sistemas operativos", "laboratorio de pi", "lab de pi", "laboratorio pi", "proyecto integrador", "laboratorio de proyecto integrador", "3-5", "35", "aula 3-5", "sala 3-5", "oficina 3-5")
+            aliases = listOf("laboratorio de pi de redes", "laboratorio de redes", "lab de redes", "pi de redes", "laboratorio de sistemas operativos", "sistemas operativos", "operativos", "redes oper", "lab pi redes oper", "pi de redes y sistemas operativos", "laboratorio de pi redes y sistemas operativos", "laboratorio de redes y sistemas operativos", "laboratorio de proyecto integrador de redes y sistemas operativos", "laboratorio de pi", "lab de pi", "laboratorio pi", "proyecto integrador", "laboratorio de proyecto integrador", "3-5", "35", "aula 3-5", "sala 3-5", "oficina 3-5"),
+            routes = listOf(MapRoute("3-5", listOf(MapPoint(0.72857f, 0.49437f), MapPoint(0.72857f, 0.5194f), MapPoint(0.73143f, 0.5219f), MapPoint(0.79143f, 0.5219f), MapPoint(0.795f, 0.5169f), MapPoint(0.795f, 0.47559f), MapPoint(0.80429f, 0.4781f))))
         ),
         Place(
             id = "oficina_3_4",
@@ -441,11 +475,12 @@ object PlacesCatalog {
             roomNumber = "3-4",
             floor = 3,
             group = null,
-            mapImageRes = R.drawable.mapa_3_4,
+            mapImageRes = R.drawable.mapa_piso_3,
             description = "Oficina sin profesor asignado.",
             directions = "De frente al ascensor, gire a la derecha y camine hasta la sala de espera. Ahí doble a la derecha. La oficina 3-4 es la primera puerta a su izquierda.",
             gestureAnimationRes = R.raw.point_right,
-            aliases = listOf("3-4", "34", "aula 3-4", "sala 3-4", "oficina 3-4")
+            aliases = listOf("3-4", "34", "aula 3-4", "sala 3-4", "oficina 3-4"),
+            routes = listOf(MapRoute("3-4", listOf(MapPoint(0.72857f, 0.49437f), MapPoint(0.72857f, 0.5194f), MapPoint(0.73143f, 0.5219f), MapPoint(0.86143f, 0.5219f), MapPoint(0.86286f, 0.62954f), MapPoint(0.87929f, 0.63204f), MapPoint(0.87857f, 0.61577f))))
         ),
         Place(
             id = "oficina_3_3",
@@ -454,11 +489,12 @@ object PlacesCatalog {
             roomNumber = "3-3",
             floor = 3,
             group = null,
-            mapImageRes = R.drawable.mapa_3_3,
+            mapImageRes = R.drawable.mapa_piso_3,
             description = "Oficina sin profesor asignado.",
             directions = "De frente al ascensor, gire a la derecha y camine hasta la sala de espera. Ahí doble a la derecha. La oficina 3-3 es la segunda puerta a su izquierda, en la esquina.",
             gestureAnimationRes = R.raw.point_right,
-            aliases = listOf("3-3", "33", "aula 3-3", "sala 3-3", "oficina 3-3")
+            aliases = listOf("3-3", "33", "aula 3-3", "sala 3-3", "oficina 3-3"),
+            routes = listOf(MapRoute("3-3", listOf(MapPoint(0.72857f, 0.49437f), MapPoint(0.72857f, 0.5194f), MapPoint(0.73143f, 0.5219f), MapPoint(0.86143f, 0.5219f), MapPoint(0.86214f, 0.68461f), MapPoint(0.86357f, 0.68961f), MapPoint(0.87929f, 0.68961f), MapPoint(0.87929f, 0.70088f))))
         ),
         Place(
             id = "oficina_3_2",
@@ -467,11 +503,12 @@ object PlacesCatalog {
             roomNumber = "3-2",
             floor = 3,
             group = null,
-            mapImageRes = R.drawable.mapa_3_2,
+            mapImageRes = R.drawable.mapa_piso_3,
             description = "Oficina del profesor Ricardo Villalón.",
             directions = "De frente al ascensor, gire a la derecha y camine hasta la sala de espera. Ahí doble a la derecha. La oficina 3-2 es la puerta a su derecha, frente a la 3-3.",
             gestureAnimationRes = R.raw.point_right,
-            aliases = listOf("ricardo villalón fonseca", "ricardo villalón", "profesor ricardo villalón", "oficina de ricardo villalón", "oficina del profesor ricardo villalón", "villalon", "villalón", "ricardo villalon", "3-2", "32", "aula 3-2", "sala 3-2", "oficina 3-2")
+            aliases = listOf("ricardo villalón fonseca", "ricardo villalón", "profesor ricardo villalón", "oficina de ricardo villalón", "oficina del profesor ricardo villalón", "villalon", "villalón", "ricardo villalon", "3-2", "32", "aula 3-2", "sala 3-2", "oficina 3-2"),
+            routes = listOf(MapRoute("3-2", listOf(MapPoint(0.72857f, 0.49437f), MapPoint(0.72857f, 0.5194f), MapPoint(0.73143f, 0.5219f), MapPoint(0.86143f, 0.5219f), MapPoint(0.86286f, 0.68461f), MapPoint(0.86071f, 0.68961f), MapPoint(0.84429f, 0.68961f))))
         ),
         Place(
             id = "banos_3",
@@ -480,11 +517,12 @@ object PlacesCatalog {
             roomNumber = null,
             floor = 3,
             group = "banos",
-            mapImageRes = R.drawable.mapa_3_banos,
+            mapImageRes = R.drawable.mapa_piso_3,
             description = "Baños",
             directions = "De frente al ascensor, gire a la izquierda. Los baños están justo a su derecha, al lado del ascensor: primero el de mujeres y luego el de hombres.",
             gestureAnimationRes = R.raw.point_left,
-            aliases = listOf("baño", "baños", "servicio sanitario", "servicios sanitarios", "sanitarios", "baño de hombres", "baño de mujeres")
+            aliases = listOf("baño", "baños", "servicio sanitario", "servicios sanitarios", "sanitarios", "baño de hombres", "baño de mujeres"),
+            routes = listOf(MapRoute("Baños", listOf(MapPoint(0.72857f, 0.49437f), MapPoint(0.72714f, 0.52065f), MapPoint(0.60214f, 0.52065f), MapPoint(0.6f, 0.51815f), MapPoint(0.60071f, 0.47559f))))
         ),
         Place(
             id = "idf_3",
@@ -493,11 +531,12 @@ object PlacesCatalog {
             roomNumber = null,
             floor = 3,
             group = "idf",
-            mapImageRes = R.drawable.mapa_3_idf,
+            mapImageRes = R.drawable.mapa_piso_3,
             description = "Cuarto de IDF",
             directions = "De frente al ascensor, gire a la izquierda y camine por el pasillo. El cuarto de IDF es la última puerta a su izquierda, antes de las puertas de vidrio.",
             gestureAnimationRes = R.raw.point_left,
-            aliases = listOf("idf", "cuarto de idf", "cuarto idf", "cuarto de telecomunicaciones")
+            aliases = listOf("idf", "cuarto de idf", "cuarto idf", "cuarto de telecomunicaciones"),
+            routes = listOf(MapRoute("IDF", listOf(MapPoint(0.72857f, 0.49437f), MapPoint(0.72714f, 0.53191f), MapPoint(0.47071f, 0.53191f), MapPoint(0.46714f, 0.53567f), MapPoint(0.46714f, 0.58323f), MapPoint(0.47f, 0.58448f))))
         ),
         Place(
             id = "sala_reuniones_3_13",
@@ -506,11 +545,12 @@ object PlacesCatalog {
             roomNumber = "3-13",
             floor = 3,
             group = "sala_reuniones",
-            mapImageRes = R.drawable.mapa_3_13,
+            mapImageRes = R.drawable.mapa_piso_3,
             description = "Área común para docentes y estudiantes.",
             directions = "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. La sala de reuniones 3-13 es la primera puerta a su derecha.",
             gestureAnimationRes = R.raw.point_left,
-            aliases = listOf("sala de reuniones", "sala de reunion", "sala de reunión", "reuniones", "cuarto de reuniones", "3-13", "313", "aula 3-13", "sala 3-13", "oficina 3-13")
+            aliases = listOf("sala de reuniones", "sala de reunion", "sala de reunión", "reuniones", "cuarto de reuniones", "3-13", "313", "aula 3-13", "sala 3-13", "oficina 3-13"),
+            routes = listOf(MapRoute("3-13", listOf(MapPoint(0.72857f, 0.49437f), MapPoint(0.72714f, 0.53191f), MapPoint(0.445f, 0.53191f), MapPoint(0.44429f, 0.47184f), MapPoint(0.44857f, 0.47059f))))
         ),
         Place(
             id = "oficina_3_17",
@@ -519,11 +559,12 @@ object PlacesCatalog {
             roomNumber = "3-17",
             floor = 3,
             group = null,
-            mapImageRes = R.drawable.mapa_3_17,
+            mapImageRes = R.drawable.mapa_piso_3,
             description = "Oficina sin profesor asignado.",
             directions = "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Doble a la derecha en el primer pasillo. La oficina 3-17 es la primera puerta a su izquierda.",
             gestureAnimationRes = R.raw.point_left,
-            aliases = listOf("3-17", "317", "aula 3-17", "sala 3-17", "oficina 3-17")
+            aliases = listOf("3-17", "317", "aula 3-17", "sala 3-17", "oficina 3-17"),
+            routes = listOf(MapRoute("3-17", listOf(MapPoint(0.72857f, 0.49437f), MapPoint(0.72714f, 0.53191f), MapPoint(0.41429f, 0.53191f), MapPoint(0.41357f, 0.44931f), MapPoint(0.41214f, 0.44556f), MapPoint(0.39786f, 0.44556f), MapPoint(0.39857f, 0.43304f))))
         ),
         Place(
             id = "oficina_3_16",
@@ -532,11 +573,12 @@ object PlacesCatalog {
             roomNumber = "3-16",
             floor = 3,
             group = null,
-            mapImageRes = R.drawable.mapa_3_16,
+            mapImageRes = R.drawable.mapa_piso_3,
             description = "Oficina del profesor Alberto Rojas.",
             directions = "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Doble a la derecha en el primer pasillo. La oficina 3-16 es la segunda puerta a su izquierda.",
             gestureAnimationRes = R.raw.point_left,
-            aliases = listOf("alberto rojas salazar", "alberto rojas", "profesor alberto rojas", "oficina de alberto rojas", "oficina del profesor alberto rojas", "3-16", "316", "aula 3-16", "sala 3-16", "oficina 3-16")
+            aliases = listOf("alberto rojas salazar", "alberto rojas", "profesor alberto rojas", "oficina de alberto rojas", "oficina del profesor alberto rojas", "3-16", "316", "aula 3-16", "sala 3-16", "oficina 3-16"),
+            routes = listOf(MapRoute("3-16", listOf(MapPoint(0.72857f, 0.49437f), MapPoint(0.72714f, 0.53191f), MapPoint(0.41429f, 0.53191f), MapPoint(0.41357f, 0.33667f), MapPoint(0.41214f, 0.33292f), MapPoint(0.39786f, 0.33292f), MapPoint(0.39786f, 0.32165f))))
         ),
         Place(
             id = "oficina_3_15",
@@ -545,11 +587,12 @@ object PlacesCatalog {
             roomNumber = "3-15",
             floor = 3,
             group = null,
-            mapImageRes = R.drawable.mapa_3_15,
+            mapImageRes = R.drawable.mapa_piso_3,
             description = "Oficina del profesor Sleyter Angulo.",
             directions = "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Doble a la derecha en el primer pasillo. La oficina 3-15 es la última puerta a su izquierda, al fondo.",
             gestureAnimationRes = R.raw.point_left,
-            aliases = listOf("sleyter angulo chavarría", "sleyter angulo", "profesor sleyter angulo", "oficina de sleyter angulo", "oficina del profesor sleyter angulo", "sleyter", "angulo", "3-15", "315", "aula 3-15", "sala 3-15", "oficina 3-15")
+            aliases = listOf("sleyter angulo chavarría", "sleyter angulo", "profesor sleyter angulo", "oficina de sleyter angulo", "oficina del profesor sleyter angulo", "sleyter", "angulo", "3-15", "315", "aula 3-15", "sala 3-15", "oficina 3-15"),
+            routes = listOf(MapRoute("3-15", listOf(MapPoint(0.72857f, 0.49437f), MapPoint(0.72714f, 0.53191f), MapPoint(0.41429f, 0.53191f), MapPoint(0.41357f, 0.22653f), MapPoint(0.41143f, 0.22278f), MapPoint(0.39786f, 0.22278f), MapPoint(0.39857f, 0.21151f))))
         ),
         Place(
             id = "oficina_3_14",
@@ -558,11 +601,12 @@ object PlacesCatalog {
             roomNumber = "3-14",
             floor = 3,
             group = null,
-            mapImageRes = R.drawable.mapa_3_14,
+            mapImageRes = R.drawable.mapa_piso_3,
             description = "Oficina del profesor José Antonio Brenes.",
             directions = "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Doble a la derecha en el primer pasillo. La oficina 3-14 es la puerta a su derecha, al fondo del pasillo.",
             gestureAnimationRes = R.raw.point_left,
-            aliases = listOf("josé antonio brenes carranza", "josé antonio brenes", "profesor josé antonio brenes", "oficina de josé antonio brenes", "oficina del profesor josé antonio brenes", "jose antonio brenes", "brenes", "branes", "jose antonio branes", "brenes carranza", "3-14", "314", "aula 3-14", "sala 3-14", "oficina 3-14")
+            aliases = listOf("josé antonio brenes carranza", "josé antonio brenes", "profesor josé antonio brenes", "oficina de josé antonio brenes", "oficina del profesor josé antonio brenes", "jose antonio brenes", "brenes", "branes", "jose antonio branes", "brenes carranza", "3-14", "314", "aula 3-14", "sala 3-14", "oficina 3-14"),
+            routes = listOf(MapRoute("3-14", listOf(MapPoint(0.72857f, 0.49437f), MapPoint(0.72714f, 0.53191f), MapPoint(0.41429f, 0.53191f), MapPoint(0.41357f, 0.22653f), MapPoint(0.42857f, 0.22403f), MapPoint(0.42857f, 0.21151f))))
         ),
         Place(
             id = "sala_funcionarios_3",
@@ -571,11 +615,12 @@ object PlacesCatalog {
             roomNumber = null,
             floor = 3,
             group = null,
-            mapImageRes = R.drawable.mapa_3_sala_funcionarios,
+            mapImageRes = R.drawable.mapa_piso_3,
             description = "Sala de solo funcionarios",
             directions = "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Doble a la izquierda en el primer pasillo. Al fondo, la sala de solo funcionarios es la puerta de la izquierda.",
             gestureAnimationRes = R.raw.point_left,
-            aliases = listOf("sala de funcionarios", "sala de solo funcionarios", "funcionarios", "sala del personal")
+            aliases = listOf("sala de funcionarios", "sala de solo funcionarios", "funcionarios", "sala del personal"),
+            routes = listOf(MapRoute("Destino", listOf(MapPoint(0.72857f, 0.49437f), MapPoint(0.72714f, 0.53191f), MapPoint(0.43286f, 0.53191f), MapPoint(0.43071f, 0.53567f), MapPoint(0.43071f, 0.78598f), MapPoint(0.43857f, 0.78598f))))
         ),
         Place(
             id = "area_comun_3_32",
@@ -584,11 +629,12 @@ object PlacesCatalog {
             roomNumber = "3-32",
             floor = 3,
             group = "area_comun",
-            mapImageRes = R.drawable.mapa_3_32,
+            mapImageRes = R.drawable.mapa_piso_3,
             description = "Áreas comunes para docentes y estudiantes.",
             directions = "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Doble a la izquierda en el primer pasillo. Al fondo, la sala 3-32 es la puerta de la derecha, al lado de la sala de solo funcionarios.",
             gestureAnimationRes = R.raw.point_left,
-            aliases = listOf("area comun", "área común", "areas comunes", "áreas comunes", "sala de estudiantes", "3-32", "332", "aula 3-32", "sala 3-32", "oficina 3-32")
+            aliases = listOf("area comun", "área común", "areas comunes", "áreas comunes", "sala de estudiantes", "3-32", "332", "aula 3-32", "sala 3-32", "oficina 3-32"),
+            routes = listOf(MapRoute("3-32", listOf(MapPoint(0.72857f, 0.49437f), MapPoint(0.72714f, 0.53191f), MapPoint(0.395f, 0.53317f), MapPoint(0.39286f, 0.78723f), MapPoint(0.385f, 0.78598f))))
         ),
         Place(
             id = "sala_estudio_3_31",
@@ -597,11 +643,12 @@ object PlacesCatalog {
             roomNumber = "3-31",
             floor = 3,
             group = "sala_estudio_individual",
-            mapImageRes = R.drawable.mapa_3_31,
+            mapImageRes = R.drawable.mapa_piso_3,
             description = "Sala de estudio individual.",
             directions = "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Siga recto unos pasos: la sala 3-31 es la primera puerta a su izquierda, después del pasillo.",
             gestureAnimationRes = R.raw.point_left,
-            aliases = listOf("sala de estudio individual", "sala individual de estudio", "estudio individual", "sala de estudio", "estudiar", "lugar para estudiar", "3-31", "331", "aula 3-31", "sala 3-31", "oficina 3-31")
+            aliases = listOf("sala de estudio individual", "sala individual de estudio", "estudio individual", "sala de estudio", "estudiar", "lugar para estudiar", "3-31", "331", "aula 3-31", "sala 3-31", "oficina 3-31"),
+            routes = listOf(MapRoute("3-31", listOf(MapPoint(0.72857f, 0.49437f), MapPoint(0.72714f, 0.53191f), MapPoint(0.36286f, 0.53191f), MapPoint(0.35929f, 0.53567f), MapPoint(0.35929f, 0.58323f), MapPoint(0.35643f, 0.58448f))))
         ),
         Place(
             id = "oficina_3_30",
@@ -610,11 +657,12 @@ object PlacesCatalog {
             roomNumber = "3-30",
             floor = 3,
             group = null,
-            mapImageRes = R.drawable.mapa_3_30,
+            mapImageRes = R.drawable.mapa_piso_3,
             description = "Oficina del profesor Ariel Mora.",
             directions = "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Siga recto: la oficina 3-30 está a su izquierda, después de la sala 3-31.",
             gestureAnimationRes = R.raw.point_left,
-            aliases = listOf("ariel mora jiménez", "ariel mora", "profesor ariel mora", "oficina de ariel mora", "oficina del profesor ariel mora", "ariel", "mora jimenez", "3-30", "330", "aula 3-30", "sala 3-30", "oficina 3-30")
+            aliases = listOf("ariel mora jiménez", "ariel mora", "profesor ariel mora", "oficina de ariel mora", "oficina del profesor ariel mora", "ariel", "mora jimenez", "3-30", "330", "aula 3-30", "sala 3-30", "oficina 3-30"),
+            routes = listOf(MapRoute("3-30", listOf(MapPoint(0.72857f, 0.49437f), MapPoint(0.72714f, 0.53191f), MapPoint(0.27214f, 0.53191f), MapPoint(0.26786f, 0.53567f), MapPoint(0.26786f, 0.58323f), MapPoint(0.27643f, 0.58198f))))
         ),
         Place(
             id = "oficina_3_18",
@@ -623,11 +671,12 @@ object PlacesCatalog {
             roomNumber = "3-18",
             floor = 3,
             group = null,
-            mapImageRes = R.drawable.mapa_3_18,
+            mapImageRes = R.drawable.mapa_piso_3,
             description = "Oficina del profesor Leonardo Villalobos.",
             directions = "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Siga recto: la oficina 3-18 está a su derecha, frente a la 3-30.",
             gestureAnimationRes = R.raw.point_left,
-            aliases = listOf("leonardo villalobos arias", "leonardo villalobos", "profesor leonardo villalobos", "oficina de leonardo villalobos", "oficina del profesor leonardo villalobos", "leonardo", "villalobos", "3-18", "318", "aula 3-18", "sala 3-18", "oficina 3-18")
+            aliases = listOf("leonardo villalobos arias", "leonardo villalobos", "profesor leonardo villalobos", "oficina de leonardo villalobos", "oficina del profesor leonardo villalobos", "leonardo", "villalobos", "3-18", "318", "aula 3-18", "sala 3-18", "oficina 3-18"),
+            routes = listOf(MapRoute("3-18", listOf(MapPoint(0.72857f, 0.49437f), MapPoint(0.72714f, 0.53191f), MapPoint(0.26857f, 0.53191f), MapPoint(0.26786f, 0.47184f), MapPoint(0.275f, 0.47184f))))
         ),
         Place(
             id = "oficina_3_23",
@@ -636,11 +685,12 @@ object PlacesCatalog {
             roomNumber = "3-23",
             floor = 3,
             group = null,
-            mapImageRes = R.drawable.mapa_3_23,
+            mapImageRes = R.drawable.mapa_piso_3,
             description = "Oficina del profesor Alexander Barquero.",
             directions = "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Siga recto hasta el final del pasillo. La oficina 3-23 es la última puerta a su derecha.",
             gestureAnimationRes = R.raw.point_left,
-            aliases = listOf("alexander barquero elizondo", "alexander barquero", "profesor alexander barquero", "oficina de alexander barquero", "oficina del profesor alexander barquero", "alexander", "barquero", "3-23", "323", "aula 3-23", "sala 3-23", "oficina 3-23")
+            aliases = listOf("alexander barquero elizondo", "alexander barquero", "profesor alexander barquero", "oficina de alexander barquero", "oficina del profesor alexander barquero", "alexander", "barquero", "3-23", "323", "aula 3-23", "sala 3-23", "oficina 3-23"),
+            routes = listOf(MapRoute("3-23", listOf(MapPoint(0.72857f, 0.49437f), MapPoint(0.72714f, 0.53191f), MapPoint(0.19429f, 0.53191f), MapPoint(0.19357f, 0.47184f), MapPoint(0.18643f, 0.47184f))))
         ),
         Place(
             id = "oficina_3_25",
@@ -649,11 +699,12 @@ object PlacesCatalog {
             roomNumber = "3-25",
             floor = 3,
             group = null,
-            mapImageRes = R.drawable.mapa_3_25,
+            mapImageRes = R.drawable.mapa_piso_3,
             description = "Oficina del profesor Ricardo Gang.",
             directions = "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Siga recto hasta el final del pasillo. La oficina 3-25 es la última puerta a su izquierda, frente a la 3-23.",
             gestureAnimationRes = R.raw.point_left,
-            aliases = listOf("ricardo gang vincenzi", "ricardo gang", "profesor ricardo gang", "oficina de ricardo gang", "oficina del profesor ricardo gang", "gang", "vincenzi", "ricardo gang", "3-25", "325", "aula 3-25", "sala 3-25", "oficina 3-25")
+            aliases = listOf("ricardo gang vincenzi", "ricardo gang", "profesor ricardo gang", "oficina de ricardo gang", "oficina del profesor ricardo gang", "gang", "vincenzi", "ricardo gang", "3-25", "325", "aula 3-25", "sala 3-25", "oficina 3-25"),
+            routes = listOf(MapRoute("3-25", listOf(MapPoint(0.72857f, 0.49437f), MapPoint(0.72714f, 0.53191f), MapPoint(0.19714f, 0.53191f), MapPoint(0.19357f, 0.53567f), MapPoint(0.19357f, 0.58323f), MapPoint(0.185f, 0.58198f))))
         ),
         Place(
             id = "sala_comun_3_19",
@@ -662,11 +713,12 @@ object PlacesCatalog {
             roomNumber = "3-19",
             floor = 3,
             group = null,
-            mapImageRes = R.drawable.mapa_3_19,
+            mapImageRes = R.drawable.mapa_piso_3,
             description = "Sala común para docentes y estudiantes.",
             directions = "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Siga recto y doble a la derecha en el último pasillo. La sala 3-19 es la primera puerta a su derecha.",
             gestureAnimationRes = R.raw.point_left,
-            aliases = listOf("sala comun de docentes y estudiantes", "sala comun para docentes y estudiantes", "3-19", "319", "aula 3-19", "sala 3-19", "oficina 3-19")
+            aliases = listOf("sala comun de docentes y estudiantes", "sala comun para docentes y estudiantes", "3-19", "319", "aula 3-19", "sala 3-19", "oficina 3-19"),
+            routes = listOf(MapRoute("3-19", listOf(MapPoint(0.72857f, 0.49437f), MapPoint(0.72714f, 0.53191f), MapPoint(0.23f, 0.53191f), MapPoint(0.22929f, 0.33542f), MapPoint(0.24429f, 0.33292f), MapPoint(0.245f, 0.32666f))))
         ),
         Place(
             id = "oficina_3_22",
@@ -675,11 +727,12 @@ object PlacesCatalog {
             roomNumber = "3-22",
             floor = 3,
             group = null,
-            mapImageRes = R.drawable.mapa_3_22,
+            mapImageRes = R.drawable.mapa_piso_3,
             description = "Oficina de la profesora Amanda Alpízar.",
             directions = "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Siga recto y doble a la derecha en el último pasillo. La oficina 3-22 es la primera puerta a su izquierda, frente a la 3-19.",
             gestureAnimationRes = R.raw.point_left,
-            aliases = listOf("amanda alpízar rodríguez", "amanda alpízar", "profesora amanda alpízar", "oficina de amanda alpízar", "oficina de la profesora amanda alpízar", "amanda", "alpizar", "alpízar", "3-22", "322", "aula 3-22", "sala 3-22", "oficina 3-22")
+            aliases = listOf("amanda alpízar rodríguez", "amanda alpízar", "profesora amanda alpízar", "oficina de amanda alpízar", "oficina de la profesora amanda alpízar", "amanda", "alpizar", "alpízar", "3-22", "322", "aula 3-22", "sala 3-22", "oficina 3-22"),
+            routes = listOf(MapRoute("3-22", listOf(MapPoint(0.72857f, 0.49437f), MapPoint(0.72714f, 0.53191f), MapPoint(0.23f, 0.53191f), MapPoint(0.22929f, 0.33667f), MapPoint(0.225f, 0.33166f), MapPoint(0.21357f, 0.33292f), MapPoint(0.21357f, 0.32541f))))
         ),
         Place(
             id = "oficina_3_20",
@@ -688,11 +741,12 @@ object PlacesCatalog {
             roomNumber = "3-20",
             floor = 3,
             group = null,
-            mapImageRes = R.drawable.mapa_3_20,
+            mapImageRes = R.drawable.mapa_piso_3,
             description = "Oficina del profesor Cristian Quesada.",
             directions = "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Siga recto y doble a la derecha en el último pasillo. La oficina 3-20 es la segunda puerta a su derecha, al fondo.",
             gestureAnimationRes = R.raw.point_left,
-            aliases = listOf("cristian quesada lópez", "cristian quesada", "profesor cristian quesada", "oficina de cristian quesada", "oficina del profesor cristian quesada", "christian quesada", "quesada", "cristian", "christian", "3-20", "320", "aula 3-20", "sala 3-20", "oficina 3-20")
+            aliases = listOf("cristian quesada lópez", "cristian quesada", "profesor cristian quesada", "oficina de cristian quesada", "oficina del profesor cristian quesada", "christian quesada", "quesada", "cristian", "christian", "3-20", "320", "aula 3-20", "sala 3-20", "oficina 3-20"),
+            routes = listOf(MapRoute("3-20", listOf(MapPoint(0.72857f, 0.49437f), MapPoint(0.72714f, 0.53191f), MapPoint(0.23f, 0.53191f), MapPoint(0.22929f, 0.22653f), MapPoint(0.24429f, 0.22403f), MapPoint(0.24429f, 0.21151f))))
         ),
         Place(
             id = "oficina_3_21",
@@ -701,11 +755,12 @@ object PlacesCatalog {
             roomNumber = "3-21",
             floor = 3,
             group = null,
-            mapImageRes = R.drawable.mapa_3_21,
+            mapImageRes = R.drawable.mapa_piso_3,
             description = "Oficina del profesor Jeisson Hidalgo.",
             directions = "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Siga recto y doble a la derecha en el último pasillo. La oficina 3-21 es la segunda puerta a su izquierda, frente a la 3-20.",
             gestureAnimationRes = R.raw.point_left,
-            aliases = listOf("jeisson hidalgo céspedes", "jeisson hidalgo", "profesor jeisson hidalgo", "oficina de jeisson hidalgo", "oficina del profesor jeisson hidalgo", "jeisson", "hidalgo", "3-21", "321", "aula 3-21", "sala 3-21", "oficina 3-21")
+            aliases = listOf("jeisson hidalgo céspedes", "jeisson hidalgo", "profesor jeisson hidalgo", "oficina de jeisson hidalgo", "oficina del profesor jeisson hidalgo", "jeisson", "hidalgo", "3-21", "321", "aula 3-21", "sala 3-21", "oficina 3-21"),
+            routes = listOf(MapRoute("3-21", listOf(MapPoint(0.72857f, 0.49437f), MapPoint(0.72714f, 0.53191f), MapPoint(0.23f, 0.53191f), MapPoint(0.22929f, 0.22653f), MapPoint(0.22714f, 0.22278f), MapPoint(0.21357f, 0.22278f), MapPoint(0.21429f, 0.21026f))))
         ),
         Place(
             id = "oficina_3_29",
@@ -714,11 +769,12 @@ object PlacesCatalog {
             roomNumber = "3-29",
             floor = 3,
             group = null,
-            mapImageRes = R.drawable.mapa_3_29,
+            mapImageRes = R.drawable.mapa_piso_3,
             description = "Oficina sin profesor asignado.",
             directions = "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Siga recto y doble a la izquierda en el último pasillo. La oficina 3-29 es la primera puerta a su izquierda.",
             gestureAnimationRes = R.raw.point_left,
-            aliases = listOf("3-29", "329", "aula 3-29", "sala 3-29", "oficina 3-29")
+            aliases = listOf("3-29", "329", "aula 3-29", "sala 3-29", "oficina 3-29"),
+            routes = listOf(MapRoute("3-29", listOf(MapPoint(0.72857f, 0.49437f), MapPoint(0.72714f, 0.53191f), MapPoint(0.23071f, 0.53317f), MapPoint(0.22929f, 0.71965f), MapPoint(0.24429f, 0.72215f), MapPoint(0.24429f, 0.73342f))))
         ),
         Place(
             id = "bodega_3_26",
@@ -727,11 +783,12 @@ object PlacesCatalog {
             roomNumber = "3-26",
             floor = 3,
             group = "bodega",
-            mapImageRes = R.drawable.mapa_3_26,
+            mapImageRes = R.drawable.mapa_piso_3,
             description = "Bodega",
             directions = "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Siga recto y doble a la izquierda en el último pasillo. La bodega 3-26 es la primera puerta a su derecha, frente a la 3-29.",
             gestureAnimationRes = R.raw.point_left,
-            aliases = listOf("bodega", "bodega 3-26", "3-26", "326", "aula 3-26", "sala 3-26", "oficina 3-26")
+            aliases = listOf("bodega", "bodega 3-26", "3-26", "326", "aula 3-26", "sala 3-26", "oficina 3-26"),
+            routes = listOf(MapRoute("3-26", listOf(MapPoint(0.72857f, 0.49437f), MapPoint(0.72714f, 0.53191f), MapPoint(0.23071f, 0.53317f), MapPoint(0.22929f, 0.7184f), MapPoint(0.21357f, 0.7209f), MapPoint(0.21429f, 0.73467f))))
         ),
         Place(
             id = "oficina_3_28",
@@ -740,11 +797,12 @@ object PlacesCatalog {
             roomNumber = "3-28",
             floor = 3,
             group = null,
-            mapImageRes = R.drawable.mapa_3_28,
+            mapImageRes = R.drawable.mapa_piso_3,
             description = "Oficina del profesor Allan Berrocal.",
             directions = "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Siga recto y doble a la izquierda en el último pasillo. La oficina 3-28 es la segunda puerta a su izquierda.",
             gestureAnimationRes = R.raw.point_left,
-            aliases = listOf("allan berrocal rojas", "allan berrocal", "profesor allan berrocal", "oficina de allan berrocal", "oficina del profesor allan berrocal", "allan", "berrocal", "3-28", "328", "aula 3-28", "sala 3-28", "oficina 3-28")
+            aliases = listOf("allan berrocal rojas", "allan berrocal", "profesor allan berrocal", "oficina de allan berrocal", "oficina del profesor allan berrocal", "allan", "berrocal", "3-28", "328", "aula 3-28", "sala 3-28", "oficina 3-28"),
+            routes = listOf(MapRoute("3-28", listOf(MapPoint(0.72857f, 0.49437f), MapPoint(0.72714f, 0.53191f), MapPoint(0.23071f, 0.53317f), MapPoint(0.22929f, 0.82603f), MapPoint(0.24429f, 0.82979f), MapPoint(0.24429f, 0.84105f))))
         ),
         Place(
             id = "oficina_3_27",
@@ -753,11 +811,12 @@ object PlacesCatalog {
             roomNumber = "3-27",
             floor = 3,
             group = null,
-            mapImageRes = R.drawable.mapa_3_27,
+            mapImageRes = R.drawable.mapa_piso_3,
             description = "Oficina del profesor Adrián Lara.",
             directions = "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Siga recto y doble a la izquierda en el último pasillo. La oficina 3-27 es la segunda puerta a su derecha, frente a la 3-28.",
             gestureAnimationRes = R.raw.point_left,
-            aliases = listOf("adrián lara petitdemange", "adrián lara", "profesor adrián lara", "oficina de adrián lara", "oficina del profesor adrián lara", "adrian lara", "adrián lara", "lara", "petitdemange", "3-27", "327", "aula 3-27", "sala 3-27", "oficina 3-27")
+            aliases = listOf("adrián lara petitdemange", "adrián lara", "profesor adrián lara", "oficina de adrián lara", "oficina del profesor adrián lara", "adrian lara", "adrián lara", "lara", "petitdemange", "3-27", "327", "aula 3-27", "sala 3-27", "oficina 3-27"),
+            routes = listOf(MapRoute("3-27", listOf(MapPoint(0.72857f, 0.49437f), MapPoint(0.72714f, 0.53191f), MapPoint(0.23071f, 0.53317f), MapPoint(0.22929f, 0.82478f), MapPoint(0.22786f, 0.82854f), MapPoint(0.21357f, 0.82854f), MapPoint(0.21429f, 0.84105f))))
         ),
         Place(
             id = "oficina_5_26",
@@ -766,11 +825,12 @@ object PlacesCatalog {
             roomNumber = "5-26",
             floor = 5,
             group = null,
-            mapImageRes = R.drawable.mapa_5_26,
+            mapImageRes = R.drawable.mapa_piso_5,
             description = "Oficina del profesor Marcelo Jenkins.",
             directions = "De frente al ascensor, gire a la derecha y camine directo. Siga recto, la oficina 5-26 es la primer puerta al frente suyo.",
             gestureAnimationRes = R.raw.point_right,
-            aliases = listOf("marcelo jenkins", "marcelo", "profesor marcelo", "oficina de marcelo jenkins", "oficina del profesor marcelo jenkins", "jenkins", "5-26", "526", "aula 5-26", "sala 5-26", "oficina 5-26")
+            aliases = listOf("marcelo jenkins", "marcelo", "profesor marcelo", "oficina de marcelo jenkins", "oficina del profesor marcelo jenkins", "jenkins", "5-26", "526", "aula 5-26", "sala 5-26", "oficina 5-26"),
+            routes = listOf(MapRoute("5-26", listOf(MapPoint(0.70801f, 0.50251f), MapPoint(0.70264f, 0.50586f), MapPoint(0.70312f, 0.51843f), MapPoint(0.70508f, 0.52429f), MapPoint(0.71045f, 0.52848f), MapPoint(0.8584f, 0.52848f))))
         ),
         Place(
             id = "oficina_5_25",
@@ -779,11 +839,12 @@ object PlacesCatalog {
             roomNumber = "5-25",
             floor = 5,
             group = null,
-            mapImageRes = R.drawable.mapa_5_25,
+            mapImageRes = R.drawable.mapa_piso_5,
             description = "Oficina de la profesora Alexandra Martinez.",
             directions = "De frente al ascensor, gire a la derecha y camine directo. Siga recto, la oficina 5-25 es la segunda puerta a la derecha, al lado de la 5-26.",
             gestureAnimationRes = R.raw.point_right,
-            aliases = listOf("alexandra martinez", "alexandra", "profesora alexandra", "oficina de alexandra martinez", "oficina de la profesora alexandra martinez", "5-25", "525", "aula 5-25", "sala 5-25", "oficina 5-25", "investigacion ia", "experimento")
+            aliases = listOf("alexandra martinez", "alexandra", "profesora alexandra", "oficina de alexandra martinez", "oficina de la profesora alexandra martinez", "5-25", "525", "aula 5-25", "sala 5-25", "oficina 5-25", "investigacion ia", "experimento"),
+            routes = listOf(MapRoute("5-25", listOf(MapPoint(0.70801f, 0.50251f), MapPoint(0.70312f, 0.5067f), MapPoint(0.70361f, 0.51256f), MapPoint(0.70752f, 0.51591f), MapPoint(0.83154f, 0.51759f), MapPoint(0.83594f, 0.52345f), MapPoint(0.83838f, 0.53518f), MapPoint(0.83887f, 0.60302f), MapPoint(0.84375f, 0.60804f), MapPoint(0.85889f, 0.60804f))))
         ),
         Place(
             id = "oficina_5_24",
@@ -792,11 +853,12 @@ object PlacesCatalog {
             roomNumber = "5-24",
             floor = 5,
             group = null,
-            mapImageRes = R.drawable.mapa_5_24,
+            mapImageRes = R.drawable.mapa_piso_5,
             description = "Oficina del profesor Arturo Camacho.",
-            directions = "De frente al ascensor, gire a la derecha y camine directo. Siga recto, la oficina 5-24 es la tercera puerta a la derecha, al lado de la 5-25.",
+            directions = "De frente al ascensor, gire a la derecha y camine directo. Siga recto, la oficina 5-24 es la tercera puerta a la derecha, al lado de la 5-26.",
             gestureAnimationRes = R.raw.point_right,
-            aliases = listOf("arturo camacho", "arturo", "profesor arturo", "oficina de arturo camacho", "oficina del profesor arturo camacho", "camacho", "5-24", "524", "aula 5-24", "sala 5-24", "oficina 5-24")
+            aliases = listOf("arturo camacho", "arturo", "profesor arturo", "oficina de arturo camacho", "oficina del profesor arturo camacho", "camacho", "5-24", "524", "aula 5-24", "sala 5-24", "oficina 5-24"),
+            routes = listOf(MapRoute("5-24", listOf(MapPoint(0.70801f, 0.50251f), MapPoint(0.70312f, 0.5067f), MapPoint(0.70361f, 0.51256f), MapPoint(0.70752f, 0.51591f), MapPoint(0.84668f, 0.51591f), MapPoint(0.85059f, 0.51843f), MapPoint(0.85498f, 0.52596f), MapPoint(0.85645f, 0.53518f), MapPoint(0.85645f, 0.65829f))))
         ),
         Place(
             id = "laboratorio_5_2",
@@ -805,11 +867,12 @@ object PlacesCatalog {
             roomNumber = "5-2",
             floor = 5,
             group = null,
-            mapImageRes = R.drawable.mapa_5_2,
+            mapImageRes = R.drawable.mapa_piso_5,
             description = "Laboratorio de computadoras 5-2.",
             directions = "De frente al ascensor, gire a la derecha y camine directo. Luego gire a la izquierda, el laboratorio 5-2 se encontrara al frente.",
             gestureAnimationRes = R.raw.point_right,
-            aliases = listOf("lab quinto piso", "clase quinto piso", "laboratorio quinto piso", "clase 5", "computadoras quinto", "5-2", "52", "aula 5-2", "sala 5-2", "oficina 5-2")
+            aliases = listOf("lab quinto piso", "clase quinto piso", "laboratorio quinto piso", "clase 5", "computadoras quinto", "5-2", "52", "aula 5-2", "sala 5-2", "oficina 5-2"),
+            routes = listOf(MapRoute("5-2", listOf(MapPoint(0.70801f, 0.50251f), MapPoint(0.69531f, 0.5067f), MapPoint(0.69678f, 0.52848f), MapPoint(0.70312f, 0.53853f), MapPoint(0.76416f, 0.53936f), MapPoint(0.76953f, 0.53601f), MapPoint(0.77441f, 0.52094f), MapPoint(0.77441f, 0.40034f))))
         ),
         Place(
             id = "oficina_5_23",
@@ -818,11 +881,12 @@ object PlacesCatalog {
             roomNumber = "5-23",
             floor = 5,
             group = null,
-            mapImageRes = R.drawable.mapa_5_23,
+            mapImageRes = R.drawable.mapa_piso_5,
             description = "Sala de Estudio 5-23.",
             directions = "De frente al ascensor, gire a la derecha y camine directo. Luego gire nuevamente a la derecha, la sala de estudio se encontrara del lado derecho, de frente a las oficinas de profesores.",
             gestureAnimationRes = R.raw.point_right,
-            aliases = listOf("sala de estudio 5", "sala de estudio quinto piso", "estudio quinto piso", "sala quinto piso", "5-23", "523", "aula 5-23", "sala 5-23", "oficina 5-23")
+            aliases = listOf("sala de estudio 5", "sala de estudio quinto piso", "estudio quinto piso", "sala quinto piso", "5-23", "523", "aula 5-23", "sala 5-23", "oficina 5-23"),
+            routes = listOf(MapRoute("5-23", listOf(MapPoint(0.70801f, 0.50251f), MapPoint(0.70312f, 0.5067f), MapPoint(0.70361f, 0.51256f), MapPoint(0.70752f, 0.51591f), MapPoint(0.85352f, 0.51759f), MapPoint(0.85742f, 0.52345f), MapPoint(0.85986f, 0.5335f), MapPoint(0.85986f, 0.64908f), MapPoint(0.85596f, 0.65578f), MapPoint(0.84229f, 0.65578f))))
         ),
         Place(
             id = "sala_5_20",
@@ -831,11 +895,12 @@ object PlacesCatalog {
             roomNumber = "5-20",
             floor = 5,
             group = null,
-            mapImageRes = R.drawable.mapa_5_20,
+            mapImageRes = R.drawable.mapa_piso_5,
             description = "Sala de Profesores 5-20.",
-            directions = "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Doble a la izquierda, la sala 5-20 esta al fondo",
+            directions = "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Doble a la izquierda, la sala 5-20 esta al fondo.",
             gestureAnimationRes = R.raw.point_left,
-            aliases = listOf("sala de profesores 5", "sala de profesores quinto piso", "profesores quinto piso", "comedor quinto piso", "5-20", "520", "aula 5-20", "sala 5-20", "oficina 5-20")
+            aliases = listOf("sala de profesores 5", "sala de profesores quinto piso", "profesores quinto piso", "comedor quinto piso", "5-20", "520", "aula 5-20", "sala 5-20", "oficina 5-20"),
+            routes = listOf(MapRoute("5-20", listOf(MapPoint(0.70801f, 0.50251f), MapPoint(0.70264f, 0.50586f), MapPoint(0.70166f, 0.53518f), MapPoint(0.69727f, 0.54355f), MapPoint(0.69238f, 0.54606f), MapPoint(0.4165f, 0.54774f), MapPoint(0.41113f, 0.55528f), MapPoint(0.40918f, 0.56281f), MapPoint(0.40918f, 0.74958f))))
         ),
         Place(
             id = "sala_5_19",
@@ -843,12 +908,13 @@ object PlacesCatalog {
             shortName = null,
             roomNumber = "5-19",
             floor = 5,
-            group = null,
-            mapImageRes = R.drawable.mapa_5_19,
+            group = "sala_reuniones",
+            mapImageRes = R.drawable.mapa_piso_5,
             description = "Sala de reuniones 5-19.",
-            directions = "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Siga directo, la sala 5-19 estara a la izquierda",
+            directions = "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Siga directo, la sala 5-19 estara a la izquierda.",
             gestureAnimationRes = R.raw.point_left,
-            aliases = listOf("sala de reuniones 5", "sala de reuniones quinto piso", "reuniones quinto piso", "reuniones 5", "5-19", "519", "aula 5-19", "sala 5-19", "oficina 5-19")
+            aliases = listOf("sala de reuniones 5", "sala de reuniones quinto piso", "reuniones quinto piso", "reuniones 5", "5-19", "519", "aula 5-19", "sala 5-19", "oficina 5-19"),
+            routes = listOf(MapRoute("5-19", listOf(MapPoint(0.70801f, 0.50251f), MapPoint(0.70264f, 0.50586f), MapPoint(0.70166f, 0.53518f), MapPoint(0.69727f, 0.54355f), MapPoint(0.69238f, 0.54606f), MapPoint(0.29834f, 0.54606f), MapPoint(0.29297f, 0.54858f), MapPoint(0.29053f, 0.55444f), MapPoint(0.29053f, 0.58375f))))
         ),
         Place(
             id = "sala_5_12",
@@ -857,11 +923,12 @@ object PlacesCatalog {
             roomNumber = "5-12",
             floor = 5,
             group = null,
-            mapImageRes = R.drawable.mapa_5_12,
+            mapImageRes = R.drawable.mapa_piso_5,
             description = "Sala de investigacion 1 5-12.",
-            directions = "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Siga directo, la sala 5-12 estara a la derecha",
+            directions = "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Siga directo, la sala 5-12 estara a la derecha.",
             gestureAnimationRes = R.raw.point_left,
-            aliases = listOf("sala de investigacion 1 5", "sala de investigacion 1 quinto piso", "investigacion 1 quinto piso", "investigacion 1", "5-12", "512", "aula 5-12", "sala 5-12", "oficina 5-12")
+            aliases = listOf("sala de investigacion 1 5", "sala de investigacion 1 quinto piso", "investigacion 1 quinto piso", "investigacion 1", "5-12", "512", "aula 5-12", "sala 5-12", "oficina 5-12"),
+            routes = listOf(MapRoute("5-12", listOf(MapPoint(0.70801f, 0.50251f), MapPoint(0.70264f, 0.50586f), MapPoint(0.70166f, 0.53518f), MapPoint(0.69727f, 0.54355f), MapPoint(0.69238f, 0.54606f), MapPoint(0.22754f, 0.54606f), MapPoint(0.22461f, 0.54523f), MapPoint(0.2207f, 0.53685f), MapPoint(0.22021f, 0.51005f))))
         ),
         Place(
             id = "sala_5_10",
@@ -870,11 +937,12 @@ object PlacesCatalog {
             roomNumber = "5-10",
             floor = 5,
             group = null,
-            mapImageRes = R.drawable.mapa_5_10,
+            mapImageRes = R.drawable.mapa_piso_5,
             description = "Sala de investigacion 2 5-10.",
-            directions = "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Siga directo, la sala 5-10 estara a la derecha",
+            directions = "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Siga directo, la sala 5-10 estara a la derecha.",
             gestureAnimationRes = R.raw.point_left,
-            aliases = listOf("sala de investigacion 2 5", "sala de investigacion 2 quinto piso", "investigacion 2 quinto piso", "investigacion 2", "5-10", "510", "aula 5-10", "sala 5-10", "oficina 5-10")
+            aliases = listOf("sala de investigacion 2 5", "sala de investigacion 2 quinto piso", "investigacion 2 quinto piso", "investigacion 2", "5-10", "510", "aula 5-10", "sala 5-10", "oficina 5-10"),
+            routes = listOf(MapRoute("5-10", listOf(MapPoint(0.70801f, 0.50251f), MapPoint(0.70264f, 0.50586f), MapPoint(0.70166f, 0.53518f), MapPoint(0.69727f, 0.54355f), MapPoint(0.69238f, 0.54606f), MapPoint(0.41602f, 0.54606f), MapPoint(0.41309f, 0.54523f), MapPoint(0.40967f, 0.53769f), MapPoint(0.40967f, 0.50586f))))
         ),
         Place(
             id = "sala_5_15",
@@ -882,12 +950,13 @@ object PlacesCatalog {
             shortName = null,
             roomNumber = "5-15",
             floor = 5,
-            group = null,
-            mapImageRes = R.drawable.mapa_5_15,
+            group = "secretaria",
+            mapImageRes = R.drawable.mapa_piso_5,
             description = "Secretaria quinto piso.",
-            directions = "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Siga directo, la secretaria estara a la izquierda",
+            directions = "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Siga directo, la secretaria estara a la izquierda.",
             gestureAnimationRes = R.raw.point_left,
-            aliases = listOf("sala de secretaria 5", "sala de secretaria quinto piso", "secretaria quinto piso", "secretaria", "5-15", "515", "aula 5-15", "sala 5-15", "oficina 5-15")
+            aliases = listOf("sala de secretaria 5", "sala de secretaria quinto piso", "secretaria quinto piso", "secretaria", "5-15", "515", "aula 5-15", "sala 5-15", "oficina 5-15"),
+            routes = listOf(MapRoute("5-15", listOf(MapPoint(0.70801f, 0.50251f), MapPoint(0.70264f, 0.50586f), MapPoint(0.70166f, 0.53518f), MapPoint(0.69727f, 0.54355f), MapPoint(0.69238f, 0.54606f), MapPoint(0.18115f, 0.54606f), MapPoint(0.17676f, 0.54774f), MapPoint(0.17383f, 0.5536f), MapPoint(0.17334f, 0.58459f))))
         ),
         Place(
             id = "sala_5_22",
@@ -895,12 +964,13 @@ object PlacesCatalog {
             shortName = null,
             roomNumber = "5-22",
             floor = 5,
-            group = null,
-            mapImageRes = R.drawable.mapa_5_22,
+            group = "idf",
+            mapImageRes = R.drawable.mapa_piso_5,
             description = "IDF quinto piso.",
-            directions = "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta antes de cruzar las puertas de vidrio. Siga directo, la sala idf estara a la izquierda",
+            directions = "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta antes de cruzar las puertas de vidrio. Siga directo, la sala idf estara a la izquierda.",
             gestureAnimationRes = R.raw.point_left,
-            aliases = listOf("sala de idf 5", "idf", "5-22", "522", "aula 5-22", "sala 5-22", "oficina 5-22")
+            aliases = listOf("sala de idf 5", "idf", "5-22", "522", "aula 5-22", "sala 5-22", "oficina 5-22"),
+            routes = listOf(MapRoute("5-22", listOf(MapPoint(0.70801f, 0.50251f), MapPoint(0.70264f, 0.50586f), MapPoint(0.70166f, 0.53518f), MapPoint(0.69727f, 0.54355f), MapPoint(0.69238f, 0.54606f), MapPoint(0.46973f, 0.54606f), MapPoint(0.46484f, 0.54774f), MapPoint(0.4624f, 0.55193f), MapPoint(0.46143f, 0.58375f))))
         ),
         Place(
             id = "sala_5_9",
@@ -909,11 +979,160 @@ object PlacesCatalog {
             roomNumber = "5-9",
             floor = 5,
             group = null,
-            mapImageRes = R.drawable.mapa_5_citic,
+            mapImageRes = R.drawable.mapa_piso_5,
             description = "Oficinas Administrativas CITIC.",
             directions = "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio para llegar a las oficinas del CITIC.",
             gestureAnimationRes = R.raw.point_left,
-            aliases = listOf("sala de citic", "sala de oficinas administrativas citic", "citic", "oficinas administrativas citic", "oficina citic", "5-9", "59", "aula 5-9", "sala 5-9", "oficina 5-9")
+            aliases = listOf("sala de citic", "sala de oficinas administrativas citic", "citic", "oficinas administrativas citic", "oficina citic", "5-9", "59", "aula 5-9", "sala 5-9", "oficina 5-9"),
+            routes = listOf(MapRoute("5-9", listOf(MapPoint(0.70801f, 0.50251f), MapPoint(0.70264f, 0.50586f), MapPoint(0.70166f, 0.53518f), MapPoint(0.69727f, 0.54355f), MapPoint(0.69238f, 0.54606f), MapPoint(0.50195f, 0.54606f))))
+        ),
+        Place(
+            id = "ascensor_6",
+            name = "Ascensor",
+            shortName = null,
+            roomNumber = null,
+            floor = 6,
+            group = "ascensor",
+            mapImageRes = R.drawable.mapa_piso_6,
+            description = "Ascensor del sexto piso.",
+            directions = "El recorrido empieza frente al ascensor.",
+            gestureAnimationRes = null,
+            aliases = listOf("ascensor", "elevador"),
+            routes = listOf(MapRoute("Ascensor", listOf(MapPoint(0.7125f, 0.4871f))))
+        ),
+        Place(
+            id = "banos_6",
+            name = "Baños",
+            shortName = null,
+            roomNumber = null,
+            floor = 6,
+            group = "banos",
+            mapImageRes = R.drawable.mapa_piso_6,
+            description = "El bloque de baños incluye un baño accesible.",
+            directions = "De frente al ascensor, gire a la izquierda y siga por el pasillo. Los baños quedan a su derecha, antes de la puerta que divide el pasillo.",
+            gestureAnimationRes = R.raw.point_left,
+            aliases = listOf("baños", "baño", "banio", "banios", "servicio sanitario", "servicios sanitarios", "sanitarios", "baño accesible"),
+            routes = listOf(MapRoute("Baños", listOf(MapPoint(0.7125f, 0.4871f), MapPoint(0.7125f, 0.52688f), MapPoint(0.5675f, 0.52688f), MapPoint(0.5675f, 0.47097f))))
+        ),
+        Place(
+            id = "escalera_central_6",
+            name = "Escalera central",
+            shortName = null,
+            roomNumber = null,
+            floor = 6,
+            group = "escalera",
+            mapImageRes = R.drawable.mapa_piso_6,
+            description = "Escalera frente al ascensor.",
+            directions = "De frente al ascensor, dé media vuelta. La entrada a la escalera está al otro lado del pasillo.",
+            gestureAnimationRes = R.raw.point_back,
+            aliases = listOf("escalera central", "escalera", "escaleras", "gradas", "gradas centrales"),
+            routes = listOf(MapRoute("Escalera central", listOf(MapPoint(0.7125f, 0.4871f), MapPoint(0.7125f, 0.52688f), MapPoint(0.73f, 0.52688f), MapPoint(0.73f, 0.5871f))))
+        ),
+        Place(
+            id = "escalera_oeste_6",
+            name = "Escalera oeste",
+            shortName = null,
+            roomNumber = null,
+            floor = 6,
+            group = null,
+            mapImageRes = R.drawable.mapa_piso_6,
+            description = "Escalera al extremo oeste del piso.",
+            directions = "De frente al ascensor, gire a la izquierda y siga hasta el fondo del pasillo. La entrada a la escalera queda al final, a su izquierda.",
+            gestureAnimationRes = R.raw.point_left,
+            aliases = listOf("escalera oeste", "escalera del oeste", "gradas del oeste"),
+            routes = listOf(MapRoute("Escalera oeste", listOf(MapPoint(0.7125f, 0.4871f), MapPoint(0.7125f, 0.52688f), MapPoint(0.11438f, 0.52688f), MapPoint(0.11438f, 0.54194f), MapPoint(0.08875f, 0.54194f))))
+        ),
+        Place(
+            id = "reuniones_6_2",
+            name = "Sala de reuniones",
+            shortName = null,
+            roomNumber = "6-2",
+            floor = 6,
+            group = "sala_reuniones",
+            mapImageRes = R.drawable.mapa_piso_6,
+            description = "Sala de reuniones",
+            directions = "De frente al ascensor, gire a la derecha y siga hasta el fondo del pasillo. Doble a la derecha. La sala queda a su derecha, frente a la oficina 6-4.",
+            gestureAnimationRes = R.raw.point_right,
+            aliases = listOf("sala de reuniones", "sala de reunión", "reuniones", "sala 6-2", "6-2"),
+            routes = listOf(MapRoute("6-2", listOf(MapPoint(0.7125f, 0.4871f), MapPoint(0.7125f, 0.52688f), MapPoint(0.85f, 0.52688f), MapPoint(0.85f, 0.62473f), MapPoint(0.82312f, 0.62473f))))
+        ),
+        Place(
+            id = "luis_quesada_6_3",
+            name = "Oficina del profesor Luis Quesada Quirós",
+            shortName = null,
+            roomNumber = "6-3",
+            floor = 6,
+            group = null,
+            mapImageRes = R.drawable.mapa_piso_6,
+            description = "Oficina del profesor Luis Quesada Quirós",
+            directions = "De frente al ascensor, gire a la derecha y siga hasta el fondo del pasillo. Doble a la derecha y pase la oficina 6-4. La oficina 6-3 es la siguiente puerta a su izquierda.",
+            gestureAnimationRes = R.raw.point_right,
+            aliases = listOf("Luis Quesada", "Luis Quesada Quirós", "profesor Luis Quesada", "oficina de Luis Quesada", "oficina 6-3", "6-3"),
+            routes = listOf(MapRoute("6-3", listOf(MapPoint(0.7125f, 0.4871f), MapPoint(0.7125f, 0.52688f), MapPoint(0.85f, 0.52688f), MapPoint(0.85f, 0.68602f), MapPoint(0.87938f, 0.68602f))))
+        ),
+        Place(
+            id = "kryscia_6_4",
+            name = "Oficina de la profesora Kryscia Ramírez Benavides",
+            shortName = null,
+            roomNumber = "6-4",
+            floor = 6,
+            group = null,
+            mapImageRes = R.drawable.mapa_piso_6,
+            description = "Oficina de la profesora Kryscia Ramírez Benavides",
+            directions = "De frente al ascensor, gire a la derecha y siga hasta el fondo del pasillo. Doble a la derecha. La oficina 6-4 es la primera puerta a su izquierda.",
+            gestureAnimationRes = R.raw.point_right,
+            aliases = listOf("Kryscia Ramírez", "Kryscia Ramírez Benavides", "profesora Kryscia", "oficina de Kryscia", "oficina 6-4", "6-4"),
+            routes = listOf(MapRoute("6-4", listOf(MapPoint(0.7125f, 0.4871f), MapPoint(0.7125f, 0.52688f), MapPoint(0.85f, 0.52688f), MapPoint(0.85f, 0.62473f), MapPoint(0.87938f, 0.62473f))))
+        ),
+        Place(
+            id = "gustavo_lopez_6_5",
+            name = "Oficina del profesor Gustavo López Herrera",
+            shortName = null,
+            roomNumber = "6-5",
+            floor = 6,
+            group = null,
+            mapImageRes = R.drawable.mapa_piso_6,
+            description = "Oficina del profesor Gustavo López Herrera",
+            directions = "De frente al ascensor, gire a la derecha y siga hasta el fondo del pasillo. La oficina 6-5 queda al frente, antes del giro hacia las otras oficinas.",
+            gestureAnimationRes = R.raw.point_right,
+            aliases = listOf("Gustavo López", "Gustavo López Herrera", "profesor Gustavo López", "oficina de Gustavo López", "oficina 6-5", "6-5"),
+            routes = listOf(MapRoute("6-5", listOf(MapPoint(0.7125f, 0.4871f), MapPoint(0.7125f, 0.52688f), MapPoint(0.85f, 0.52688f), MapPoint(0.85f, 0.49355f), MapPoint(0.87938f, 0.49355f))))
+        ),
+        Place(
+            id = "aula_6_6",
+            name = "Aula de Posgrado",
+            shortName = "Aula",
+            roomNumber = "6-6",
+            floor = 6,
+            group = null,
+            mapImageRes = R.drawable.mapa_piso_6,
+            description = "Aula de Posgrado",
+            directions = "De frente al ascensor, gire a la derecha. El aula 6-6 es la primera puerta a su izquierda.",
+            gestureAnimationRes = R.raw.point_right,
+            aliases = listOf("aula 6-6", "aula de posgrado", "aula del posgrado", "salón 6-6", "6-6"),
+            routes = listOf(MapRoute("6-6", listOf(MapPoint(0.7125f, 0.4871f), MapPoint(0.7125f, 0.52688f), MapPoint(0.7775f, 0.52688f), MapPoint(0.7775f, 0.34086f))))
+        ),
+        Place(
+            id = "posgrado_6",
+            name = "Oficinas administrativas de Posgrado en Computación e Informática",
+            shortName = "Oficinas de Posgrado",
+            roomNumber = null,
+            floor = 6,
+            group = null,
+            mapImageRes = R.drawable.mapa_piso_6,
+            description = "Oficinas administrativas de Posgrado en Computación e Informática",
+            directions = "De frente al ascensor, gire a la izquierda y siga por el pasillo. Pase los baños y cruce las puertas dobles para llegar al sector de las oficinas administrativas de Posgrado.",
+            gestureAnimationRes = R.raw.point_left,
+            aliases = listOf("posgrado", "PPCI", "oficinas del posgrado", "oficinas administrativas de posgrado", "secretaría de posgrado", "administración del posgrado", "posgrado en computación e informática"),
+            routes = listOf(MapRoute("Posgrado", listOf(MapPoint(0.7125f, 0.4871f), MapPoint(0.7125f, 0.52688f), MapPoint(0.40625f, 0.52688f))))
         )
     )
+
+    private val byAlias: Map<String, List<Place>> = places
+        .flatMap { place -> (listOf(place.name) + place.aliases).map { RequestPolicy.normalize(it) to place } }
+        .groupBy({ it.first }, { it.second })
+        .mapValues { (_, matches) -> matches.distinctBy { it.id } }
+
+    fun exactMatches(request: String): List<Place> =
+        byAlias[RequestPolicy.normalize(request)] ?: byAlias[Floors.withoutFloor(request)].orEmpty()
 }

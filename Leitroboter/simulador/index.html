@@ -31,12 +31,12 @@ h1{margin:0;font-weight:600;text-align:center}
 p.body{margin:0;color:var(--body);text-align:center}
 /* screen_list.xml */
 .list{padding:16px 32px 8px}
-.grid{flex:1;width:100%;display:flex;flex-direction:column;min-height:0}
-.row{display:flex;flex:1 1 0;min-height:0}
+.grid-scroll{flex:1;width:100%;min-height:0;overflow-y:auto}
+.grid{width:100%;min-height:100%;display:flex;flex-direction:column;justify-content:center;margin:auto}
+.row{display:flex}
 .row>*{flex:1 1 0;margin:4px;min-width:0}
 .row>span{padding:0 12px}
-.grid button.btn{height:auto;min-height:0;min-width:0;padding:0 12px;line-height:1.2;overflow:hidden}
-.grid button.btn span{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.grid button.btn{height:auto;min-height:52px;min-width:0;padding:7px 12px;line-height:1.2;overflow-wrap:anywhere}
 .bottom{display:flex;width:100%;padding:0 128px;margin-top:8px}
 .bottom button.btn{flex:1;min-width:0;min-height:var(--bottom-button-height);font-size:16px;margin:0 8px}
 .card{background:var(--card);border:1px solid var(--border);border-radius:20px}
@@ -56,7 +56,7 @@ p.body{margin:0;color:var(--body);text-align:center}
 <script>
 const PEPPER_FLOORS = [1,2,3,4,5,6];
 const OFFICE_PREFIXES = ['Oficina del profesor ', 'Oficina de la profesora '];
-const GRID_SIDE_PADDING = {2:200, 3:80, 4:0};
+const GRID_MAX_WIDTH = {2:760, 3:1040};
 let places = [], pepperFloor = 4;
 const tablet = document.getElementById('tablet');
 
@@ -89,8 +89,8 @@ const NUM = {uno:1,dos:2,tres:3,cuatro:4,cinco:5,seis:6};
 function requestedFloor(text) {
   const w = norm(text).split(' ');
   for (let i = 0; i < w.length; i++) if (w[i] === 'piso' || w[i] === 'nivel') {
-    const n = w[i+1] && (NUM[w[i+1]] || parseInt(w[i+1])); if (n >= 1 && n <= 6) return n;
-    const b = w[i-1] && (ORD[w[i-1]] || NUM[w[i-1]] || parseInt(w[i-1])); if (b >= 1 && b <= 6) return b;
+    const n = w[i+1] && (NUM[w[i+1]] || ORD[w[i+1]] || parseInt(w[i+1])); if (n >= 1 && n <= 99) return n;
+    const b = w[i-1] && (ORD[w[i-1]] || NUM[w[i-1]] || parseInt(w[i-1])); if (b >= 1 && b <= 99) return b;
   }
   return null;
 }
@@ -153,20 +153,63 @@ function search(text, status) {
 }
 function resolvePlace(place, request) {
   let cands = place.group ? places.filter(p => p.group === place.group) : [place];
+  const query = norm(request).replace(/\b(?:(?:en|de|del|al) )?(?:el )?(?:(?:piso|nivel) (?:[0-9]+|uno|dos|tres|cuatro|cinco|seis)|(?:[0-9]+|primer|primero|segundo|tercer|tercero|cuarto|quinto|sexto) (?:piso|nivel))\b/g, '').trim();
+  const exact = cands.filter(p => [p.name, ...p.aliases].some(a => norm(a) === query));
+  if (exact.length === 1) cands = exact;
+  const room = /\b([1-6])-([0-9]{1,2})\b/.exec(request);
+  if (room) cands = cands.filter(p => p.roomNumber === `${room[1]}-${room[2]}`);
   const f = requestedFloor(request);
-  if (f) { const onFloor = cands.filter(p => p.floor === f); if (onFloor.length) cands = onFloor; }
+  if (f) cands = cands.filter(p => p.floor === f);
+  if (!cands.length) return showNotFound(f);
   cands.sort((a, b) => a.floor - b.floor);
   if (cands.length === 1) showPlace(cands[0]); else showFloorChoice(cands, request);
 }
 
+function routeMap(p) {
+  const map = el('div', {style:'position:relative;flex:1;min-height:0;width:100%;margin-top:4px'});
+  const image = el('img', {src:`maps/${p.map}.svg`,style:'position:absolute;width:100%;height:100%;object-fit:contain'});
+  map.append(image);
+  image.onload = () => {
+    const w = image.naturalWidth || 1400;
+    const h = image.naturalHeight || 800;
+    const unit = w / 1400;
+    const svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+    svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+    svg.style.cssText='position:absolute;width:100%;height:100%';
+    const shape = (tag, attrs) => {
+      const node=document.createElementNS(svg.namespaceURI,tag);
+      Object.entries(attrs).forEach(([key,value])=>node.setAttribute(key,value));
+      svg.append(node); return node;
+    };
+    const label = (text,x,y,color) => {
+      const node=shape('text',{x,y:Math.max(26*unit,y-18*unit),fill:color,'font-size':23*unit,'font-family':'Poppins,sans-serif','font-weight':600,'text-anchor':'middle',stroke:'white','stroke-width':7*unit,'paint-order':'stroke'});
+      node.textContent=text;
+    };
+    for (const route of p.routes) {
+      const points=route.points.map(([x,y])=>[x*w,y*h]);
+      for (const [stroke,width] of [['white',12],['#169247',7]]) shape('polyline',{points:points.map(p=>p.join(',')).join(' '),fill:'none',stroke,'stroke-width':width*unit,'stroke-linecap':'round','stroke-linejoin':'round'});
+      if(points.length>1) {
+        const [x,y]=points.at(-1),[px,py]=points.at(-2),angle=Math.atan2(y-py,x-px);
+        shape('polygon',{points:[[x,y],[x-17*unit*Math.cos(angle-.5),y-17*unit*Math.sin(angle-.5)],[x-17*unit*Math.cos(angle+.5),y-17*unit*Math.sin(angle+.5)]].map(p=>p.join(',')).join(' '),fill:'#169247'});
+        label(route.label,x,y,'#a32321');
+      }
+    }
+    const [x,y]=p.routes[0].points[0];
+    shape('circle',{cx:x*w,cy:y*h,r:9*unit,fill:'#1c60c6',stroke:'white','stroke-width':3*unit});
+    label('Ascensor',x*w,y*h,'#1c60c6');
+    map.append(svg);
+  };
+  return map;
+}
+
 /* ---------- Mapa (screen_place.xml) ---------- */
 function showPlace(p) {
-  const directions = p.directions;
+  const directions = p.floor === pepperFloor ? p.directions : `Estas indicaciones empiezan frente al ascensor del piso ${p.floor}. ${p.directions}`;
   const repeats = norm(p.description).replace(/\.$/, '') === norm(p.name);
   const text = [repeats ? '' : p.description, directions].filter(Boolean).join('\n');
   show(el('div', {class: 'screen', style: 'padding:8px 32px'},
     el('h1', {style: 'font-size:22px'}, `${title(p)} · Piso ${p.floor}`),
-    el('img', {src: `maps/${p.map}.jpg`, style: 'flex:1;min-height:0;width:100%;object-fit:contain;margin-top:4px'}),
+    routeMap(p),
     el('div', {class: 'card', style: 'width:100%;margin-top:6px;padding:6px 16px;font-size:14px;color:var(--body);white-space:pre-line'}, text),
     el('div', {class: 'bottom', style: 'padding:0;margin-top:6px'},
       btn('Consultar otra ubicación', () => showSearch(), {style: 'min-height:52px;font-size:18px'}),
@@ -174,11 +217,11 @@ function showPlace(p) {
   ));
   say(`Usted quiere ir a ${p.name}${p.floor !== pepperFloor ? `, en el piso ${p.floor}` : ''}. ${directions}`);
 }
-function showNotFound() {
+function showNotFound(floor = null) {
   show(el('div', {class: 'screen', style: 'padding:8px 32px'},
     el('h1', {style: 'font-size:22px'}, 'No encontré el lugar que pediste'),
     el('img', {src: 'maps/mapa_default.jpg', style: 'flex:1;min-height:0;width:100%;object-fit:contain;margin-top:4px'}),
-    el('div', {class: 'card', style: 'width:100%;margin-top:6px;padding:6px 16px;font-size:14px;color:var(--body)'}, 'Prueba con otro lugar del anexo de la ECCI, o explora los lugares por piso.'),
+    el('div', {class: 'card', style: 'width:100%;margin-top:6px;padding:6px 16px;font-size:14px;color:var(--body)'}, floor ? `No tengo ese lugar registrado en el piso ${floor}. Puedes explorar los lugares disponibles por piso.` : 'Prueba con otro lugar del anexo de la ECCI, o explora los lugares por piso.'),
     el('div', {class: 'bottom', style: 'padding:0;margin-top:6px'},
       btn('Consultar otra ubicación', () => showSearch(), {style: 'min-height:52px;font-size:18px'}),
       btn('Regresar al menú', showMenu, {style: 'min-height:52px;font-size:18px'}))
@@ -187,25 +230,19 @@ function showNotFound() {
 
 /* ---------- Listas en cuadrícula (screen_list.xml + item_list_button.xml) ---------- */
 const GRID_TEXT = {2: 18, 3: 16, 4: 14};   // MainActivity.GRID_TEXT_SP
-const GRID_ROWS = 7;                       // MainActivity.GRID_ROWS
 function showList(t, sub, options, secondary, speech) {
   const columns = options.length <= 6 ? 2 : options.length <= 12 ? 3 : 4;
-  const grid = el('div', {class: 'grid', style: `padding:0 ${GRID_SIDE_PADDING[columns]}px`});
-  const rows = Math.ceil(options.length / columns);
-  const spacer = Math.max(0, GRID_ROWS - rows) / 2;
-  const addSpacer = () => { if (spacer) grid.append(el('div', {style: `flex:${spacer} 1 0`})); };
-  addSpacer();
+  const grid = el('div', {class: 'grid', style: `max-width:${GRID_MAX_WIDTH[columns] || 1216}px`});
   for (let i = 0; i < options.length; i += columns) {
     const chunk = options.slice(i, i + columns);
     grid.append(el('div', {class: 'row'},
       chunk.map(o => btn(el('span', {}, o.text), o.onClick, {style: `font-size:${GRID_TEXT[columns]}px`, ...(o.enabled === false ? {disabled: ''} : {})})),
       Array.from({length: columns - chunk.length}, () => el('span'))));
   }
-  addSpacer();
   show(el('div', {class: 'screen list'},
     el('h1', {style: 'font-size:28px;width:100%'}, t),
     el('p', {class: 'body', style: 'font-size:16px;margin:4px 0 8px'}, sub),
-    grid,
+    el('div', {class: 'grid-scroll'}, grid),
     el('div', {class: 'bottom'}, btn(secondary[0], secondary[1]), btn('Regresar al menú', showMenu))
   ));
   say(speech);

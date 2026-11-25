@@ -27,14 +27,19 @@
         android:gravity="center"
         android:textSize="16sp" />
 
-    <!-- Cuadrícula sin desplazamiento: MainActivity agrega las filas, centradas en el alto. -->
-    <LinearLayout
-        android:id="@+id/listContainer"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:gravity="center_vertical"
-        android:orientation="vertical" />
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:id="@+id/listContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="vertical" />
+    </ScrollView>
 
     <LinearLayout
         android:layout_width="match_parent"

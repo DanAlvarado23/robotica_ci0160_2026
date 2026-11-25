@@ -33,6 +33,7 @@ class ConsecutiveSearchTest {
                 assertEquals("", it.findViewById<EditText>(R.id.placeInput).text.toString())
             }
             searchExact(second)
+            onView(withText("Piso 4 · Baños")).perform(click())
             onView(withId(R.id.placeName)).check(matches(withText(displayName(second))))
             onView(withId(R.id.backButton)).perform(click())
             onView(withId(R.id.searchButton)).check(matches(isDisplayed()))
@@ -54,6 +55,7 @@ class ConsecutiveSearchTest {
             onView(withId(R.id.newSearchButton)).perform(click())
             onView(withId(R.id.placeInput)).check(matches(withText("")))
             searchExact(PlacesCatalog.places.first { it.id == "banos" })
+            onView(withText("Piso 4 · Baños")).perform(click())
             onView(withId(R.id.newSearchButton)).check(matches(isDisplayed()))
         }
     }
@@ -64,5 +66,5 @@ class ConsecutiveSearchTest {
     }
 
     private fun displayName(place: Place): String =
-        if (place.roomNumber != null) "${place.name} (${place.roomNumber})" else place.name
+        (if (place.roomNumber != null) "${place.name} (${place.roomNumber})" else place.name) + " · Piso ${place.floor}"
 }

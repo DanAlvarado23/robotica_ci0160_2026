@@ -38,17 +38,39 @@ object Floors {
     }
 
     private fun number(word: String): Int? =
-        (word.toIntOrNull() ?: cardinals[word] ?: ordinals[word])?.takeIf { it in ALL }
+        (word.toIntOrNull() ?: cardinals[word] ?: ordinals[word])?.takeIf { it in 1..99 }
+
+    private val floorNumberWords = "(?:[0-9]{1,2}|${(cardinals.keys + ordinals.keys).joinToString("|")})"
+    private val floorMention = Regex(
+        "\\b(?:(?:en|de|del|al) )?(?:el )?(?:(?:piso|nivel) $floorNumberWords|$floorNumberWords (?:piso|nivel))\\b"
+    )
+
+    fun withoutFloor(request: String): String =
+        RequestPolicy.normalize(request).replace(floorMention, " ")
+            .replace(Regex("\\s+"), " ").trim()
 
     /**
      * Lugares entre los que la persona debe elegir piso. Si el lugar es único o la persona dijo
      * el piso, la lista tiene un solo lugar.
      */
     fun candidates(place: Place, request: String, catalog: List<Place>): List<Place> {
-        val group = place.group ?: return listOf(place)
-        val sameGroup = catalog.filter { it.group == group }.sortedBy { it.floor }
-        val floor = requestedFloor(request) ?: return sameGroup
-        return sameGroup.filter { it.floor == floor }.ifEmpty { sameGroup }
+        val sameGroup = if (place.group == null) listOf(place)
+            else catalog.filter { it.group == place.group }.sortedBy { it.floor }
+        val query = withoutFloor(request)
+        val exact = sameGroup.filter { candidate ->
+            RequestPolicy.normalize(candidate.name) == query ||
+                candidate.aliases.any { RequestPolicy.normalize(it) == query }
+        }
+        val room = Regex("\\b([1-6])\\s*[-–]\\s*([0-9]{1,2})\\b").find(request)?.let {
+            "${it.groupValues[1]} ${it.groupValues[2]}"
+        }
+        val candidates = when {
+            exact.size == 1 -> exact
+            room != null -> sameGroup.filter { RequestPolicy.normalize(it.roomNumber.orEmpty()) == room }
+            else -> sameGroup
+        }
+        val floor = requestedFloor(request) ?: return candidates
+        return candidates.filter { it.floor == floor }
     }
 
     /** Coincidencias exactas de varios pisos del mismo grupo; null si no son un solo grupo. */

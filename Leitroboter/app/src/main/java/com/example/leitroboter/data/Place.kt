@@ -17,5 +17,6 @@ data class Place(
     val directions: String,
     // Animación (res/raw) con la que Pepper señala el primer giro, o null si no hay gesto.
     val gestureAnimationRes: Int?,
-    val aliases: List<String>
+    val aliases: List<String>,
+    val routes: List<MapRoute> = emptyList()
 )

@@ -14,7 +14,6 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.Space
 import android.widget.EditText
-import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.aldebaran.qi.Future as QiFuture
@@ -29,6 +28,7 @@ import com.aldebaran.qi.sdk.design.activity.RobotActivity
 import com.aldebaran.qi.sdk.design.activity.conversationstatus.SpeechBarDisplayStrategy
 import com.example.leitroboter.data.Floors
 import com.example.leitroboter.data.Place
+import com.example.leitroboter.data.MapRoute
 import com.example.leitroboter.data.PlacesCatalog
 import com.example.leitroboter.matching.DestinationClient
 import com.example.leitroboter.matching.DestinationResult
@@ -61,10 +61,11 @@ class MainActivity : RobotActivity(), RobotLifecycleCallbacks {
     private var voiceCapturePending = false
     private var foreground = false
     @Volatile private var qiContext: QiContext? = null
+    private var pendingMapSpeech = emptyList<SpeechPart>()
     // El estado de voz se modifica en el hilo principal.
     private val speechFutures = mutableSetOf<QiFuture<*>>()
     private var speechEpoch = 0
-    private var speechStartTask: Runnable? = null
+    private var speechTask: Runnable? = null
     private var voiceSilenceTask: Runnable? = null
     private var transcriptPauseTask: Runnable? = null
     private var pendingRequest: Future<*>? = null
@@ -318,8 +319,8 @@ class MainActivity : RobotActivity(), RobotLifecycleCallbacks {
     private fun showTranscriptThenSearch(transcript: String) {
         placeInput?.setText(transcript)
         placeInput?.setSelection(transcript.length)
-        statusText?.setText(R.string.voice_heard)
         setBusy(true)
+        statusText?.setText(R.string.voice_heard)
         val generation = requestGeneration
         val task = Runnable {
             transcriptPauseTask = null
@@ -338,11 +339,7 @@ class MainActivity : RobotActivity(), RobotLifecycleCallbacks {
             return
         }
         stopSpeaking()
-        val normalized = RequestPolicy.normalize(request)
-        val exactMatches = PlacesCatalog.places.filter { place ->
-            RequestPolicy.normalize(place.name) == normalized ||
-                place.aliases.any { RequestPolicy.normalize(it) == normalized }
-        }
+        val exactMatches = PlacesCatalog.exactMatches(request)
         // Un mismo nombre puede estar en varios pisos (grupo): se pregunta el piso si hace falta.
         if (exactMatches.size == 1 || (exactMatches.size > 1 && Floors.groupOf(exactMatches) != null)) {
             resolvePlace(exactMatches.first(), request)
@@ -379,7 +376,7 @@ class MainActivity : RobotActivity(), RobotLifecycleCallbacks {
                     val place = PlacesCatalog.places.firstOrNull { it.id == result.id }
                     if (place == null) showNotFound() else resolvePlace(place, request)
                 }
-                DestinationResult.NoMatch -> showNotFound()
+                DestinationResult.NoMatch -> showNotFound(Floors.requestedFloor(request))
                 DestinationResult.Failure -> statusText?.setText(R.string.service_unavailable)
             }
         }
@@ -396,18 +393,23 @@ class MainActivity : RobotActivity(), RobotLifecycleCallbacks {
     /** Muestra el lugar, o la lista de pisos si el lugar se repite y no se dijo en cuál piso. */
     private fun resolvePlace(place: Place, request: String) {
         val candidates = Floors.candidates(place, request, PlacesCatalog.places)
-        if (candidates.size == 1) showPlace(candidates.single()) else showFloorChoice(candidates, request)
+        when (candidates.size) {
+            0 -> showNotFound(Floors.requestedFloor(request))
+            1 -> showPlace(candidates.single())
+            else -> showFloorChoice(candidates, request)
+        }
     }
 
     private fun showPlace(place: Place) {
         lastPlaceId = place.id
         val otherFloor = place.floor != pepperFloor
-        // En otro piso, el título y Pepper ya dicen el piso; las indicaciones son desde el ascensor de ese piso.
-        val directions = place.directions
+        val routeStart = if (otherFloor) getString(R.string.directions_other_floor, place.floor) else ""
+        val directions = joinSentences(routeStart, place.directions)
         val title = if (place.roomNumber != null) "${place.name} (${place.roomNumber})" else place.name
         showMap(
             placeName = "$title · ${getString(R.string.floor_label, place.floor)}",
             mapImage = place.mapImageRes,
+            routes = place.routes,
             // El nombre ya está en el título; la descripción solo se muestra si agrega algo.
             description = listOf(
                 if (repeatsName(place.description, place.name)) "" else place.description,
@@ -417,11 +419,10 @@ class MainActivity : RobotActivity(), RobotLifecycleCallbacks {
                 SpeechPart(joinSentences(
                     if (otherFloor) "Usted quiere ir a ${place.name}, en el piso ${place.floor}"
                     else "Usted quiere ir a ${place.name}",
-                    if (repeatsName(place.description, place.name)) "" else place.description
+                    if (repeatsName(place.description, place.name)) "" else place.description,
+                    routeStart
                 )),
-                // Pepper señala el primer giro mientras dice las indicaciones. En otro piso no,
-                // porque el giro se hace frente al ascensor de ese piso, no aquí.
-                SpeechPart(directions, if (otherFloor) null else place.gestureAnimationRes)
+                SpeechPart(place.directions, place.gestureAnimationRes)
             )
         )
     }
@@ -505,15 +506,6 @@ class MainActivity : RobotActivity(), RobotLifecycleCallbacks {
         if (speech.isNotBlank()) say(speech)
     }
 
-    /**
-     * Acomoda las opciones en una cuadrícula que cabe en la pantalla sin deslizar:
-     * hasta 6 opciones en 2 columnas (los pisos quedan en 2 x 3), hasta 12 en 3 y más en 4
-     * (el piso 3, con 26 lugares, queda en 4 x 7).
-     *
-     * Para que todas las pantallas se vean iguales, el alto se divide siempre en
-     * [GRID_ROWS] filas del mismo tamaño; si hay menos filas, el resto queda como espacio
-     * arriba y abajo. Así todos los botones miden lo mismo en cualquier piso.
-     */
     private fun fillGrid(grid: LinearLayout, options: List<ListOption>) {
         val columns = when {
             options.size <= 6 -> 2
@@ -521,18 +513,12 @@ class MainActivity : RobotActivity(), RobotLifecycleCallbacks {
             else -> 4
         }
         val density = resources.displayMetrics.density
-        val sidePadding = ((GRID_SIDE_PADDING_DP[columns] ?: 0) * density).toInt()
+        val width = resources.configuration.screenWidthDp
+        val maxWidth = GRID_MAX_WIDTH_DP[columns] ?: width
+        val sidePadding = ((width - 64 - maxWidth).coerceAtLeast(0) * density / 2).toInt()
         grid.setPadding(sidePadding, 0, sidePadding, 0)
         val textSize = GRID_TEXT_SP[columns] ?: 14f
-        val rows = options.chunked(columns)
-        val spacerWeight = (GRID_ROWS - rows.size).coerceAtLeast(0) / 2f
-        fun addSpacer() {
-            if (spacerWeight > 0f) {
-                grid.addView(Space(this), LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, spacerWeight))
-            }
-        }
-        addSpacer()
-        for (rowOptions in rows) {
+        for (rowOptions in options.chunked(columns)) {
             val row = LinearLayout(this).apply {
                 orientation = LinearLayout.HORIZONTAL
                 // Sin esto, Android alinea los botones por la línea del texto y los desplaza
@@ -552,9 +538,10 @@ class MainActivity : RobotActivity(), RobotLifecycleCallbacks {
             repeat(columns - rowOptions.size) {
                 row.addView(Space(this), LinearLayout.LayoutParams(0, 0, 1f))
             }
-            grid.addView(row, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 1f))
+            grid.addView(row, LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT
+            ))
         }
-        addSpacer()
     }
 
     /** Nombre corto para un botón de la cuadrícula: "3-14 · José Antonio Brenes Carranza".
@@ -566,12 +553,15 @@ class MainActivity : RobotActivity(), RobotLifecycleCallbacks {
         return if (room != null && !name.contains(room)) "$room · $name" else name
     }
 
-    private fun showNotFound() {
+    private fun showNotFound() = showNotFound(null)
+
+    private fun showNotFound(floor: Int?) {
         lastPlaceId = null
         showMap(
             getString(R.string.place_not_found),
             R.drawable.mapa_default,
-            getString(R.string.place_not_found_description)
+            if (floor == null) getString(R.string.place_not_found_description)
+            else getString(R.string.place_not_found_on_floor, floor)
         )
     }
 
@@ -579,7 +569,8 @@ class MainActivity : RobotActivity(), RobotLifecycleCallbacks {
         placeName: String,
         mapImage: Int,
         description: String,
-        speech: List<SpeechPart> = listOf(SpeechPart(description))
+        speech: List<SpeechPart> = listOf(SpeechPart(description)),
+        routes: List<MapRoute> = emptyList()
     ) {
         stopSpeaking()
         cancelPendingRequest()
@@ -590,11 +581,20 @@ class MainActivity : RobotActivity(), RobotLifecycleCallbacks {
         setContentView(R.layout.screen_place)
         // El servidor devuelve un ID; el texto y el mapa se obtienen del catálogo local.
         findViewById<TextView>(R.id.placeName).text = placeName
-        findViewById<ImageView>(R.id.placeMap).setImageResource(mapImage)
+        findViewById<RouteMapView>(R.id.placeMap).apply {
+            setImageResource(mapImage)
+            setRoutes(routes)
+        }
         findViewById<TextView>(R.id.placeDescription).text = description
         findViewById<Button>(R.id.backButton).setOnClickListener { showMenu() }
         findViewById<Button>(R.id.newSearchButton).setOnClickListener { listenForPlace() }
-        say(speech)
+        pendingMapSpeech = speech
+        speakPendingMap()
+    }
+
+    private fun speakPendingMap() {
+        if (screen != Screen.MAP || pendingMapSpeech.isEmpty() || speechTask != null) return
+        say(pendingMapSpeech) { pendingMapSpeech = emptyList() }
     }
 
     private fun clearSearchViews() {
@@ -649,6 +649,7 @@ class MainActivity : RobotActivity(), RobotLifecycleCallbacks {
     override fun onStart() {
         super.onStart()
         foreground = true
+        speakPendingMap()
         if (screen == Screen.MENU && qiContext != null) say(GREETING)
     }
 
@@ -692,8 +693,10 @@ class MainActivity : RobotActivity(), RobotLifecycleCallbacks {
         Log.i(TAG, "Foco Pepper obtenido")
         this.qiContext = qiContext
         runOnUiThread {
-            if (this.qiContext === qiContext && foreground && screen == Screen.MENU &&
-                !externalVoiceActive && !voiceCapturePending) say(GREETING)
+            if (this.qiContext !== qiContext || !foreground || externalVoiceActive || voiceCapturePending) {
+                return@runOnUiThread
+            }
+            if (screen == Screen.MENU) say(GREETING) else speakPendingMap()
         }
     }
 
@@ -713,7 +716,7 @@ class MainActivity : RobotActivity(), RobotLifecycleCallbacks {
     private fun say(text: String) = say(listOf(SpeechPart(text)))
 
     /** Dice las partes en orden; las animaciones se cancelan junto con la voz. */
-    private fun say(parts: List<SpeechPart>) {
+    private fun say(parts: List<SpeechPart>, onFinished: () -> Unit = {}) {
         stopSpeaking()
         val context = qiContext ?: return
         val pending = parts.filter { it.text.isNotBlank() }
@@ -724,51 +727,86 @@ class MainActivity : RobotActivity(), RobotLifecycleCallbacks {
             override fun run() {
                 if (!canSpeak(epoch, context)) return
                 if (speechFutures.any { !it.isDone }) {
-                    if (System.nanoTime() < deadline) mainHandler.postDelayed(this, 50L)
+                    if (System.nanoTime() < deadline) {
+                        mainHandler.postDelayed(this, 50L)
+                    } else {
+                        speechTask = null
+                        Log.w(TAG, "Pepper sigue ocupado con la indicación anterior")
+                    }
                     return
                 }
-                speechStartTask = null
-                sayPart(pending, 0, epoch, context)
+                sayNextPart(pending.iterator(), epoch, context, onFinished)
             }
         }
-        speechStartTask = startWhenSilent
+        speechTask = startWhenSilent
         mainHandler.post(startWhenSilent)
     }
 
-    private fun sayPart(parts: List<SpeechPart>, index: Int, epoch: Int, context: QiContext) {
-        if (index >= parts.size || !canSpeak(epoch, context)) return
-        val part = parts[index]
+    private fun sayNextPart(
+        parts: Iterator<SpeechPart>,
+        epoch: Int,
+        context: QiContext,
+        onFinished: () -> Unit
+    ) {
+        if (!canSpeak(epoch, context)) return
+        if (!parts.hasNext()) {
+            speechTask = null
+            onFinished()
+            return
+        }
+        val part = parts.next()
+
+        fun continueAfterVoiceError(message: String, error: Throwable) {
+            Log.w(TAG, message, error)
+            part.animationRes?.let { animate(it, context) }
+            sayNextPart(parts, epoch, context, onFinished)
+        }
+
         try {
-            val builder = SayBuilder.with(context).withText(part.text.replace("\n", " "))
-            // Sin gestos automáticos de la voz para que no choquen con la animación.
-            if (part.animationRes != null) builder.withBodyLanguageOption(BodyLanguageOption.DISABLED)
-            val build = builder.buildAsync()
+            val build = SayBuilder.with(context).withText(part.text.replace("\n", " "))
+                .withBodyLanguageOption(BodyLanguageOption.DISABLED)
+                .buildAsync()
             speechFutures.add(build)
             build.thenConsume { completed ->
                 runOnUiThread {
                     speechFutures.remove(build)
-                    if (!canSpeak(epoch, context) || !completed.isSuccess) return@runOnUiThread
-                    try {
-                        part.animationRes?.let { animate(it, context) }
-                        val running = completed.value.async().run()
-                        speechFutures.add(running)
-                        running.thenConsume { completedSpeech ->
-                            if (completedSpeech.hasError()) {
-                                Log.w(TAG, "No se pudo completar la voz de Pepper", completedSpeech.error)
-                            } else if (completedSpeech.isSuccess) {
-                                Log.i(TAG, "Voz de Pepper completada")
-                            }
-                            runOnUiThread {
-                                speechFutures.remove(running)
-                                if (completedSpeech.isSuccess) sayPart(parts, index + 1, epoch, context)
+                    if (!canSpeak(epoch, context)) return@runOnUiThread
+                    if (!completed.isSuccess) {
+                        if (completed.hasError()) {
+                            continueAfterVoiceError("No se pudo preparar la voz de Pepper", completed.error)
+                        } else {
+                            speechTask = null
+                        }
+                        return@runOnUiThread
+                    }
+                    val running = try {
+                        completed.value.async().run()
+                    } catch (error: Exception) {
+                        continueAfterVoiceError("No se pudo iniciar la voz de Pepper", error)
+                        return@runOnUiThread
+                    }
+                    speechFutures.add(running)
+                    part.animationRes?.let { animate(it, context) }
+                    running.thenConsume { completedSpeech ->
+                        if (completedSpeech.hasError()) {
+                            Log.w(TAG, "No se pudo completar la voz de Pepper", completedSpeech.error)
+                        } else if (completedSpeech.isSuccess) {
+                            Log.i(TAG, "Voz de Pepper completada")
+                        }
+                        runOnUiThread finishPart@{
+                            speechFutures.remove(running)
+                            if (!canSpeak(epoch, context)) return@finishPart
+                            if (completedSpeech.isSuccess || completedSpeech.hasError()) {
+                                sayNextPart(parts, epoch, context, onFinished)
+                            } else {
+                                speechTask = null
                             }
                         }
-                    } catch (_: Exception) {
                     }
                 }
             }
-        } catch (_: Exception) {
-            // El mapa sigue disponible si falla el servicio de voz.
+        } catch (error: Exception) {
+            continueAfterVoiceError("No se pudo preparar la voz de Pepper", error)
         }
     }
 
@@ -785,8 +823,8 @@ class MainActivity : RobotActivity(), RobotLifecycleCallbacks {
                 if (completed.hasError()) Log.w(TAG, "No se pudo completar el gesto de Pepper", completed.error)
                 runOnUiThread { speechFutures.remove(running) }
             }
-        } catch (_: Exception) {
-            // Sin gesto, Pepper igual dice las indicaciones.
+        } catch (error: Exception) {
+            Log.w(TAG, "No se pudo iniciar el gesto de Pepper", error)
         }
     }
 
@@ -796,8 +834,8 @@ class MainActivity : RobotActivity(), RobotLifecycleCallbacks {
 
     private fun stopSpeaking() {
         speechEpoch++
-        speechStartTask?.let { mainHandler.removeCallbacks(it) }
-        speechStartTask = null
+        speechTask?.let { mainHandler.removeCallbacks(it) }
+        speechTask = null
         // Espera la cancelación de Say antes de habilitar el micrófono.
         speechFutures.filter { !it.isDone }.toList().forEach {
             try { it.requestCancellation() } catch (_: Exception) { }
@@ -829,12 +867,9 @@ class MainActivity : RobotActivity(), RobotLifecycleCallbacks {
 
     private companion object {
         const val TAG = "Leitroboter"
-        /** Margen a cada lado de la cuadrícula según cuántas columnas tiene. */
-        val GRID_SIDE_PADDING_DP = mapOf(2 to 200, 3 to 80, 4 to 0)
+        val GRID_MAX_WIDTH_DP = mapOf(2 to 760, 3 to 1040)
         /** Tamaño de letra de los botones según las columnas: igual en toda la cuadrícula. */
         val GRID_TEXT_SP = mapOf(2 to 18f, 3 to 16f, 4 to 14f)
-        /** Filas en que se divide el alto (las del piso 3, el que tiene más lugares). */
-        const val GRID_ROWS = 7
         val OFFICE_PREFIXES = listOf("Oficina del profesor ", "Oficina de la profesora ")
         const val VOICE_REQUEST = 1001
         /** Tiempo para leer en la barra lo que se entendió antes de mostrar la ruta. */

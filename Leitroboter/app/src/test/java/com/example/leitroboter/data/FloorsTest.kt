@@ -22,7 +22,7 @@ class FloorsTest {
         assertEquals(5, Floors.requestedFloor("quinto nivel"))
         assertEquals(3, Floors.requestedFloor("3er piso"))
         assertNull(Floors.requestedFloor("baños"))
-        assertNull(Floors.requestedFloor("piso 9"))
+        assertEquals(9, Floors.requestedFloor("piso 9"))
         assertNull(Floors.requestedFloor("aula 4-6"))
     }
 
@@ -30,9 +30,30 @@ class FloorsTest {
         val banos = catalog.first()
         assertEquals(listOf("banos_2", "banos", "banos_6"), Floors.candidates(banos, "baños", catalog).map { it.id })
         assertEquals(listOf("banos_6"), Floors.candidates(banos, "baños del sexto piso", catalog).map { it.id })
-        // Un piso que no tiene ese lugar muestra todas las opciones.
-        assertEquals(3, Floors.candidates(banos, "baños del piso 3", catalog).size)
+        assertEquals(emptyList<Place>(), Floors.candidates(banos, "baños del piso 3", catalog))
         assertEquals(listOf("auditorio_1"), Floors.candidates(catalog.last(), "auditorio", catalog).map { it.id })
+    }
+
+    @Test fun doesNotSubstituteAnotherFloorForAUniquePlace() {
+        assertEquals(emptyList<Place>(), Floors.candidates(catalog.last(), "auditorio del piso 6", catalog))
+        assertEquals(emptyList<Place>(), Floors.candidates(catalog.first(), "baños del piso 9", catalog))
+    }
+
+    @Test fun exactRoomDoesNotAskForItsFloorAgain() {
+        val fourth = place("pi_4", 4, "pi").copy(roomNumber = "4-6", aliases = listOf("pi", "4-6", "46"))
+        val third = place("pi_3", 3, "pi").copy(roomNumber = "3-5", aliases = listOf("pi", "3-5", "35"))
+        val places = listOf(third, fourth)
+        for (request in listOf("4-6", "46", "quiero ir al aula 4-6")) {
+            assertEquals(listOf(fourth), Floors.candidates(fourth, request, places))
+        }
+        assertEquals(emptyList<Place>(), Floors.candidates(fourth, "4-6 del piso 3", places))
+    }
+
+    @Test fun stripsOnlyTheFloorMentionFromAnExactSearch() {
+        assertEquals("banos", Floors.withoutFloor("Baños del piso dos"))
+        assertEquals("banos", Floors.withoutFloor("Baños en el segundo piso"))
+        assertEquals("4 6", Floors.withoutFloor("4-6"))
+        assertEquals("idf", Floors.withoutFloor("IDF del piso 5"))
     }
 
     @Test fun exactMatchesFromOneGroupOnly() {

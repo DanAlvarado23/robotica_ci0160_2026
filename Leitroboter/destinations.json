@@ -6,7 +6,7 @@
     "roomNumber": "4-6",
     "floor": 4,
     "group": "laboratorio_pi",
-    "map": "mapa_4_6",
+    "map": "mapa_piso_4",
     "description": "Laboratorio del PI de Ingeniería de Software y Bases de Datos.",
     "directions": "De frente al ascensor, gire a la derecha. El laboratorio 4-6 es la primera puerta a su izquierda, la puerta grande al lado de la oficina 4-5.",
     "gesture": "right",
@@ -29,6 +29,17 @@
       "oficina 4-6",
       "cuatro seis",
       "aula cuatro seis"
+    ],
+    "routes": [
+      {
+        "label": "4-6",
+        "points": [
+          [0.7193, 0.49692],
+          [0.72105, 0.53538],
+          [0.79386, 0.53231],
+          [0.79386, 0.35538]
+        ]
+      }
     ]
   },
   {
@@ -36,7 +47,7 @@
     "name": "Oficina de la profesora Gabriela Barrantes Sliesarieva",
     "roomNumber": "4-5",
     "floor": 4,
-    "map": "mapa_4_5",
+    "map": "mapa_piso_4",
     "description": "La profesora Gabriela es la directora de la escuela.",
     "directions": "De frente al ascensor, gire a la derecha y camine unos pasos. La oficina 4-5 es la puerta que queda de frente.",
     "gesture": "right",
@@ -60,6 +71,18 @@
       "gabi",
       "oficina gaby",
       "cuatro cinco"
+    ],
+    "routes": [
+      {
+        "label": "4-5",
+        "points": [
+          [0.7193, 0.49692],
+          [0.72105, 0.53538],
+          [0.86316, 0.53538],
+          [0.86667, 0.50462],
+          [0.89123, 0.50462]
+        ]
+      }
     ]
   },
   {
@@ -67,7 +90,7 @@
     "name": "Oficina del profesor Luis Gustavo Esquivel Quirós",
     "roomNumber": "4-4",
     "floor": 4,
-    "map": "mapa_4_4",
+    "map": "mapa_piso_4",
     "description": "Oficina del profesor Luis Gustavo.",
     "directions": "De frente al ascensor, gire a la derecha y camine unos pasos hasta la oficina 4-5. Ahí doble a la derecha. La oficina 4-4 es la primera puerta a su izquierda.",
     "gesture": "right",
@@ -89,6 +112,18 @@
       "luis gustavo esp",
       "oficina luis gustavo esp",
       "cuatro cuatro"
+    ],
+    "routes": [
+      {
+        "label": "4-4",
+        "points": [
+          [0.7193, 0.49692],
+          [0.72105, 0.53538],
+          [0.86316, 0.53538],
+          [0.86491, 0.63385],
+          [0.89298, 0.63692]
+        ]
+      }
     ]
   },
   {
@@ -96,7 +131,7 @@
     "name": "Oficina del profesor Edgar Casasola Murillo",
     "roomNumber": "4-3",
     "floor": 4,
-    "map": "mapa_4_3",
+    "map": "mapa_piso_4",
     "description": "Oficina del profesor Casasola.",
     "directions": "De frente al ascensor, gire a la derecha y camine unos pasos hasta la oficina 4-5. Ahí doble a la derecha. La oficina 4-3 es la segunda puerta a su izquierda, después de la 4-4, en la esquina.",
     "gesture": "right",
@@ -114,6 +149,18 @@
       "aula 4-3",
       "oficina casasola",
       "cuatro tres"
+    ],
+    "routes": [
+      {
+        "label": "4-3",
+        "points": [
+          [0.7193, 0.49692],
+          [0.72105, 0.53538],
+          [0.86316, 0.53538],
+          [0.86491, 0.69538],
+          [0.89123, 0.69846]
+        ]
+      }
     ]
   },
   {
@@ -121,7 +168,7 @@
     "name": "Sala de consultas",
     "roomNumber": "4-2",
     "floor": 4,
-    "map": "mapa_4_2",
+    "map": "mapa_piso_4",
     "description": "Para consultas entre profesores y estudiantes.",
     "directions": "De frente al ascensor, gire a la derecha y camine unos pasos hasta la oficina 4-5. Ahí doble a la derecha. La sala 4-2 es la primera puerta a su derecha, frente a la oficina 4-4.",
     "gesture": "right",
@@ -138,6 +185,18 @@
       "aula 4-2",
       "oficina 4-2",
       "cuatro dos"
+    ],
+    "routes": [
+      {
+        "label": "4-2",
+        "points": [
+          [0.7193, 0.49692],
+          [0.72105, 0.53538],
+          [0.86316, 0.53538],
+          [0.86491, 0.63385],
+          [0.83333, 0.63692]
+        ]
+      }
     ]
   },
   {
@@ -146,7 +205,7 @@
     "roomNumber": null,
     "floor": 4,
     "group": "sala_estudio_individual",
-    "map": "mapa_sala_estudio",
+    "map": "mapa_piso_4",
     "description": "Sala individual de estudio.",
     "directions": "De frente al ascensor, gire a la izquierda y cruce las puertas de vidrio. Es la cuarta puerta a su izquierda, al lado de la sala 4-19.",
     "gesture": "left",
@@ -156,6 +215,17 @@
       "sala de estudio",
       "estudio individual",
       "estudiar"
+    ],
+    "routes": [
+      {
+        "label": "Estudio",
+        "points": [
+          [0.7193, 0.49692],
+          [0.71754, 0.53538],
+          [0.35263, 0.53538],
+          [0.35088, 0.61385]
+        ]
+      }
     ]
   },
   {
@@ -163,7 +233,7 @@
     "name": "Comedor de profesores",
     "roomNumber": "4-20",
     "floor": 4,
-    "map": "mapa_4_20",
+    "map": "mapa_piso_4",
     "description": "Comedor de profesores.",
     "directions": "De frente al ascensor, gire a la izquierda y cruce las puertas de vidrio. El comedor (4-20) es la segunda puerta a su izquierda, al lado del cuarto de impresora.",
     "gesture": "left",
@@ -179,6 +249,17 @@
       "comedor profes",
       "comedor profesores",
       "cuatro veinte"
+    ],
+    "routes": [
+      {
+        "label": "4-20",
+        "points": [
+          [0.7193, 0.49692],
+          [0.71754, 0.53538],
+          [0.42982, 0.53538],
+          [0.42807, 0.79077]
+        ]
+      }
     ]
   },
   {
@@ -188,7 +269,7 @@
     "roomNumber": "4-19",
     "floor": 4,
     "group": "area_comun",
-    "map": "mapa_4_19",
+    "map": "mapa_piso_4",
     "description": "Área común y sala de estudiantes.",
     "directions": "De frente al ascensor, gire a la izquierda y cruce las puertas de vidrio. La sala 4-19 es la tercera puerta a su izquierda, al lado del comedor.",
     "gesture": "left",
@@ -206,6 +287,17 @@
       "sala estudiantes",
       "sala est",
       "cuatro diecinueve"
+    ],
+    "routes": [
+      {
+        "label": "4-19",
+        "points": [
+          [0.7193, 0.49692],
+          [0.71754, 0.53538],
+          [0.39035, 0.53538],
+          [0.3886, 0.79538]
+        ]
+      }
     ]
   },
   {
@@ -213,7 +305,7 @@
     "name": "Cuarto de impresora",
     "roomNumber": "4-18",
     "floor": 4,
-    "map": "mapa_4_18",
+    "map": "mapa_piso_4",
     "description": "Cuarto de la impresora.",
     "directions": "De frente al ascensor, gire a la izquierda y cruce las puertas de vidrio. El cuarto de impresora (4-18) es la primera puerta a su izquierda.",
     "gesture": "left",
@@ -229,6 +321,17 @@
       "oficina 4-18",
       "impresión",
       "cuatro dieciocho"
+    ],
+    "routes": [
+      {
+        "label": "4-18",
+        "points": [
+          [0.7193, 0.49692],
+          [0.71754, 0.53538],
+          [0.45789, 0.53538],
+          [0.45702, 0.62]
+        ]
+      }
     ]
   },
   {
@@ -236,7 +339,7 @@
     "name": "Laboratorios de Robótica",
     "roomNumber": "4-15 y 4-17",
     "floor": 4,
-    "map": "mapa_laboratorios_robotica",
+    "map": "mapa_piso_4",
     "description": "En este piso hay dos laboratorios de robótica: la 4-15 (Robótica y énfasis en Ingeniería de Software) y la 4-17 (Robótica Kryscia y énfasis en Ciencias de la Computación).",
     "directions": "De frente al ascensor, gire a la izquierda y cruce las puertas de vidrio. La 4-15 es la segunda puerta a su derecha y la 4-17 es la última sala al fondo a su izquierda, frente a la 4-15.",
     "gesture": "left",
@@ -248,6 +351,26 @@
       "aula de robotica",
       "aula robotica",
       "laboratorio robotica"
+    ],
+    "routes": [
+      {
+        "label": "4-15",
+        "points": [
+          [0.7193, 0.49692],
+          [0.71754, 0.53538],
+          [0.2886, 0.53538],
+          [0.28772, 0.46462]
+        ]
+      },
+      {
+        "label": "4-17",
+        "points": [
+          [0.7193, 0.49692],
+          [0.71754, 0.53538],
+          [0.2886, 0.53538],
+          [0.28772, 0.61231]
+        ]
+      }
     ]
   },
   {
@@ -256,7 +379,7 @@
     "shortName": "Lab. Robótica Kryscia",
     "roomNumber": "4-17",
     "floor": 4,
-    "map": "mapa_4_17",
+    "map": "mapa_piso_4",
     "description": "Laboratorio de Robótica Kryscia y del énfasis en Ciencias de la Computación.",
     "directions": "De frente al ascensor, gire a la izquierda, cruce las puertas de vidrio y siga hasta el fondo del pasillo. El laboratorio 4-17 es la última sala a su izquierda, frente a la 4-15.",
     "gesture": "left",
@@ -279,6 +402,17 @@
       "laboratorio tcu",
       "laboratorio cc",
       "cc rob tcu"
+    ],
+    "routes": [
+      {
+        "label": "4-17",
+        "points": [
+          [0.7193, 0.49692],
+          [0.71754, 0.53538],
+          [0.28947, 0.53538],
+          [0.28772, 0.61231]
+        ]
+      }
     ]
   },
   {
@@ -287,7 +421,7 @@
     "shortName": "Lab. Robótica e Ing. Software",
     "roomNumber": "4-15",
     "floor": 4,
-    "map": "mapa_4_15",
+    "map": "mapa_piso_4",
     "description": "Laboratorio de Robótica y del énfasis en Ingeniería de Software.",
     "directions": "De frente al ascensor, gire a la izquierda y cruce las puertas de vidrio. El laboratorio 4-15 es la segunda puerta a su derecha, después de la 4-14.",
     "gesture": "left",
@@ -308,6 +442,17 @@
       "Laboratorio IS",
       "lab is",
       "laboratorio de is"
+    ],
+    "routes": [
+      {
+        "label": "4-15",
+        "points": [
+          [0.7193, 0.49692],
+          [0.71754, 0.53538],
+          [0.28947, 0.53538],
+          [0.28772, 0.46462]
+        ]
+      }
     ]
   },
   {
@@ -316,7 +461,7 @@
     "shortName": "Lab. Tecnologías de Información",
     "roomNumber": "4-14",
     "floor": 4,
-    "map": "mapa_4_14",
+    "map": "mapa_piso_4",
     "description": "Laboratorio del énfasis en Ingeniería en Tecnologías de Información.",
     "directions": "De frente al ascensor, gire a la izquierda y cruce las puertas de vidrio. El laboratorio 4-14 es la primera puerta a su derecha.",
     "gesture": "left",
@@ -330,6 +475,17 @@
       "aula 4-14",
       "laboratorio 4-14",
       "cuatro catorce"
+    ],
+    "routes": [
+      {
+        "label": "4-14",
+        "points": [
+          [0.7193, 0.49692],
+          [0.71754, 0.53538],
+          [0.34123, 0.53538],
+          [0.33947, 0.46462]
+        ]
+      }
     ]
   },
   {
@@ -338,13 +494,21 @@
     "roomNumber": null,
     "floor": 4,
     "group": "ascensor",
-    "map": "mapa_ascensor",
+    "map": "mapa_piso_4",
     "description": "Ascensor",
     "directions": "Usted se encuentra frente al ascensor.",
     "gesture": null,
     "aliases": [
       "ascensor",
       "elevador"
+    ],
+    "routes": [
+      {
+        "label": "Ascensor",
+        "points": [
+          [0.7193, 0.49692]
+        ]
+      }
     ]
   },
   {
@@ -353,7 +517,7 @@
     "roomNumber": null,
     "floor": 4,
     "group": "banos",
-    "map": "mapa_banios",
+    "map": "mapa_piso_4",
     "description": "Mujeres a la derecha, hombres a la izquierda y el baño para personas con discapacidad en el medio.",
     "directions": "De frente al ascensor, gire a la izquierda. Los baños están justo a su derecha, al lado del ascensor.",
     "gesture": "left",
@@ -369,6 +533,17 @@
       "baño de discapacitados",
       "baño accesible",
       "sanitarios"
+    ],
+    "routes": [
+      {
+        "label": "Baños",
+        "points": [
+          [0.7193, 0.49692],
+          [0.71754, 0.53538],
+          [0.58246, 0.53538],
+          [0.5807, 0.45846]
+        ]
+      }
     ]
   },
   {
@@ -377,7 +552,7 @@
     "roomNumber": null,
     "floor": 4,
     "group": "salida_emergencia",
-    "map": "mapa_salida_emergencia",
+    "map": "mapa_piso_4",
     "description": "Es la escalera de emergencia.",
     "directions": "De frente al ascensor, gire a la izquierda, cruce las puertas de vidrio y siga recto hasta el final del pasillo. La salida de emergencia es la puerta del fondo.",
     "gesture": "left",
@@ -388,6 +563,17 @@
       "escalera de emergencia",
       "salida emergencia",
       "salida de emergencias"
+    ],
+    "routes": [
+      {
+        "label": "Salida",
+        "points": [
+          [0.7193, 0.49692],
+          [0.71754, 0.53538],
+          [0.09035, 0.53538],
+          [0.09211, 0.52615]
+        ]
+      }
     ]
   },
   {
@@ -396,7 +582,7 @@
     "roomNumber": null,
     "floor": 4,
     "group": "escalera",
-    "map": "mapa_escaleras",
+    "map": "mapa_piso_4",
     "description": "Escaleras",
     "directions": "De frente al ascensor, dé media vuelta. Las escaleras están justo detrás de usted, al otro lado del pasillo.",
     "gesture": "back",
@@ -404,6 +590,17 @@
       "escaleras",
       "escalera",
       "gradas"
+    ],
+    "routes": [
+      {
+        "label": "Escaleras",
+        "points": [
+          [0.7193, 0.49692],
+          [0.72105, 0.53538],
+          [0.74386, 0.53846],
+          [0.74386, 0.62923]
+        ]
+      }
     ]
   },
   {
@@ -411,7 +608,7 @@
     "name": "Auditorio",
     "roomNumber": null,
     "floor": 1,
-    "map": "mapa_1_auditorio",
+    "map": "mapa_piso_1",
     "description": "Auditorio",
     "directions": "De frente al ascensor, gire a la izquierda y cruce todo el vestíbulo hasta las puertas dobles del fondo. Al pasarlas, siga recto hasta la puerta del auditorio.",
     "gesture": "left",
@@ -423,6 +620,18 @@
       "conferencia",
       "escenario",
       "sala de conferencias"
+    ],
+    "routes": [
+      {
+        "label": "Auditorio",
+        "points": [
+          [0.73286, 0.52169],
+          [0.73286, 0.5539],
+          [0.73071, 0.55886],
+          [0.39143, 0.55886],
+          [0.39286, 0.54399]
+        ]
+      }
     ]
   },
   {
@@ -430,7 +639,7 @@
     "name": "Aula multiuso",
     "roomNumber": "1-17",
     "floor": 1,
-    "map": "mapa_1_17",
+    "map": "mapa_piso_1",
     "description": "Aula multiuso.",
     "directions": "De frente al ascensor, gire a la derecha y camine unos pasos. La puerta del aula multiuso 1-17 queda a su derecha, al lado de las escaleras.",
     "gesture": "right",
@@ -444,6 +653,18 @@
       "aula 1-17",
       "sala 1-17",
       "oficina 1-17"
+    ],
+    "routes": [
+      {
+        "label": "1-17",
+        "points": [
+          [0.73286, 0.52169],
+          [0.73429, 0.5539],
+          [0.78857, 0.55514],
+          [0.78929, 0.61834],
+          [0.79786, 0.61462]
+        ]
+      }
     ]
   },
   {
@@ -452,7 +673,7 @@
     "roomNumber": null,
     "floor": 1,
     "group": "banos",
-    "map": "mapa_1_banos",
+    "map": "mapa_piso_1",
     "description": "Baños",
     "directions": "De frente al ascensor, gire a la derecha y luego a la izquierda, por el lado del ascensor. Los baños quedan al fondo: el de mujeres a la izquierda y el de hombres a la derecha.",
     "gesture": "right",
@@ -464,6 +685,19 @@
       "sanitarios",
       "baño de hombres",
       "baño de mujeres"
+    ],
+    "routes": [
+      {
+        "label": "Baños",
+        "points": [
+          [0.73286, 0.52169],
+          [0.73286, 0.54771],
+          [0.735, 0.55019],
+          [0.84571, 0.54895],
+          [0.84643, 0.33953],
+          [0.84929, 0.33829]
+        ]
+      }
     ]
   },
   {
@@ -471,7 +705,7 @@
     "name": "Entradas del edificio",
     "roomNumber": null,
     "floor": 1,
-    "map": "mapa_1_entradas",
+    "map": "mapa_piso_1",
     "description": "Entradas del edificio",
     "directions": "De frente al ascensor, gire a la izquierda y camine por el vestíbulo. Hay dos entradas con puertas dobles: una a su derecha y otra a su izquierda.",
     "gesture": "left",
@@ -484,6 +718,27 @@
       "puerta principal",
       "como salgo",
       "por donde salgo"
+    ],
+    "routes": [
+      {
+        "label": "Entrada",
+        "points": [
+          [0.73286, 0.52169],
+          [0.73143, 0.5539],
+          [0.58357, 0.5539],
+          [0.58357, 0.34696]
+        ]
+      },
+      {
+        "label": "Entrada",
+        "points": [
+          [0.73286, 0.52169],
+          [0.73143, 0.5539],
+          [0.58429, 0.5539],
+          [0.58357, 0.76828],
+          [0.58571, 0.76952]
+        ]
+      }
     ]
   },
   {
@@ -492,7 +747,7 @@
     "roomNumber": "2-1",
     "floor": 2,
     "group": "bodega",
-    "map": "mapa_2_1",
+    "map": "mapa_piso_2",
     "description": "Bodega",
     "directions": "De frente al ascensor, gire a la derecha y enseguida a la izquierda, al pasillo que pasa al lado del ascensor. La bodega 2-1 es la puerta de la izquierda, al fondo.",
     "gesture": "right",
@@ -504,6 +759,19 @@
       "aula 2-1",
       "sala 2-1",
       "oficina 2-1"
+    ],
+    "routes": [
+      {
+        "label": "2-1",
+        "points": [
+          [0.73071, 0.50619],
+          [0.73071, 0.52599],
+          [0.73286, 0.52723],
+          [0.78214, 0.52723],
+          [0.78429, 0.52351],
+          [0.78429, 0.32302]
+        ]
+      }
     ]
   },
   {
@@ -511,7 +779,7 @@
     "name": "Laboratorio taller",
     "roomNumber": null,
     "floor": 2,
-    "map": "mapa_2_laboratorio_taller",
+    "map": "mapa_piso_2",
     "description": "Laboratorio taller.",
     "directions": "De frente al ascensor, gire a la derecha y enseguida a la izquierda, al pasillo que pasa al lado del ascensor. El laboratorio taller es la puerta de la derecha, al fondo.",
     "gesture": "right",
@@ -521,6 +789,20 @@
       "laboratorio / taller",
       "lab taller",
       "el taller"
+    ],
+    "routes": [
+      {
+        "label": "Taller",
+        "points": [
+          [0.73071, 0.50619],
+          [0.73071, 0.52599],
+          [0.73286, 0.52723],
+          [0.825, 0.52475],
+          [0.82643, 0.30198],
+          [0.82786, 0.29579],
+          [0.83429, 0.29827]
+        ]
+      }
     ]
   },
   {
@@ -528,7 +810,7 @@
     "name": "Cuarto de servidores",
     "roomNumber": null,
     "floor": 2,
-    "map": "mapa_2_servidores",
+    "map": "mapa_piso_2",
     "description": "Cuarto de servidores",
     "directions": "De frente al ascensor, gire a la derecha y enseguida a la izquierda, al pasillo que pasa al lado del ascensor. El cuarto de servidores es la primera puerta a su derecha.",
     "gesture": "right",
@@ -537,6 +819,22 @@
       "servidores",
       "sala de servidores",
       "data center"
+    ],
+    "routes": [
+      {
+        "label": "Servidores",
+        "points": [
+          [0.73071, 0.50619],
+          [0.73071, 0.52599],
+          [0.73286, 0.52723],
+          [0.81286, 0.52723],
+          [0.815, 0.52475],
+          [0.815, 0.44554],
+          [0.81714, 0.44183],
+          [0.83857, 0.44183],
+          [0.83786, 0.42698]
+        ]
+      }
     ]
   },
   {
@@ -545,7 +843,7 @@
     "shortName": "Administración de redes (RID)",
     "roomNumber": "2-4",
     "floor": 2,
-    "map": "mapa_2_4",
+    "map": "mapa_piso_2",
     "description": "Oficina de administración de redes (RID)",
     "directions": "De frente al ascensor, gire a la derecha y camine hasta el final del pasillo. La oficina 2-4 es la puerta que queda de frente.",
     "gesture": "right",
@@ -565,6 +863,18 @@
       "aula 2-4",
       "sala 2-4",
       "oficina 2-4"
+    ],
+    "routes": [
+      {
+        "label": "2-4",
+        "points": [
+          [0.73071, 0.50619],
+          [0.73071, 0.52599],
+          [0.73286, 0.52723],
+          [0.83857, 0.52723],
+          [0.83929, 0.53342]
+        ]
+      }
     ]
   },
   {
@@ -573,7 +883,7 @@
     "shortName": "Administración de redes 2 (RID)",
     "roomNumber": "2-5",
     "floor": 2,
-    "map": "mapa_2_5",
+    "map": "mapa_piso_2",
     "description": "Segunda oficina de administración de redes (RID)",
     "directions": "De frente al ascensor, gire a la derecha y camine hasta el final del pasillo. La oficina 2-5 es la puerta a su derecha, después del laboratorio de pruebas 2-6.",
     "gesture": "right",
@@ -584,6 +894,19 @@
       "aula 2-5",
       "sala 2-5",
       "oficina 2-5"
+    ],
+    "routes": [
+      {
+        "label": "2-5",
+        "points": [
+          [0.73071, 0.50619],
+          [0.73, 0.53342],
+          [0.73214, 0.53589],
+          [0.84714, 0.53589],
+          [0.84857, 0.60644],
+          [0.85571, 0.60396]
+        ]
+      }
     ]
   },
   {
@@ -591,7 +914,7 @@
     "name": "Laboratorio de pruebas (RID)",
     "roomNumber": "2-6",
     "floor": 2,
-    "map": "mapa_2_6",
+    "map": "mapa_piso_2",
     "description": "Laboratorio de pruebas (RID)",
     "directions": "De frente al ascensor, gire a la derecha. El laboratorio de pruebas 2-6 es la primera puerta a su derecha, al lado de las escaleras.",
     "gesture": "right",
@@ -606,6 +929,19 @@
       "aula 2-6",
       "sala 2-6",
       "oficina 2-6"
+    ],
+    "routes": [
+      {
+        "label": "2-6",
+        "points": [
+          [0.73071, 0.50619],
+          [0.73, 0.53342],
+          [0.73214, 0.53589],
+          [0.79071, 0.53589],
+          [0.79214, 0.59406],
+          [0.79714, 0.59406]
+        ]
+      }
     ]
   },
   {
@@ -614,7 +950,7 @@
     "roomNumber": null,
     "floor": 2,
     "group": "banos",
-    "map": "mapa_2_banos",
+    "map": "mapa_piso_2",
     "description": "Baños",
     "directions": "De frente al ascensor, gire a la izquierda. Los baños están justo a su derecha, al lado del ascensor: primero el de mujeres y luego el de hombres.",
     "gesture": "left",
@@ -626,6 +962,18 @@
       "sanitarios",
       "baño de hombres",
       "baño de mujeres"
+    ],
+    "routes": [
+      {
+        "label": "Baños",
+        "points": [
+          [0.73071, 0.50619],
+          [0.72857, 0.5396],
+          [0.61, 0.5396],
+          [0.60929, 0.4901],
+          [0.60643, 0.48886]
+        ]
+      }
     ]
   },
   {
@@ -634,7 +982,7 @@
     "roomNumber": null,
     "floor": 2,
     "group": "idf",
-    "map": "mapa_2_idf",
+    "map": "mapa_piso_2",
     "description": "Cuarto de IDF",
     "directions": "De frente al ascensor, gire a la izquierda y camine por el pasillo. El cuarto de IDF es la última puerta a su izquierda, antes de las puertas de vidrio.",
     "gesture": "left",
@@ -643,6 +991,18 @@
       "cuarto de idf",
       "cuarto idf",
       "cuarto de telecomunicaciones"
+    ],
+    "routes": [
+      {
+        "label": "IDF",
+        "points": [
+          [0.73071, 0.50619],
+          [0.72857, 0.54455],
+          [0.47714, 0.54455],
+          [0.475, 0.54827],
+          [0.47643, 0.59158]
+        ]
+      }
     ]
   },
   {
@@ -651,7 +1011,7 @@
     "shortName": "Comedor administrativo",
     "roomNumber": null,
     "floor": 2,
-    "map": "mapa_2_comedor",
+    "map": "mapa_piso_2",
     "description": "Comedor del personal administrativo.",
     "directions": "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. El comedor del personal administrativo es la primera puerta a su derecha.",
     "gesture": "left",
@@ -660,6 +1020,19 @@
       "comedor del personal administrativo",
       "comedor de administrativos",
       "comedor personal administrativo"
+    ],
+    "routes": [
+      {
+        "label": "Comedor",
+        "points": [
+          [0.73071, 0.50619],
+          [0.72857, 0.54455],
+          [0.43286, 0.54455],
+          [0.43071, 0.54084],
+          [0.43071, 0.48762],
+          [0.43286, 0.48515]
+        ]
+      }
     ]
   },
   {
@@ -667,7 +1040,7 @@
     "name": "Mensajería",
     "roomNumber": null,
     "floor": 2,
-    "map": "mapa_2_mensajeria",
+    "map": "mapa_piso_2",
     "description": "También es la conserjería.",
     "directions": "De frente al ascensor, gire a la izquierda, cruce las puertas de vidrio y siga recto, pasando las bodegas. La mensajería queda al final del pasillo, a su derecha.",
     "gesture": "left",
@@ -679,6 +1052,19 @@
       "correspondencia",
       "entregar un paquete",
       "paquetes"
+    ],
+    "routes": [
+      {
+        "label": "Mensajería",
+        "points": [
+          [0.73071, 0.50619],
+          [0.72857, 0.54455],
+          [0.29143, 0.54455],
+          [0.28929, 0.54208],
+          [0.28929, 0.46287],
+          [0.27571, 0.45792]
+        ]
+      }
     ]
   },
   {
@@ -686,7 +1072,7 @@
     "name": "Secretaría de la ECCI",
     "roomNumber": null,
     "floor": 2,
-    "map": "mapa_2_secretaria",
+    "map": "mapa_piso_2",
     "description": "Secretaría de la ECCI",
     "directions": "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Todo el lado izquierdo es la secretaría; la entrada está a pocos pasos, a su izquierda.",
     "gesture": "left",
@@ -700,6 +1086,19 @@
       "administracion",
       "administración",
       "recepcion de la ecci"
+    ],
+    "group": "secretaria",
+    "routes": [
+      {
+        "label": "Secretaría",
+        "points": [
+          [0.73071, 0.50619],
+          [0.72857, 0.54455],
+          [0.38357, 0.54455],
+          [0.38214, 0.59777],
+          [0.37714, 0.59777]
+        ]
+      }
     ]
   },
   {
@@ -709,7 +1108,7 @@
     "roomNumber": "3-5",
     "floor": 3,
     "group": "laboratorio_pi",
-    "map": "mapa_3_5",
+    "map": "mapa_piso_3",
     "description": "PI significa proyecto integrador.",
     "directions": "De frente al ascensor, gire a la derecha. El laboratorio 3-5 es la primera puerta a su izquierda, la puerta grande.",
     "gesture": "right",
@@ -737,6 +1136,20 @@
       "aula 3-5",
       "sala 3-5",
       "oficina 3-5"
+    ],
+    "routes": [
+      {
+        "label": "3-5",
+        "points": [
+          [0.72857, 0.49437],
+          [0.72857, 0.5194],
+          [0.73143, 0.5219],
+          [0.79143, 0.5219],
+          [0.795, 0.5169],
+          [0.795, 0.47559],
+          [0.80429, 0.4781]
+        ]
+      }
     ]
   },
   {
@@ -744,7 +1157,7 @@
     "name": "Oficina 3-4",
     "roomNumber": "3-4",
     "floor": 3,
-    "map": "mapa_3_4",
+    "map": "mapa_piso_3",
     "description": "Oficina sin profesor asignado.",
     "directions": "De frente al ascensor, gire a la derecha y camine hasta la sala de espera. Ahí doble a la derecha. La oficina 3-4 es la primera puerta a su izquierda.",
     "gesture": "right",
@@ -754,6 +1167,20 @@
       "aula 3-4",
       "sala 3-4",
       "oficina 3-4"
+    ],
+    "routes": [
+      {
+        "label": "3-4",
+        "points": [
+          [0.72857, 0.49437],
+          [0.72857, 0.5194],
+          [0.73143, 0.5219],
+          [0.86143, 0.5219],
+          [0.86286, 0.62954],
+          [0.87929, 0.63204],
+          [0.87857, 0.61577]
+        ]
+      }
     ]
   },
   {
@@ -761,7 +1188,7 @@
     "name": "Oficina 3-3",
     "roomNumber": "3-3",
     "floor": 3,
-    "map": "mapa_3_3",
+    "map": "mapa_piso_3",
     "description": "Oficina sin profesor asignado.",
     "directions": "De frente al ascensor, gire a la derecha y camine hasta la sala de espera. Ahí doble a la derecha. La oficina 3-3 es la segunda puerta a su izquierda, en la esquina.",
     "gesture": "right",
@@ -771,6 +1198,21 @@
       "aula 3-3",
       "sala 3-3",
       "oficina 3-3"
+    ],
+    "routes": [
+      {
+        "label": "3-3",
+        "points": [
+          [0.72857, 0.49437],
+          [0.72857, 0.5194],
+          [0.73143, 0.5219],
+          [0.86143, 0.5219],
+          [0.86214, 0.68461],
+          [0.86357, 0.68961],
+          [0.87929, 0.68961],
+          [0.87929, 0.70088]
+        ]
+      }
     ]
   },
   {
@@ -778,7 +1220,7 @@
     "name": "Oficina del profesor Ricardo Villalón Fonseca",
     "roomNumber": "3-2",
     "floor": 3,
-    "map": "mapa_3_2",
+    "map": "mapa_piso_3",
     "description": "Oficina del profesor Ricardo Villalón.",
     "directions": "De frente al ascensor, gire a la derecha y camine hasta la sala de espera. Ahí doble a la derecha. La oficina 3-2 es la puerta a su derecha, frente a la 3-3.",
     "gesture": "right",
@@ -796,6 +1238,20 @@
       "aula 3-2",
       "sala 3-2",
       "oficina 3-2"
+    ],
+    "routes": [
+      {
+        "label": "3-2",
+        "points": [
+          [0.72857, 0.49437],
+          [0.72857, 0.5194],
+          [0.73143, 0.5219],
+          [0.86143, 0.5219],
+          [0.86286, 0.68461],
+          [0.86071, 0.68961],
+          [0.84429, 0.68961]
+        ]
+      }
     ]
   },
   {
@@ -804,7 +1260,7 @@
     "roomNumber": null,
     "floor": 3,
     "group": "banos",
-    "map": "mapa_3_banos",
+    "map": "mapa_piso_3",
     "description": "Baños",
     "directions": "De frente al ascensor, gire a la izquierda. Los baños están justo a su derecha, al lado del ascensor: primero el de mujeres y luego el de hombres.",
     "gesture": "left",
@@ -816,6 +1272,18 @@
       "sanitarios",
       "baño de hombres",
       "baño de mujeres"
+    ],
+    "routes": [
+      {
+        "label": "Baños",
+        "points": [
+          [0.72857, 0.49437],
+          [0.72714, 0.52065],
+          [0.60214, 0.52065],
+          [0.6, 0.51815],
+          [0.60071, 0.47559]
+        ]
+      }
     ]
   },
   {
@@ -824,7 +1292,7 @@
     "roomNumber": null,
     "floor": 3,
     "group": "idf",
-    "map": "mapa_3_idf",
+    "map": "mapa_piso_3",
     "description": "Cuarto de IDF",
     "directions": "De frente al ascensor, gire a la izquierda y camine por el pasillo. El cuarto de IDF es la última puerta a su izquierda, antes de las puertas de vidrio.",
     "gesture": "left",
@@ -833,6 +1301,19 @@
       "cuarto de idf",
       "cuarto idf",
       "cuarto de telecomunicaciones"
+    ],
+    "routes": [
+      {
+        "label": "IDF",
+        "points": [
+          [0.72857, 0.49437],
+          [0.72714, 0.53191],
+          [0.47071, 0.53191],
+          [0.46714, 0.53567],
+          [0.46714, 0.58323],
+          [0.47, 0.58448]
+        ]
+      }
     ]
   },
   {
@@ -841,7 +1322,7 @@
     "roomNumber": "3-13",
     "floor": 3,
     "group": "sala_reuniones",
-    "map": "mapa_3_13",
+    "map": "mapa_piso_3",
     "description": "Área común para docentes y estudiantes.",
     "directions": "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. La sala de reuniones 3-13 es la primera puerta a su derecha.",
     "gesture": "left",
@@ -856,6 +1337,18 @@
       "aula 3-13",
       "sala 3-13",
       "oficina 3-13"
+    ],
+    "routes": [
+      {
+        "label": "3-13",
+        "points": [
+          [0.72857, 0.49437],
+          [0.72714, 0.53191],
+          [0.445, 0.53191],
+          [0.44429, 0.47184],
+          [0.44857, 0.47059]
+        ]
+      }
     ]
   },
   {
@@ -863,7 +1356,7 @@
     "name": "Oficina 3-17",
     "roomNumber": "3-17",
     "floor": 3,
-    "map": "mapa_3_17",
+    "map": "mapa_piso_3",
     "description": "Oficina sin profesor asignado.",
     "directions": "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Doble a la derecha en el primer pasillo. La oficina 3-17 es la primera puerta a su izquierda.",
     "gesture": "left",
@@ -873,6 +1366,20 @@
       "aula 3-17",
       "sala 3-17",
       "oficina 3-17"
+    ],
+    "routes": [
+      {
+        "label": "3-17",
+        "points": [
+          [0.72857, 0.49437],
+          [0.72714, 0.53191],
+          [0.41429, 0.53191],
+          [0.41357, 0.44931],
+          [0.41214, 0.44556],
+          [0.39786, 0.44556],
+          [0.39857, 0.43304]
+        ]
+      }
     ]
   },
   {
@@ -880,7 +1387,7 @@
     "name": "Oficina del profesor Alberto Rojas Salazar",
     "roomNumber": "3-16",
     "floor": 3,
-    "map": "mapa_3_16",
+    "map": "mapa_piso_3",
     "description": "Oficina del profesor Alberto Rojas.",
     "directions": "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Doble a la derecha en el primer pasillo. La oficina 3-16 es la segunda puerta a su izquierda.",
     "gesture": "left",
@@ -895,6 +1402,20 @@
       "aula 3-16",
       "sala 3-16",
       "oficina 3-16"
+    ],
+    "routes": [
+      {
+        "label": "3-16",
+        "points": [
+          [0.72857, 0.49437],
+          [0.72714, 0.53191],
+          [0.41429, 0.53191],
+          [0.41357, 0.33667],
+          [0.41214, 0.33292],
+          [0.39786, 0.33292],
+          [0.39786, 0.32165]
+        ]
+      }
     ]
   },
   {
@@ -902,7 +1423,7 @@
     "name": "Oficina del profesor Sleyter Angulo Chavarría",
     "roomNumber": "3-15",
     "floor": 3,
-    "map": "mapa_3_15",
+    "map": "mapa_piso_3",
     "description": "Oficina del profesor Sleyter Angulo.",
     "directions": "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Doble a la derecha en el primer pasillo. La oficina 3-15 es la última puerta a su izquierda, al fondo.",
     "gesture": "left",
@@ -919,6 +1440,20 @@
       "aula 3-15",
       "sala 3-15",
       "oficina 3-15"
+    ],
+    "routes": [
+      {
+        "label": "3-15",
+        "points": [
+          [0.72857, 0.49437],
+          [0.72714, 0.53191],
+          [0.41429, 0.53191],
+          [0.41357, 0.22653],
+          [0.41143, 0.22278],
+          [0.39786, 0.22278],
+          [0.39857, 0.21151]
+        ]
+      }
     ]
   },
   {
@@ -926,7 +1461,7 @@
     "name": "Oficina del profesor José Antonio Brenes Carranza",
     "roomNumber": "3-14",
     "floor": 3,
-    "map": "mapa_3_14",
+    "map": "mapa_piso_3",
     "description": "Oficina del profesor José Antonio Brenes.",
     "directions": "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Doble a la derecha en el primer pasillo. La oficina 3-14 es la puerta a su derecha, al fondo del pasillo.",
     "gesture": "left",
@@ -946,6 +1481,19 @@
       "aula 3-14",
       "sala 3-14",
       "oficina 3-14"
+    ],
+    "routes": [
+      {
+        "label": "3-14",
+        "points": [
+          [0.72857, 0.49437],
+          [0.72714, 0.53191],
+          [0.41429, 0.53191],
+          [0.41357, 0.22653],
+          [0.42857, 0.22403],
+          [0.42857, 0.21151]
+        ]
+      }
     ]
   },
   {
@@ -953,7 +1501,7 @@
     "name": "Sala de solo funcionarios",
     "roomNumber": null,
     "floor": 3,
-    "map": "mapa_3_sala_funcionarios",
+    "map": "mapa_piso_3",
     "description": "Sala de solo funcionarios",
     "directions": "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Doble a la izquierda en el primer pasillo. Al fondo, la sala de solo funcionarios es la puerta de la izquierda.",
     "gesture": "left",
@@ -962,6 +1510,19 @@
       "sala de solo funcionarios",
       "funcionarios",
       "sala del personal"
+    ],
+    "routes": [
+      {
+        "label": "Destino",
+        "points": [
+          [0.72857, 0.49437],
+          [0.72714, 0.53191],
+          [0.43286, 0.53191],
+          [0.43071, 0.53567],
+          [0.43071, 0.78598],
+          [0.43857, 0.78598]
+        ]
+      }
     ]
   },
   {
@@ -971,7 +1532,7 @@
     "roomNumber": "3-32",
     "floor": 3,
     "group": "area_comun",
-    "map": "mapa_3_32",
+    "map": "mapa_piso_3",
     "description": "Áreas comunes para docentes y estudiantes.",
     "directions": "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Doble a la izquierda en el primer pasillo. Al fondo, la sala 3-32 es la puerta de la derecha, al lado de la sala de solo funcionarios.",
     "gesture": "left",
@@ -986,6 +1547,18 @@
       "aula 3-32",
       "sala 3-32",
       "oficina 3-32"
+    ],
+    "routes": [
+      {
+        "label": "3-32",
+        "points": [
+          [0.72857, 0.49437],
+          [0.72714, 0.53191],
+          [0.395, 0.53317],
+          [0.39286, 0.78723],
+          [0.385, 0.78598]
+        ]
+      }
     ]
   },
   {
@@ -994,7 +1567,7 @@
     "roomNumber": "3-31",
     "floor": 3,
     "group": "sala_estudio_individual",
-    "map": "mapa_3_31",
+    "map": "mapa_piso_3",
     "description": "Sala de estudio individual.",
     "directions": "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Siga recto unos pasos: la sala 3-31 es la primera puerta a su izquierda, después del pasillo.",
     "gesture": "left",
@@ -1010,6 +1583,19 @@
       "aula 3-31",
       "sala 3-31",
       "oficina 3-31"
+    ],
+    "routes": [
+      {
+        "label": "3-31",
+        "points": [
+          [0.72857, 0.49437],
+          [0.72714, 0.53191],
+          [0.36286, 0.53191],
+          [0.35929, 0.53567],
+          [0.35929, 0.58323],
+          [0.35643, 0.58448]
+        ]
+      }
     ]
   },
   {
@@ -1017,7 +1603,7 @@
     "name": "Oficina del profesor Ariel Mora Jiménez",
     "roomNumber": "3-30",
     "floor": 3,
-    "map": "mapa_3_30",
+    "map": "mapa_piso_3",
     "description": "Oficina del profesor Ariel Mora.",
     "directions": "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Siga recto: la oficina 3-30 está a su izquierda, después de la sala 3-31.",
     "gesture": "left",
@@ -1034,6 +1620,19 @@
       "aula 3-30",
       "sala 3-30",
       "oficina 3-30"
+    ],
+    "routes": [
+      {
+        "label": "3-30",
+        "points": [
+          [0.72857, 0.49437],
+          [0.72714, 0.53191],
+          [0.27214, 0.53191],
+          [0.26786, 0.53567],
+          [0.26786, 0.58323],
+          [0.27643, 0.58198]
+        ]
+      }
     ]
   },
   {
@@ -1041,7 +1640,7 @@
     "name": "Oficina del profesor Leonardo Villalobos Arias",
     "roomNumber": "3-18",
     "floor": 3,
-    "map": "mapa_3_18",
+    "map": "mapa_piso_3",
     "description": "Oficina del profesor Leonardo Villalobos.",
     "directions": "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Siga recto: la oficina 3-18 está a su derecha, frente a la 3-30.",
     "gesture": "left",
@@ -1058,6 +1657,18 @@
       "aula 3-18",
       "sala 3-18",
       "oficina 3-18"
+    ],
+    "routes": [
+      {
+        "label": "3-18",
+        "points": [
+          [0.72857, 0.49437],
+          [0.72714, 0.53191],
+          [0.26857, 0.53191],
+          [0.26786, 0.47184],
+          [0.275, 0.47184]
+        ]
+      }
     ]
   },
   {
@@ -1065,7 +1676,7 @@
     "name": "Oficina del profesor Alexander Barquero Elizondo",
     "roomNumber": "3-23",
     "floor": 3,
-    "map": "mapa_3_23",
+    "map": "mapa_piso_3",
     "description": "Oficina del profesor Alexander Barquero.",
     "directions": "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Siga recto hasta el final del pasillo. La oficina 3-23 es la última puerta a su derecha.",
     "gesture": "left",
@@ -1082,6 +1693,18 @@
       "aula 3-23",
       "sala 3-23",
       "oficina 3-23"
+    ],
+    "routes": [
+      {
+        "label": "3-23",
+        "points": [
+          [0.72857, 0.49437],
+          [0.72714, 0.53191],
+          [0.19429, 0.53191],
+          [0.19357, 0.47184],
+          [0.18643, 0.47184]
+        ]
+      }
     ]
   },
   {
@@ -1089,7 +1712,7 @@
     "name": "Oficina del profesor Ricardo Gang Vincenzi",
     "roomNumber": "3-25",
     "floor": 3,
-    "map": "mapa_3_25",
+    "map": "mapa_piso_3",
     "description": "Oficina del profesor Ricardo Gang.",
     "directions": "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Siga recto hasta el final del pasillo. La oficina 3-25 es la última puerta a su izquierda, frente a la 3-23.",
     "gesture": "left",
@@ -1107,6 +1730,19 @@
       "aula 3-25",
       "sala 3-25",
       "oficina 3-25"
+    ],
+    "routes": [
+      {
+        "label": "3-25",
+        "points": [
+          [0.72857, 0.49437],
+          [0.72714, 0.53191],
+          [0.19714, 0.53191],
+          [0.19357, 0.53567],
+          [0.19357, 0.58323],
+          [0.185, 0.58198]
+        ]
+      }
     ]
   },
   {
@@ -1115,7 +1751,7 @@
     "shortName": "Sala común",
     "roomNumber": "3-19",
     "floor": 3,
-    "map": "mapa_3_19",
+    "map": "mapa_piso_3",
     "description": "Sala común para docentes y estudiantes.",
     "directions": "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Siga recto y doble a la derecha en el último pasillo. La sala 3-19 es la primera puerta a su derecha.",
     "gesture": "left",
@@ -1127,6 +1763,19 @@
       "aula 3-19",
       "sala 3-19",
       "oficina 3-19"
+    ],
+    "routes": [
+      {
+        "label": "3-19",
+        "points": [
+          [0.72857, 0.49437],
+          [0.72714, 0.53191],
+          [0.23, 0.53191],
+          [0.22929, 0.33542],
+          [0.24429, 0.33292],
+          [0.245, 0.32666]
+        ]
+      }
     ]
   },
   {
@@ -1134,7 +1783,7 @@
     "name": "Oficina de la profesora Amanda Alpízar Rodríguez",
     "roomNumber": "3-22",
     "floor": 3,
-    "map": "mapa_3_22",
+    "map": "mapa_piso_3",
     "description": "Oficina de la profesora Amanda Alpízar.",
     "directions": "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Siga recto y doble a la derecha en el último pasillo. La oficina 3-22 es la primera puerta a su izquierda, frente a la 3-19.",
     "gesture": "left",
@@ -1152,6 +1801,20 @@
       "aula 3-22",
       "sala 3-22",
       "oficina 3-22"
+    ],
+    "routes": [
+      {
+        "label": "3-22",
+        "points": [
+          [0.72857, 0.49437],
+          [0.72714, 0.53191],
+          [0.23, 0.53191],
+          [0.22929, 0.33667],
+          [0.225, 0.33166],
+          [0.21357, 0.33292],
+          [0.21357, 0.32541]
+        ]
+      }
     ]
   },
   {
@@ -1159,7 +1822,7 @@
     "name": "Oficina del profesor Cristian Quesada López",
     "roomNumber": "3-20",
     "floor": 3,
-    "map": "mapa_3_20",
+    "map": "mapa_piso_3",
     "description": "Oficina del profesor Cristian Quesada.",
     "directions": "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Siga recto y doble a la derecha en el último pasillo. La oficina 3-20 es la segunda puerta a su derecha, al fondo.",
     "gesture": "left",
@@ -1178,6 +1841,19 @@
       "aula 3-20",
       "sala 3-20",
       "oficina 3-20"
+    ],
+    "routes": [
+      {
+        "label": "3-20",
+        "points": [
+          [0.72857, 0.49437],
+          [0.72714, 0.53191],
+          [0.23, 0.53191],
+          [0.22929, 0.22653],
+          [0.24429, 0.22403],
+          [0.24429, 0.21151]
+        ]
+      }
     ]
   },
   {
@@ -1185,7 +1861,7 @@
     "name": "Oficina del profesor Jeisson Hidalgo Céspedes",
     "roomNumber": "3-21",
     "floor": 3,
-    "map": "mapa_3_21",
+    "map": "mapa_piso_3",
     "description": "Oficina del profesor Jeisson Hidalgo.",
     "directions": "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Siga recto y doble a la derecha en el último pasillo. La oficina 3-21 es la segunda puerta a su izquierda, frente a la 3-20.",
     "gesture": "left",
@@ -1202,6 +1878,20 @@
       "aula 3-21",
       "sala 3-21",
       "oficina 3-21"
+    ],
+    "routes": [
+      {
+        "label": "3-21",
+        "points": [
+          [0.72857, 0.49437],
+          [0.72714, 0.53191],
+          [0.23, 0.53191],
+          [0.22929, 0.22653],
+          [0.22714, 0.22278],
+          [0.21357, 0.22278],
+          [0.21429, 0.21026]
+        ]
+      }
     ]
   },
   {
@@ -1209,7 +1899,7 @@
     "name": "Oficina 3-29",
     "roomNumber": "3-29",
     "floor": 3,
-    "map": "mapa_3_29",
+    "map": "mapa_piso_3",
     "description": "Oficina sin profesor asignado.",
     "directions": "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Siga recto y doble a la izquierda en el último pasillo. La oficina 3-29 es la primera puerta a su izquierda.",
     "gesture": "left",
@@ -1219,6 +1909,19 @@
       "aula 3-29",
       "sala 3-29",
       "oficina 3-29"
+    ],
+    "routes": [
+      {
+        "label": "3-29",
+        "points": [
+          [0.72857, 0.49437],
+          [0.72714, 0.53191],
+          [0.23071, 0.53317],
+          [0.22929, 0.71965],
+          [0.24429, 0.72215],
+          [0.24429, 0.73342]
+        ]
+      }
     ]
   },
   {
@@ -1227,7 +1930,7 @@
     "roomNumber": "3-26",
     "floor": 3,
     "group": "bodega",
-    "map": "mapa_3_26",
+    "map": "mapa_piso_3",
     "description": "Bodega",
     "directions": "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Siga recto y doble a la izquierda en el último pasillo. La bodega 3-26 es la primera puerta a su derecha, frente a la 3-29.",
     "gesture": "left",
@@ -1239,6 +1942,19 @@
       "aula 3-26",
       "sala 3-26",
       "oficina 3-26"
+    ],
+    "routes": [
+      {
+        "label": "3-26",
+        "points": [
+          [0.72857, 0.49437],
+          [0.72714, 0.53191],
+          [0.23071, 0.53317],
+          [0.22929, 0.7184],
+          [0.21357, 0.7209],
+          [0.21429, 0.73467]
+        ]
+      }
     ]
   },
   {
@@ -1246,7 +1962,7 @@
     "name": "Oficina del profesor Allan Berrocal Rojas",
     "roomNumber": "3-28",
     "floor": 3,
-    "map": "mapa_3_28",
+    "map": "mapa_piso_3",
     "description": "Oficina del profesor Allan Berrocal.",
     "directions": "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Siga recto y doble a la izquierda en el último pasillo. La oficina 3-28 es la segunda puerta a su izquierda.",
     "gesture": "left",
@@ -1263,6 +1979,19 @@
       "aula 3-28",
       "sala 3-28",
       "oficina 3-28"
+    ],
+    "routes": [
+      {
+        "label": "3-28",
+        "points": [
+          [0.72857, 0.49437],
+          [0.72714, 0.53191],
+          [0.23071, 0.53317],
+          [0.22929, 0.82603],
+          [0.24429, 0.82979],
+          [0.24429, 0.84105]
+        ]
+      }
     ]
   },
   {
@@ -1270,7 +1999,7 @@
     "name": "Oficina del profesor Adrián Lara Petitdemange",
     "roomNumber": "3-27",
     "floor": 3,
-    "map": "mapa_3_27",
+    "map": "mapa_piso_3",
     "description": "Oficina del profesor Adrián Lara.",
     "directions": "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Siga recto y doble a la izquierda en el último pasillo. La oficina 3-27 es la segunda puerta a su derecha, frente a la 3-28.",
     "gesture": "left",
@@ -1289,6 +2018,20 @@
       "aula 3-27",
       "sala 3-27",
       "oficina 3-27"
+    ],
+    "routes": [
+      {
+        "label": "3-27",
+        "points": [
+          [0.72857, 0.49437],
+          [0.72714, 0.53191],
+          [0.23071, 0.53317],
+          [0.22929, 0.82478],
+          [0.22786, 0.82854],
+          [0.21357, 0.82854],
+          [0.21429, 0.84105]
+        ]
+      }
     ]
   },
   {
@@ -1298,7 +2041,7 @@
     "roomNumber": "5-26",
     "floor": 5,
     "group": null,
-    "map": "mapa_5_26",
+    "map": "mapa_piso_5",
     "description": "Oficina del profesor Marcelo Jenkins.",
     "directions": "De frente al ascensor, gire a la derecha y camine directo. Siga recto, la oficina 5-26 es la primer puerta al frente suyo.",
     "gesture": "right",
@@ -1314,6 +2057,19 @@
       "aula 5-26",
       "sala 5-26",
       "oficina 5-26"
+    ],
+    "routes": [
+      {
+        "label": "5-26",
+        "points": [
+          [0.70801, 0.50251],
+          [0.70264, 0.50586],
+          [0.70312, 0.51843],
+          [0.70508, 0.52429],
+          [0.71045, 0.52848],
+          [0.8584, 0.52848]
+        ]
+      }
     ]
   },
   {
@@ -1323,7 +2079,7 @@
     "roomNumber": "5-25",
     "floor": 5,
     "group": null,
-    "map": "mapa_5_25",
+    "map": "mapa_piso_5",
     "description": "Oficina de la profesora Alexandra Martinez.",
     "directions": "De frente al ascensor, gire a la derecha y camine directo. Siga recto, la oficina 5-25 es la segunda puerta a la derecha, al lado de la 5-26.",
     "gesture": "right",
@@ -1340,6 +2096,23 @@
       "oficina 5-25",
       "investigacion ia",
       "experimento"
+    ],
+    "routes": [
+      {
+        "label": "5-25",
+        "points": [
+          [0.70801, 0.50251],
+          [0.70312, 0.5067],
+          [0.70361, 0.51256],
+          [0.70752, 0.51591],
+          [0.83154, 0.51759],
+          [0.83594, 0.52345],
+          [0.83838, 0.53518],
+          [0.83887, 0.60302],
+          [0.84375, 0.60804],
+          [0.85889, 0.60804]
+        ]
+      }
     ]
   },
   {
@@ -1349,7 +2122,7 @@
     "roomNumber": "5-24",
     "floor": 5,
     "group": null,
-    "map": "mapa_5_24",
+    "map": "mapa_piso_5",
     "description": "Oficina del profesor Arturo Camacho.",
     "directions": "De frente al ascensor, gire a la derecha y camine directo. Siga recto, la oficina 5-24 es la tercera puerta a la derecha, al lado de la 5-26.",
     "gesture": "right",
@@ -1365,6 +2138,22 @@
       "aula 5-24",
       "sala 5-24",
       "oficina 5-24"
+    ],
+    "routes": [
+      {
+        "label": "5-24",
+        "points": [
+          [0.70801, 0.50251],
+          [0.70312, 0.5067],
+          [0.70361, 0.51256],
+          [0.70752, 0.51591],
+          [0.84668, 0.51591],
+          [0.85059, 0.51843],
+          [0.85498, 0.52596],
+          [0.85645, 0.53518],
+          [0.85645, 0.65829]
+        ]
+      }
     ]
   },
   {
@@ -1374,7 +2163,7 @@
     "roomNumber": "5-2",
     "floor": 5,
     "group": null,
-    "map": "mapa_5_2",
+    "map": "mapa_piso_5",
     "description": "Laboratorio de computadoras 5-2.",
     "directions": "De frente al ascensor, gire a la derecha y camine directo. Luego gire a la izquierda, el laboratorio 5-2 se encontrara al frente.",
     "gesture": "right",
@@ -1389,6 +2178,21 @@
       "aula 5-2",
       "sala 5-2",
       "oficina 5-2"
+    ],
+    "routes": [
+      {
+        "label": "5-2",
+        "points": [
+          [0.70801, 0.50251],
+          [0.69531, 0.5067],
+          [0.69678, 0.52848],
+          [0.70312, 0.53853],
+          [0.76416, 0.53936],
+          [0.76953, 0.53601],
+          [0.77441, 0.52094],
+          [0.77441, 0.40034]
+        ]
+      }
     ]
   },
   {
@@ -1398,7 +2202,7 @@
     "roomNumber": "5-23",
     "floor": 5,
     "group": null,
-    "map": "mapa_5_23",
+    "map": "mapa_piso_5",
     "description": "Sala de Estudio 5-23.",
     "directions": "De frente al ascensor, gire a la derecha y camine directo. Luego gire nuevamente a la derecha, la sala de estudio se encontrara del lado derecho, de frente a las oficinas de profesores.",
     "gesture": "right",
@@ -1412,6 +2216,23 @@
       "aula 5-23",
       "sala 5-23",
       "oficina 5-23"
+    ],
+    "routes": [
+      {
+        "label": "5-23",
+        "points": [
+          [0.70801, 0.50251],
+          [0.70312, 0.5067],
+          [0.70361, 0.51256],
+          [0.70752, 0.51591],
+          [0.85352, 0.51759],
+          [0.85742, 0.52345],
+          [0.85986, 0.5335],
+          [0.85986, 0.64908],
+          [0.85596, 0.65578],
+          [0.84229, 0.65578]
+        ]
+      }
     ]
   },
   {
@@ -1421,7 +2242,7 @@
     "roomNumber": "5-20",
     "floor": 5,
     "group": null,
-    "map": "mapa_5_20",
+    "map": "mapa_piso_5",
     "description": "Sala de Profesores 5-20.",
     "directions": "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Doble a la izquierda, la sala 5-20 esta al fondo.",
     "gesture": "left",
@@ -1435,6 +2256,22 @@
       "aula 5-20",
       "sala 5-20",
       "oficina 5-20"
+    ],
+    "routes": [
+      {
+        "label": "5-20",
+        "points": [
+          [0.70801, 0.50251],
+          [0.70264, 0.50586],
+          [0.70166, 0.53518],
+          [0.69727, 0.54355],
+          [0.69238, 0.54606],
+          [0.4165, 0.54774],
+          [0.41113, 0.55528],
+          [0.40918, 0.56281],
+          [0.40918, 0.74958]
+        ]
+      }
     ]
   },
   {
@@ -1443,8 +2280,8 @@
     "shortName": null,
     "roomNumber": "5-19",
     "floor": 5,
-    "group": null,
-    "map": "mapa_5_19",
+    "group": "sala_reuniones",
+    "map": "mapa_piso_5",
     "description": "Sala de reuniones 5-19.",
     "directions": "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Siga directo, la sala 5-19 estara a la izquierda.",
     "gesture": "left",
@@ -1458,6 +2295,22 @@
       "aula 5-19",
       "sala 5-19",
       "oficina 5-19"
+    ],
+    "routes": [
+      {
+        "label": "5-19",
+        "points": [
+          [0.70801, 0.50251],
+          [0.70264, 0.50586],
+          [0.70166, 0.53518],
+          [0.69727, 0.54355],
+          [0.69238, 0.54606],
+          [0.29834, 0.54606],
+          [0.29297, 0.54858],
+          [0.29053, 0.55444],
+          [0.29053, 0.58375]
+        ]
+      }
     ]
   },
   {
@@ -1467,7 +2320,7 @@
     "roomNumber": "5-12",
     "floor": 5,
     "group": null,
-    "map": "mapa_5_12",
+    "map": "mapa_piso_5",
     "description": "Sala de investigacion 1 5-12.",
     "directions": "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Siga directo, la sala 5-12 estara a la derecha.",
     "gesture": "left",
@@ -1481,6 +2334,22 @@
       "aula 5-12",
       "sala 5-12",
       "oficina 5-12"
+    ],
+    "routes": [
+      {
+        "label": "5-12",
+        "points": [
+          [0.70801, 0.50251],
+          [0.70264, 0.50586],
+          [0.70166, 0.53518],
+          [0.69727, 0.54355],
+          [0.69238, 0.54606],
+          [0.22754, 0.54606],
+          [0.22461, 0.54523],
+          [0.2207, 0.53685],
+          [0.22021, 0.51005]
+        ]
+      }
     ]
   },
   {
@@ -1490,7 +2359,7 @@
     "roomNumber": "5-10",
     "floor": 5,
     "group": null,
-    "map": "mapa_5_10",
+    "map": "mapa_piso_5",
     "description": "Sala de investigacion 2 5-10.",
     "directions": "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Siga directo, la sala 5-10 estara a la derecha.",
     "gesture": "left",
@@ -1504,6 +2373,22 @@
       "aula 5-10",
       "sala 5-10",
       "oficina 5-10"
+    ],
+    "routes": [
+      {
+        "label": "5-10",
+        "points": [
+          [0.70801, 0.50251],
+          [0.70264, 0.50586],
+          [0.70166, 0.53518],
+          [0.69727, 0.54355],
+          [0.69238, 0.54606],
+          [0.41602, 0.54606],
+          [0.41309, 0.54523],
+          [0.40967, 0.53769],
+          [0.40967, 0.50586]
+        ]
+      }
     ]
   },
   {
@@ -1512,8 +2397,8 @@
     "shortName": null,
     "roomNumber": "5-15",
     "floor": 5,
-    "group": null,
-    "map": "mapa_5_15",
+    "group": "secretaria",
+    "map": "mapa_piso_5",
     "description": "Secretaria quinto piso.",
     "directions": "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio. Siga directo, la secretaria estara a la izquierda.",
     "gesture": "left",
@@ -1527,6 +2412,22 @@
       "aula 5-15",
       "sala 5-15",
       "oficina 5-15"
+    ],
+    "routes": [
+      {
+        "label": "5-15",
+        "points": [
+          [0.70801, 0.50251],
+          [0.70264, 0.50586],
+          [0.70166, 0.53518],
+          [0.69727, 0.54355],
+          [0.69238, 0.54606],
+          [0.18115, 0.54606],
+          [0.17676, 0.54774],
+          [0.17383, 0.5536],
+          [0.17334, 0.58459]
+        ]
+      }
     ]
   },
   {
@@ -1535,8 +2436,8 @@
     "shortName": null,
     "roomNumber": "5-22",
     "floor": 5,
-    "group": null,
-    "map": "mapa_5_22",
+    "group": "idf",
+    "map": "mapa_piso_5",
     "description": "IDF quinto piso.",
     "directions": "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta antes de cruzar las puertas de vidrio. Siga directo, la sala idf estara a la izquierda.",
     "gesture": "left",
@@ -1548,6 +2449,22 @@
       "aula 5-22",
       "sala 5-22",
       "oficina 5-22"
+    ],
+    "routes": [
+      {
+        "label": "5-22",
+        "points": [
+          [0.70801, 0.50251],
+          [0.70264, 0.50586],
+          [0.70166, 0.53518],
+          [0.69727, 0.54355],
+          [0.69238, 0.54606],
+          [0.46973, 0.54606],
+          [0.46484, 0.54774],
+          [0.4624, 0.55193],
+          [0.46143, 0.58375]
+        ]
+      }
     ]
   },
   {
@@ -1557,7 +2474,7 @@
     "roomNumber": "5-9",
     "floor": 5,
     "group": null,
-    "map": "mapa_5_citic",
+    "map": "mapa_piso_5",
     "description": "Oficinas Administrativas CITIC.",
     "directions": "De frente al ascensor, gire a la izquierda y camine por el pasillo hasta cruzar las puertas de vidrio para llegar a las oficinas del CITIC.",
     "gesture": "left",
@@ -1572,6 +2489,310 @@
       "aula 5-9",
       "sala 5-9",
       "oficina 5-9"
+    ],
+    "routes": [
+      {
+        "label": "5-9",
+        "points": [
+          [0.70801, 0.50251],
+          [0.70264, 0.50586],
+          [0.70166, 0.53518],
+          [0.69727, 0.54355],
+          [0.69238, 0.54606],
+          [0.50195, 0.54606]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ascensor_6",
+    "name": "Ascensor",
+    "group": "ascensor",
+    "description": "Ascensor del sexto piso.",
+    "directions": "El recorrido empieza frente al ascensor.",
+    "gesture": null,
+    "aliases": [
+      "ascensor",
+      "elevador"
+    ],
+    "roomNumber": null,
+    "floor": 6,
+    "map": "mapa_piso_6",
+    "routes": [
+      {
+        "label": "Ascensor",
+        "points": [
+          [0.7125, 0.4871]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "banos_6",
+    "name": "Baños",
+    "group": "banos",
+    "description": "El bloque de baños incluye un baño accesible.",
+    "directions": "De frente al ascensor, gire a la izquierda y siga por el pasillo. Los baños quedan a su derecha, antes de la puerta que divide el pasillo.",
+    "gesture": "left",
+    "aliases": [
+      "baños",
+      "baño",
+      "banio",
+      "banios",
+      "servicio sanitario",
+      "servicios sanitarios",
+      "sanitarios",
+      "baño accesible"
+    ],
+    "roomNumber": null,
+    "floor": 6,
+    "map": "mapa_piso_6",
+    "routes": [
+      {
+        "label": "Baños",
+        "points": [
+          [0.7125, 0.4871],
+          [0.7125, 0.52688],
+          [0.5675, 0.52688],
+          [0.5675, 0.47097]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "escalera_central_6",
+    "name": "Escalera central",
+    "group": "escalera",
+    "description": "Escalera frente al ascensor.",
+    "directions": "De frente al ascensor, dé media vuelta. La entrada a la escalera está al otro lado del pasillo.",
+    "gesture": "back",
+    "aliases": [
+      "escalera central",
+      "escalera",
+      "escaleras",
+      "gradas",
+      "gradas centrales"
+    ],
+    "roomNumber": null,
+    "floor": 6,
+    "map": "mapa_piso_6",
+    "routes": [
+      {
+        "label": "Escalera central",
+        "points": [
+          [0.7125, 0.4871],
+          [0.7125, 0.52688],
+          [0.73, 0.52688],
+          [0.73, 0.5871]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "escalera_oeste_6",
+    "name": "Escalera oeste",
+    "group": null,
+    "description": "Escalera al extremo oeste del piso.",
+    "directions": "De frente al ascensor, gire a la izquierda y siga hasta el fondo del pasillo. La entrada a la escalera queda al final, a su izquierda.",
+    "gesture": "left",
+    "aliases": [
+      "escalera oeste",
+      "escalera del oeste",
+      "gradas del oeste"
+    ],
+    "roomNumber": null,
+    "floor": 6,
+    "map": "mapa_piso_6",
+    "routes": [
+      {
+        "label": "Escalera oeste",
+        "points": [
+          [0.7125, 0.4871],
+          [0.7125, 0.52688],
+          [0.11438, 0.52688],
+          [0.11438, 0.54194],
+          [0.08875, 0.54194]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "reuniones_6_2",
+    "name": "Sala de reuniones",
+    "roomNumber": "6-2",
+    "group": "sala_reuniones",
+    "directions": "De frente al ascensor, gire a la derecha y siga hasta el fondo del pasillo. Doble a la derecha. La sala queda a su derecha, frente a la oficina 6-4.",
+    "aliases": [
+      "sala de reuniones",
+      "sala de reunión",
+      "reuniones",
+      "sala 6-2",
+      "6-2"
+    ],
+    "floor": 6,
+    "map": "mapa_piso_6",
+    "description": "Sala de reuniones",
+    "gesture": "right",
+    "routes": [
+      {
+        "label": "6-2",
+        "points": [
+          [0.7125, 0.4871],
+          [0.7125, 0.52688],
+          [0.85, 0.52688],
+          [0.85, 0.62473],
+          [0.82312, 0.62473]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "luis_quesada_6_3",
+    "name": "Oficina del profesor Luis Quesada Quirós",
+    "roomNumber": "6-3",
+    "directions": "De frente al ascensor, gire a la derecha y siga hasta el fondo del pasillo. Doble a la derecha y pase la oficina 6-4. La oficina 6-3 es la siguiente puerta a su izquierda.",
+    "aliases": [
+      "Luis Quesada",
+      "Luis Quesada Quirós",
+      "profesor Luis Quesada",
+      "oficina de Luis Quesada",
+      "oficina 6-3",
+      "6-3"
+    ],
+    "floor": 6,
+    "map": "mapa_piso_6",
+    "description": "Oficina del profesor Luis Quesada Quirós",
+    "gesture": "right",
+    "routes": [
+      {
+        "label": "6-3",
+        "points": [
+          [0.7125, 0.4871],
+          [0.7125, 0.52688],
+          [0.85, 0.52688],
+          [0.85, 0.68602],
+          [0.87938, 0.68602]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "kryscia_6_4",
+    "name": "Oficina de la profesora Kryscia Ramírez Benavides",
+    "roomNumber": "6-4",
+    "directions": "De frente al ascensor, gire a la derecha y siga hasta el fondo del pasillo. Doble a la derecha. La oficina 6-4 es la primera puerta a su izquierda.",
+    "aliases": [
+      "Kryscia Ramírez",
+      "Kryscia Ramírez Benavides",
+      "profesora Kryscia",
+      "oficina de Kryscia",
+      "oficina 6-4",
+      "6-4"
+    ],
+    "floor": 6,
+    "map": "mapa_piso_6",
+    "description": "Oficina de la profesora Kryscia Ramírez Benavides",
+    "gesture": "right",
+    "routes": [
+      {
+        "label": "6-4",
+        "points": [
+          [0.7125, 0.4871],
+          [0.7125, 0.52688],
+          [0.85, 0.52688],
+          [0.85, 0.62473],
+          [0.87938, 0.62473]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "gustavo_lopez_6_5",
+    "name": "Oficina del profesor Gustavo López Herrera",
+    "roomNumber": "6-5",
+    "directions": "De frente al ascensor, gire a la derecha y siga hasta el fondo del pasillo. La oficina 6-5 queda al frente, antes del giro hacia las otras oficinas.",
+    "aliases": [
+      "Gustavo López",
+      "Gustavo López Herrera",
+      "profesor Gustavo López",
+      "oficina de Gustavo López",
+      "oficina 6-5",
+      "6-5"
+    ],
+    "floor": 6,
+    "map": "mapa_piso_6",
+    "description": "Oficina del profesor Gustavo López Herrera",
+    "gesture": "right",
+    "routes": [
+      {
+        "label": "6-5",
+        "points": [
+          [0.7125, 0.4871],
+          [0.7125, 0.52688],
+          [0.85, 0.52688],
+          [0.85, 0.49355],
+          [0.87938, 0.49355]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "aula_6_6",
+    "name": "Aula de Posgrado",
+    "shortName": "Aula",
+    "roomNumber": "6-6",
+    "directions": "De frente al ascensor, gire a la derecha. El aula 6-6 es la primera puerta a su izquierda.",
+    "aliases": [
+      "aula 6-6",
+      "aula de posgrado",
+      "aula del posgrado",
+      "salón 6-6",
+      "6-6"
+    ],
+    "floor": 6,
+    "map": "mapa_piso_6",
+    "description": "Aula de Posgrado",
+    "gesture": "right",
+    "routes": [
+      {
+        "label": "6-6",
+        "points": [
+          [0.7125, 0.4871],
+          [0.7125, 0.52688],
+          [0.7775, 0.52688],
+          [0.7775, 0.34086]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "posgrado_6",
+    "name": "Oficinas administrativas de Posgrado en Computación e Informática",
+    "shortName": "Oficinas de Posgrado",
+    "roomNumber": null,
+    "directions": "De frente al ascensor, gire a la izquierda y siga por el pasillo. Pase los baños y cruce las puertas dobles para llegar al sector de las oficinas administrativas de Posgrado.",
+    "aliases": [
+      "posgrado",
+      "PPCI",
+      "oficinas del posgrado",
+      "oficinas administrativas de posgrado",
+      "secretaría de posgrado",
+      "administración del posgrado",
+      "posgrado en computación e informática"
+    ],
+    "floor": 6,
+    "map": "mapa_piso_6",
+    "description": "Oficinas administrativas de Posgrado en Computación e Informática",
+    "gesture": "left",
+    "routes": [
+      {
+        "label": "Posgrado",
+        "points": [
+          [0.7125, 0.4871],
+          [0.7125, 0.52688],
+          [0.40625, 0.52688]
+        ]
+      }
     ]
   }
 ]

@@ -14,5 +14,6 @@ object RequestPolicy {
         .replace(Regex("\\p{M}+"), "")
         .lowercase(Locale.ROOT)
         .trim()
-        .replace(Regex("\\s+"), " ")
+        .replace(Regex("[^a-z0-9]+"), " ")
+        .trim()
 }
