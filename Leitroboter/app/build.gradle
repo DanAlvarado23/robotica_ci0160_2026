@@ -3,6 +3,12 @@ plugins {
     id 'kotlin-android'
 }
 
+def localSettings = new Properties()
+def localSettingsFile = rootProject.file('local.properties')
+if (localSettingsFile.exists()) {
+    localSettingsFile.withInputStream { localSettings.load(it) }
+}
+
 android {
     compileSdk 30
 
@@ -14,8 +20,8 @@ android {
         versionName "1.0"
 
         // La clave de Gemini se configura en server/.env.
-        def apiUrl = project.findProperty('DESTINATION_API_URL') ?: 'http://10.0.2.2:8787/match'
-        def apiToken = project.findProperty('DESTINATION_API_TOKEN') ?: ''
+        def apiUrl = project.findProperty('DESTINATION_API_URL') ?: localSettings.getProperty('DESTINATION_API_URL', 'http://10.0.2.2:8787/match')
+        def apiToken = project.findProperty('DESTINATION_API_TOKEN') ?: localSettings.getProperty('DESTINATION_API_TOKEN', '')
         resValue 'string', 'destination_api_url', apiUrl.toString()
         resValue 'string', 'destination_api_token', apiToken.toString()
 
@@ -26,12 +32,21 @@ android {
     }
 
     buildTypes {
+        debug {
+            applicationIdSuffix '.debug'
+        }
         release {
             minifyEnabled false
         }
     }
-    if (project.hasProperty('DEBUG_KEYSTORE')) {
-        signingConfigs.debug.storeFile = file(project.property('DEBUG_KEYSTORE'))
+    packagingOptions {
+        jniLibs {
+            useLegacyPackaging true
+        }
+    }
+    def debugKeystore = project.findProperty('DEBUG_KEYSTORE') ?: localSettings.getProperty('DEBUG_KEYSTORE')
+    if (debugKeystore) {
+        signingConfigs.debug.storeFile = file(debugKeystore)
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
